@@ -75,3 +75,7 @@ belongs_to:user
 <!--When generate user_controller-->
 ### Tags
 ### User
+
+---
+# ER図
+![Prompterにおけるデータ関係図](data_base_setting.drawio.png)
