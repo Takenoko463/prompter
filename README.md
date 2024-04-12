@@ -7,7 +7,9 @@
 | content | text | null: false |
 | nick_name | string | null: false<br>default: 'prompter'|
 | ai_id | integer | null: false<br>default:'1'|
+| tags | references | null: false<br>foreign_key:true|
 | user | references | null: false<br>foreign_key:true| 
+<!--tagを実装するならば-->
 <!--userを実装するならば-->
 ---
 ### Comments
