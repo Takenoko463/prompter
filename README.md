@@ -24,7 +24,7 @@
 | Column | Type | Options |
 | --- | --- | --- |
 | prompt| references |null: false<br>foreign_key:true|
-### Favorite
+### Favorites
 <!--cookie上に保存?-->
 <!--後から拡張しやすいようにcountは入れない-->
 | Column | Type | Options |
