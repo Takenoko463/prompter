@@ -7,8 +7,8 @@
 | content | text | null: false |
 | nick_name | string | null: false<br>default: 'prompter'|
 | ai_id | integer | null: false<br>default:'1'|
+| user | references | null: false<br>foreign_key:true| 
 <!--userを実装するならば-->
-| user | references | null: false<br>foreign_key:true|
 ---
 ### Comments
 | Column | Type | Options |
@@ -16,8 +16,8 @@
 | nick_name | string |null: false<br>default:'commenter'|
 | content | text | null: false |
 | prompt | references | null: false<br>foreign_key:true|
-<!--userを実装するならば-->
 | user | references | null: false<br>foreign_key:true|
+<!--userを実装するならば-->
 ### Likes
 <!--cookie上に保存?-->
 <!--後から拡張しやすいようにcountは入れない-->
