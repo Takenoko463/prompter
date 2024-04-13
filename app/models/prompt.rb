@@ -5,4 +5,5 @@ class Prompt < ApplicationRecord
     validates :nick_name, comparison: { less_than: 31 }
     validates :ai_id, numericality: { other_than: 0 }
   end
+  belongs_to :ai
 end
