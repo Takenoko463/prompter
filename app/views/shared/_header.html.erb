@@ -1,4 +1,7 @@
 <header>
   <%=link_to "Prompter",root_path,html_options = {class:"top-page-link"}%>
-  <%=link_to "マイページ","#",html_options = {class:"favorites-index-link"}%>
+  <div class="link-index">
+    <%=link_to "prompt投稿",new_prompt_path%>
+    <%=link_to "マイページ","#",html_options = {class:"favorites-index-link"}%>
+  </div>
 </header>

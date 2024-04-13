@@ -1,7 +1,11 @@
-<%= render "shared/header" %>
 <main>
-  <div class="prompts">
-    <%= render "prompt"%>
+  <div class="prompts-index">
+    <div class="prompts">
+      <%if @prompts.any?%>
+        <%=render partial: "prompt",collection: @prompts%>
+      <%else%>
+        <p>条件に該当するpromptは存在しません。</p>
+      <%end%>
+    </div>
   </div>
 </main>
-<%= render "shared/footer"%>

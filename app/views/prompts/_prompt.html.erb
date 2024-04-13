@@ -1,18 +1,20 @@
 <div class="prompt">
-  <div class="prompt-title">
-    sample-title
+  <div class="prompt-header">
+    <div class="prompt-title">
+      <%=prompt.title%>
+    </div>
   </div>
   <div class="prompt-main">
     <div class="prompt-content">
-      sample-content
+      <span class="title-column">prompt内容</span>
+      <%=simple_format(h(prompt.content),class:"toggle")%>
     </div>
   </div>
   <div class="prompt-footer">
-    <a class="prompt-nick-name">
-      sample-name
-    </a>
-    <a class="prompt-ai-name">
-      sample-ai
-    </a>
+    <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
+    <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
+    <button class="content-copy-button">COPY!</button>
+    <%=link_to "編集", edit_prompt_path(prompt.id)%>
+    <%= link_to "削除", prompt_path(prompt.id),data: {turbo_method: :delete}%>
   </div>
 </div>
