@@ -17,6 +17,13 @@ footer {
     background-color: #34495e;
 }
 
+
+/*詳細情報を隠す*/
+
+.detail {
+    display: none;
+}
+
 header a {
     color: #ffffff;
     font-size: 16px;
@@ -29,12 +36,17 @@ header a:hover {
     /* ホバー時に下線を表示する */
 }
 
+.prompts-index {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .prompts {
     height: 100%;
     overflow: auto;
     /* プロンプトがmainの高さを超えたらスクロールバーを表示 */
-    display: flex;
-    justify-content: center;
 }
 
 
