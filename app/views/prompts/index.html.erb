@@ -1,10 +1,14 @@
 <main>
-  <div class="prompts">
-    <%if @prompts.any?%>
-      <%=render partial: "prompt",collection: @prompts%>
-    <%else%>
-      <p>条件に該当するpromptは存在しません。</p>
-    <%end%>
+  <div class="prompts-index">
+    <div class="prompts">
+      <%if @prompts.any?%>
+        <%=render partial: "prompt",collection: @prompts%>
+      <%else%>
+        <p>条件に該当するpromptは存在しません。</p>
+      <%end%>
+    </div>
+    <div class="prompt-new">
+      <%=link_to "prompt投稿",new_prompt_path%>
+    </div>
   </div>
-  <%=link_to "prompt投稿",new_prompt_path%>
 </main>
