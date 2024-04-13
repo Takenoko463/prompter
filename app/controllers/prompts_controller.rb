@@ -1,5 +1,6 @@
 class PromptsController < ApplicationController
-  before_action :retribute_active_hash, only: [:index, :new]
+  before_action :retribute_active_hash, only: [:index, :new, :edit]
+  before_action :set_prompt, only: [:edit, :update]
   def index
     @prompts = Prompt.all
   end
@@ -13,6 +14,11 @@ class PromptsController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+    @prompt.update(prompt_params)
+    redirect_to root_path
+  end
+
   private
 
   def retribute_active_hash
@@ -21,5 +27,9 @@ class PromptsController < ApplicationController
 
   def prompt_params
     params.require(:prompt).permit(:title, :content, :nick_name, :ai_id)
+  end
+
+  def set_prompt
+    @prompt = Prompt.find(params[:id])
   end
 end

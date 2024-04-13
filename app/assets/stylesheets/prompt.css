@@ -86,8 +86,7 @@ header a:hover {
 
 /* ユーザー名とAI名のスタイル */
 
-.prompt-nick-name,
-.ai-link {
+.prompt-footer a {
     margin-right: 10px;
     /* ユーザー名とAI名の間に余白を追加する */
     text-decoration: none;
@@ -99,8 +98,7 @@ header a:hover {
 
 /* ユーザー名とAI名のホバー時のスタイル */
 
-.prompt-nick-name:hover,
-.ai-link:hover {
+.prompt-footer a:hover {
     text-decoration: underline;
     /* ホバー時に下線を表示する */
 }

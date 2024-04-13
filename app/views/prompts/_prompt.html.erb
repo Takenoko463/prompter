@@ -14,5 +14,6 @@
     <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
     <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
     <button class="content-copy-button">COPY!</button>
+    <%=link_to "編集", edit_prompt_path(prompt.id)%>
   </div>
 </div>
