@@ -8,9 +8,18 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new
   end
 
+  def create
+    @prompt = Prompt.create(prompt_params)
+    redirect_to root_path
+  end
+
   private
 
   def retribute_active_hash
     @ais = Ai.all
+  end
+
+  def prompt_params
+    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id)
   end
 end
