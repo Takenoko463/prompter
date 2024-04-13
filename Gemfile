@@ -75,3 +75,4 @@ gem "active_hash"
 gem "jquery-rails"
 gem "bootstrap"
 gem "sassc-rails"
+gem 'pry-rails'
