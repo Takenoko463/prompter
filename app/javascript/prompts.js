@@ -10,8 +10,14 @@
      }
  }
 
- // ボタンにイベントリスナーを追加
- const buttons = document.querySelectorAll('.showDetails');
- buttons.forEach(button => {
-     button.addEventListener('click', toggleDetails);
- });
+ function openDetails() {
+     // ボタンにイベントリスナーを追加
+     const buttons = document.querySelectorAll('.showDetails');
+     buttons.forEach(button => {
+         button.addEventListener('click', toggleDetails);
+     });
+ }
+
+
+ window.addEventListener('turbo:load', openDetails)
+ window.addEventListener('turbo:render', openDetails)
