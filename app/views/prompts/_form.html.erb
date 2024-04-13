@@ -1,0 +1,19 @@
+<%=form_with model:prompt, local: true do |form|%>
+  <div class="prompt-title-form">
+    <span>プロンプトタイトル</span>
+    <%=form.text_field :title%>
+  </div>
+  <div class="prompt-content-form">
+    <span>プロンプト内容</span>
+    <%=form.text_area :content, size: "30x12"%>
+  </div>
+  <div class="prompt-nick-name-form">
+    <span>投稿者名</span>
+    <%=form.text_field :nick_name%>
+  </div>
+  <div class="prompt-ai-name-form">
+    <span>プロンプトを適用したAI</span>
+    <%=form.collection_select(:ai_id, ais, :id, :name, {})%>
+  </div>
+  <%= form.submit "投稿する", class: "submit-btn" %>
+<%end%>
