@@ -7,7 +7,7 @@
   <div class="prompt-main">
     <div class="prompt-content">
       <span class="title-column">prompt内容</span>
-      <p class="toggle"><%=prompt.content%></p>
+      <%=simple_format(h(prompt.content),class:"toggle")%>
     </div>
   </div>
   <div class="prompt-footer">
