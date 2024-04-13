@@ -72,3 +72,4 @@ group :test do
 end
 
 gem "active_hash"
+gem 'jquery-rails'
