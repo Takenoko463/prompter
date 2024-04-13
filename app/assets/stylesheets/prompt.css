@@ -1,0 +1,132 @@
+header {
+    background-color: #2c3e50;
+    height: 76px;
+    display: flex;
+    padding: 15px 15px 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    height: calc( 100vh - 100px);
+    background-color: #ecf0f1;
+}
+
+footer {
+    height: 24px;
+    background-color: #34495e;
+}
+
+header a {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+    /* ホバー時に下線を表示する */
+}
+
+.prompts {
+    height: 100%;
+    overflow: auto;
+    /* プロンプトがmainの高さを超えたらスクロールバーを表示 */
+    display: flex;
+    justify-content: center;
+}
+
+
+/* プロンプト全体のスタイル */
+
+.prompt {
+    border: 1px solid #ccc;
+    /* 枠線を追加してプロンプトを区別する */
+    border-radius: 5px;
+    /* 角丸にする */
+    padding: 15px;
+    /* 内側の余白を追加して内容を調整する */
+    margin: 10px;
+    /* プロンプト間の間隔を追加する */
+}
+
+
+/* プロンプトのタイトルのスタイル */
+
+.prompt-title {
+    font-weight: bold;
+    /* タイトルを太字にする */
+    margin-bottom: 5px;
+    /* タイトルと内容の間に余白を追加する */
+}
+
+
+/* プロンプトのフッターのスタイル */
+
+.prompt-footer {
+    margin: 10px, 0, 5px;
+    /* フッターと内容の間に余白を追加する */
+}
+
+
+/* ユーザー名とAI名のスタイル */
+
+.prompt-nick-name,
+.prompt-ai-name {
+    margin-right: 10px;
+    /* ユーザー名とAI名の間に余白を追加する */
+    text-decoration: none;
+    /* 下線を削除する */
+    color: black;
+    /* リンクの色を青にする */
+}
+
+
+/* ユーザー名とAI名のホバー時のスタイル */
+
+.prompt-nick-name:hover,
+.prompt-ai-name:hover {
+    text-decoration: underline;
+    /* ホバー時に下線を表示する */
+}
+
+
+/* プロンプト全体のサイズ設定 */
+
+.prompt {
+    width: 100%;
+    /* 幅を親要素の幅いっぱいに設定する */
+    max-width: 600px;
+    /* 最大幅を設定して、コンテンツが大きすぎないようにする */
+    height: 200px;
+    /* 高さを200pxに固定する */
+}
+
+
+/* タイトルのサイズ設定 */
+
+.prompt-title {
+    font-size: 18px;
+    /* タイトルのフォントサイズを設定する */
+    height: 10%;
+    /* タイトルの高さを設定する */
+}
+
+
+/* プロンプト内容のサイズ設定 */
+
+.prompt-main {
+    height: 80%;
+    overflow: auto;
+    /* コンテンツがプロンプトの高さを超えた場合にスクロールバーを表示する */
+}
+
+
+/* フッターのサイズ設定 */
+
+.prompt-footer {
+    height: 10%;
+    font-size: 14px;
+    /* フッターのフォントサイズを設定する */
+}
