@@ -2,7 +2,7 @@
   <div class="prompt-title">
     <%=prompt.title%>
   </div>
-  <button class="showDetails">詳細を表示</button>
+  <button class="showDetails">プロンプト内容を表示</button>
   <div class="prompt-main detail">
     <div class="prompt-content">
       <%=prompt.content%>
@@ -12,8 +12,6 @@
     <a class="prompt-nick-name">
       <%=prompt.nick_name%>
     </a>
-    <a class="prompt-ai-name">
-      <%=prompt.ai.name%>
-    </a>
+    <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link"%>
   </div>
 </div>
