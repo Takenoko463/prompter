@@ -1,7 +1,5 @@
-<%= render "shared/header" %>
 <main>
   <div class="prompts">
-    <%= render "prompt"%>
+    <%=render partial: "prompt", collections: @prompts%>
   </div>
 </main>
-<%= render "shared/footer"%>
