@@ -1,6 +1,6 @@
 class PromptsController < ApplicationController
   before_action :retribute_active_hash, only: [:index, :new, :edit]
-  before_action :set_prompt, only: [:edit, :update]
+  before_action :set_prompt, only: [:edit, :update, :destroy]
   def index
     @prompts = Prompt.all
   end
@@ -16,6 +16,11 @@ class PromptsController < ApplicationController
 
   def update
     @prompt.update(prompt_params)
+    redirect_to root_path
+  end
+
+  def destroy
+    @prompt.destroy
     redirect_to root_path
   end
 
