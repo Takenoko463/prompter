@@ -3,10 +3,10 @@
      const details = this.nextElementSibling;
      if (details.style.display === 'none') {
          details.style.display = 'block';
-         this.textContent = '詳細を隠す';
+         this.textContent = 'プロンプト内容を隠す';
      } else {
          details.style.display = 'none';
-         this.textContent = '詳細を表示';
+         this.textContent = 'プロンプト内容を表示';
      }
  }
 
