@@ -1,5 +1,9 @@
 <main>
   <div class="prompts">
-    <%=render partial: "prompt", collections: @prompts%>
+    <%if @prompts.any?%>
+      <%=render partial: "prompt", collections: @prompts%>
+    <%else%>
+      <p>条件に該当するpromptは存在しません。</p>
+    <%end%>
   </div>
 </main>
