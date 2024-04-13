@@ -72,4 +72,6 @@ group :test do
 end
 
 gem "active_hash"
-gem 'jquery-rails'
+gem "jquery-rails"
+gem "bootstrap"
+gem "sassc-rails"
