@@ -1,17 +1,17 @@
 <div class="prompt">
-  <div class="prompt-title">
-    <%=prompt.title%>
+  <div class="prompt-header">
+    <div class="prompt-title">
+      <%=prompt.title%>
+    </div>
   </div>
-  <button class="showDetails">プロンプト内容を表示</button>
-  <div class="prompt-main detail">
+  <div class="prompt-main">
     <div class="prompt-content">
-      <%=prompt.content%>
+      <span>prompt内容</span>
+      <p class="toggle"><%=prompt.content%></p>
     </div>
   </div>
   <div class="prompt-footer">
-    <a class="prompt-nick-name">
-      <%=prompt.nick_name%>
-    </a>
+    <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
     <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
   </div>
 </div>

@@ -21,7 +21,7 @@ footer {
 
 /*詳細情報を隠す*/
 
-.detail {
+.toggle {
     display: none;
 }
 
@@ -113,9 +113,9 @@ header a:hover {
     /* 幅を親要素の幅いっぱいに設定する */
     max-width: 600px;
     /* 最大幅を設定して、コンテンツが大きすぎないようにする */
-    height: 200px;
+    max-height: 200px;
     /* 高さを200pxに固定する */
-    overflow: auto;
+    /* overflow: auto;*/
     /* コンテンツがpromptの枠を超えた場合にスクロールバーを表示する */
 }
 
@@ -133,11 +133,15 @@ header a:hover {
 /* プロンプト内容のサイズ設定 */
 
 .prompt-main {
-    height: 80%;
+    max-height: 80%;
 }
 
 .prompt-content {
     max-height: 80%;
+}
+
+.prompt-content p {
+    background-color: #f6f6f6;
 }
 
 
