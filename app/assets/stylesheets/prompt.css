@@ -165,7 +165,7 @@ form * {
 }
 
 .prompt-title-form {
-    width: 80%;
+    width: 60%;
     /* 幅を100%に設定して親要素にフィットさせる */
     padding: 10px;
 }
