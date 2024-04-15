@@ -17,7 +17,6 @@ class PromptsController < ApplicationController
     else
       render action: :new, status: :unprocessable_entity
     end
-    redirect_to root_path
   end
 
   def update
