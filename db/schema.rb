@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_15_070357) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_15_100759) do
   create_table "prompts", charset: "utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_070357) do
     t.integer "ai_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "ip", null: false
+    t.string "ip_md5_head8", null: false
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|

@@ -8,7 +8,7 @@ class Prompt < ApplicationRecord
     validates :content, length: { minimum: 5, maximum: 3000 }
     validates :nick_name, length: { maximum: 31 }
     validates :ai_id, numericality: { other_than: 0 }
-    validates :ip
+    validates :ip_md5_head8
   end
   belongs_to :ai
 end
