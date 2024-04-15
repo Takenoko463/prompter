@@ -1,5 +1,5 @@
 class PromptsController < ApplicationController
-  before_action :retribute_active_hash, only: [:index, :new, :edit]
+  before_action :retribute_active_hash, only: [:index, :new, :edit, :update]
   before_action :set_prompt, only: [:edit, :update, :destroy]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
@@ -11,13 +11,21 @@ class PromptsController < ApplicationController
   end
 
   def create
-    @prompt = Prompt.create(prompt_params)
+    @prompt = Prompt.new(prompt_params)
+    if @prompt.save
+      redirect_to root_path
+    else
+      render action: :new, status: :unprocessable_entity
+    end
     redirect_to root_path
   end
 
   def update
-    @prompt.update(prompt_params)
-    redirect_to root_path
+    if @prompt.update(prompt_params)
+      redirect_to root_path
+    else
+      render action: :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

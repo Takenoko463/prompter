@@ -1,4 +1,7 @@
 <%=form_with model:prompt, local: true do |form|%>
+  <%if form.object.errors.any?&&!form.object.valid?%>
+    <%=render 'shared/error_messages', model: form.object %>
+  <%end%>
   <div class="prompt-title-form">
     <span>プロンプトタイトル</span>
     <%=form.text_field :title%>
