@@ -31,10 +31,19 @@ class PromptsController < ApplicationController
   end
 
   def prompt_params
-    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id)
+    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id).merge(ip: set_ip)
   end
 
   def set_prompt
     @prompt = Prompt.find(params[:id])
+  end
+
+  def ip_to_md5(ip)
+    Digest::MD5.hexdigest(ip)[0, 8]
+  end
+
+  def set_ip
+    ip_plain = request.remote_ip
+    ip_to_md5(ip_plain)
   end
 end
