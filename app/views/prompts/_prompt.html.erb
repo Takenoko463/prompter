@@ -6,7 +6,7 @@
   </div>
   <div class="prompt-main">
     <div class="prompt-content">
-      <span class="title-column">prompt内容</span>
+      <span class="title-column">prompt open</span>
       <%=simple_format(h(prompt.content),class:"toggle")%>
     </div>
   </div>
@@ -14,7 +14,9 @@
     <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
     <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
     <button class="content-copy-button">COPY!</button>
-    <%=link_to "編集", edit_prompt_path(prompt.id)%>
-    <%= link_to "削除", prompt_path(prompt.id),data: {turbo_method: :delete}%>
+    <%if(your_prompt?(prompt))%>
+      <%=link_to "編集", edit_prompt_path(prompt.id)%>
+      <%= link_to "削除", prompt_path(prompt.id),data: {turbo_method: :delete}%>
+    <%end%>
   </div>
 </div>

@@ -19,7 +19,7 @@
 | content | text | null: false |
 | prompt | references | null: false<br>foreign_key:true|
 | user | references | null: false<br>foreign_key:true|
-<!--userを実装するならば-->
+
 ### Likes
 <!--cookie上に保存?-->
 <!--後から拡張しやすいようにcountは入れない-->
@@ -42,16 +42,13 @@
 | --- | --- | --- |
 | prompt | references | null: false |
 | tag | references | null: false |
-<!--誤って、送信しないように別で管理-->
-### IPs
-| Column | Type | Options |
-| --- | --- | --- |
-| content | string | null: false<br>uniqueness|
 
 ### Users
 | Column | Type | Options |
 | --- | --- | --- |
-| ip | references | null: false<br>foreign_key:true<br>uniqueness|
+| nick_name | string| null: false |
+| email | string | null:false |
+| encrypted_password | string | null:false |
 ---
 
 ## Association
