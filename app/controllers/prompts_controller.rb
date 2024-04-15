@@ -3,7 +3,7 @@ class PromptsController < ApplicationController
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
-    @prompts = Prompt.all
+    @prompts = Prompt.all.order(id: 'DESC')
   end
 
   def new
