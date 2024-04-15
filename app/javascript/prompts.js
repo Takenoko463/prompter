@@ -12,6 +12,12 @@ $(window).on('turbo:load', function() {
 function hide() {
     $('.title-column').click(function() {
         $(this).parent().find('.toggle').toggle();
+        const text = $(this).text(); // ボタンの文字取得
+        if (text == "prompt open") {
+            $(this).text("prompt close");
+        } else {
+            $(this).text("prompt open");
+        }
     })
 }
 
