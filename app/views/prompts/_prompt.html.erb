@@ -1,8 +1,6 @@
 <div class="prompt">
   <div class="prompt-header">
-    <div class="prompt-title">
-      <%=prompt.title%>
-    </div>
+    <%=link_to prompt.title,prompt_path(prompt.id),class:"prompt-title"%>
   </div>
   <div class="prompt-main">
     <div class="prompt-content">

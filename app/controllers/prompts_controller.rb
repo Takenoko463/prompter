@@ -1,6 +1,6 @@
 class PromptsController < ApplicationController
-  before_action :retribute_active_hash, only: [:index, :new, :edit, :update]
-  before_action :set_prompt, only: [:edit, :update, :destroy]
+  before_action :retribute_active_hash, only: [:index, :new, :edit, :update, :show]
+  before_action :set_prompt, only: [:edit, :update, :destroy, :show]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
     @prompts = Prompt.all
