@@ -31,4 +31,4 @@
 /config/master.key
 /config/clientid.key
 /config/client_secret.key
-/config/my-key-pair.pem
+/config/aws/*
