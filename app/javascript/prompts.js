@@ -9,7 +9,7 @@ $(window).on('turbo:load', function() {
     $(copy_prompt)
 });
 
-function hide() {
+const hide = () => {
     $('.title-column').click(function() {
         $(this).parent().find('.toggle').toggle();
         const text = $(this).text(); // ボタンの文字取得
@@ -21,7 +21,7 @@ function hide() {
     })
 }
 
-function copy_prompt() {
+const copy_prompt = () => {
     $('.content-copy-button').click(function() {
         const text = $(this).parent().parent().find("p.toggle").text(); //テキスト取得
         navigator.clipboard.writeText(text); // ★ テキストをクリップボードに書き込み（＝コピー）
