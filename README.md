@@ -7,6 +7,7 @@
 | content | text | null: false |
 | nick_name | string | null: false<br>default: 'prompter'|
 | ai_id | integer | null: false<br>default:'1'|
+| ip_md5_head8| string | null: false | 
 | tags | references | null: false<br>foreign_key:true|
 | user | references | null: false<br>foreign_key:true| 
 <!--tagを実装するならば-->
@@ -18,6 +19,7 @@
 | nick_name | string |null: false<br>default:'commenter'|
 | content | text | null: false |
 | prompt | references | null: false<br>foreign_key:true|
+| ip_md5_head8 | string | null: false | 
 | user | references | null: false<br>foreign_key:true|
 
 ### Likes

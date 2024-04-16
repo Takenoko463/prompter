@@ -71,6 +71,9 @@ group :test do
   gem "webdrivers"
 end
 
+group :production do
+  gem 'unicorn', '6.1.0'
+end
 gem "active_hash"
 gem "jquery-rails"
 gem "bootstrap"

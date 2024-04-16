@@ -1,0 +1,11 @@
+<main>
+  <div class="prompts-index">
+    <div class="prompts">
+      <%if @prompt.present?%>
+        <%=render partial: "prompt",locals: {prompt: @prompt}%>
+      <%else%>
+        <p>条件に該当するpromptは存在しません。</p>
+      <%end%>
+    </div>
+  </div>
+</main>
