@@ -6,7 +6,7 @@
 [Prompter](http://54.199.100.28/)
 ### ID
 ```
-master
+admin
 ```
 ### password
 ```
