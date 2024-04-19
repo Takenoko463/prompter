@@ -35,9 +35,7 @@ admin
 | ai_id | integer | null: false<br>default:'1'|
 | ip_md5_head8| string | null: false | 
 | tags | references | null: false<br>foreign_key:true|
-| user | references | null: false<br>foreign_key:true| 
 <!--tagを実装するならば-->
-<!--userを実装するならば-->
 ---
 ### Comments
 | Column | Type | Options |
@@ -46,7 +44,6 @@ admin
 | content | text | null: false |
 | prompt | references | null: false<br>foreign_key:true|
 | ip_md5_head8 | string | null: false | 
-| user | references | null: false<br>foreign_key:true|
 
 ### Likes
 <!--cookie上に保存?-->
@@ -89,11 +86,8 @@ has_many:likes
 has_many:favorites
 <!--When generate tags_controller-->
 has_many:tags,throw prompt_tag_relations 
-<!--When generate user_controller-->
-belongs_to:user
 ### Comments
-<!--When generate user_controller-->
-belongs_to:user
+
 ### Likes
 <!--When generate user_controller-->
 ### Favorites
