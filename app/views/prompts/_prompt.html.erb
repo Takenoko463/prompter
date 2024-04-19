@@ -4,8 +4,11 @@
   </div>
   <div class="prompt-main">
     <div class="prompt-content">
-      <span class="title-column">prompt open</span>
-      <%=simple_format(h(prompt.content),class:"toggle")%>
+      <p class="content-first-line"> <%= prompt.first_line %></p>
+      <%if prompt.remaining_content.present?%>
+        <span class="read-more">続きを読む</span>
+        <%=simple_format(h(prompt.remaining_content),class:"toggle")%>
+      <%end%>
     </div>
   </div>
   <div class="prompt-footer">
