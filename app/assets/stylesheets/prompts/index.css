@@ -144,6 +144,11 @@ header a:hover {
     background-color: #f6f6f6;
 }
 
+.read-more {
+    background-color: white;
+    opacity: 0.5;
+}
+
 
 /* フッターのサイズ設定 */
 
