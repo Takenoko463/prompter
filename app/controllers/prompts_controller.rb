@@ -13,6 +13,7 @@ class PromptsController < ApplicationController
   def create
     @prompt = Prompt.new(prompt_params)
     if @prompt.save
+      cookies[:last_nick_name] = prompt_params[:nick_name]
       redirect_to root_path
     else
       render action: :new, status: :unprocessable_entity
