@@ -11,4 +11,12 @@ class Prompt < ApplicationRecord
     validates :ip_md5_head8
   end
   belongs_to :ai
+
+  def first_line
+    content.split("\n").first
+  end
+
+  def remaining_content
+    content.split("\n")[1..].join("\n")
+  end
 end
