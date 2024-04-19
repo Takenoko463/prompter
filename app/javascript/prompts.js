@@ -5,7 +5,7 @@ $(window).on('turbo:load', function() {
 
 const hideOrOpen = () => {
     $('.read-more').on("click", function() {
-        $(this).parent().find('.toggle').toggle();
+        $(this).parent().parent().find('.toggle').toggle();
         var readMoreText = $(this).text() == "続きを読む" ? "一部を表示" : "続きを読む";
         $(this).text(readMoreText);
     });

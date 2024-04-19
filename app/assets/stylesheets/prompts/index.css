@@ -145,6 +145,7 @@ header a:hover {
 }
 
 .read-more {
+    background-color: white;
     opacity: 0.5;
 }
 

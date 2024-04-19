@@ -6,8 +6,8 @@
     <div class="prompt-content">
       <p class="content-first-line"> <%= prompt.first_line %></p>
       <%if prompt.remaining_content.present?%>
-        <span class="read-more">続きを読む</span>
         <%=simple_format(h(prompt.remaining_content),class:"toggle")%>
+        <p><span class="read-more">続きを読む</span></p>
       <%end%>
     </div>
   </div>
