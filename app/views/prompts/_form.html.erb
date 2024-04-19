@@ -12,7 +12,7 @@
   </div>
   <div class="prompt-nick-name-form">
     <span>投稿者名</span>
-    <%=form.text_field :nick_name%>
+    <%=form.text_field :nick_name, value: cookies[:last_nick_name] %>
   </div>
   <div class="prompt-ai-name-form">
     <span>プロンプトを適用したAI</span>
