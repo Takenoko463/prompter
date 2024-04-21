@@ -68,7 +68,6 @@ class PromptsController < ApplicationController
   end
 
   def set_categories
-    @categories = Category.new
-    @main_categories = Category.all.order('id ASC').limit(9)
+    @categories = Category.roots
   end
 end
