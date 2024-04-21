@@ -7,10 +7,21 @@ header {
     align-items: center;
 }
 
+header a {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+    /* ホバー時に下線を表示する */
+}
+
 main {
     height: calc( 100vh - 100px);
     background-color: #ecf0f1;
-    overflow: auto;
 }
 
 footer {
