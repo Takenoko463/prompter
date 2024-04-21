@@ -1,0 +1,15 @@
+<main class="prompts-main-index">
+  <div class="categories">
+    <%=render partial: "index",collection: @categories, as: :category%>
+  </div>
+  <div class="prompts-index">
+    <h1><%=@category.name%>一覧</h1>
+    <div class="prompts">
+      <%if @prompts.any?%>
+        <%=render partial: "prompts/prompt",collection: @prompts%>
+      <%else%>
+        <p>条件に該当するpromptは存在しません。</p>
+      <%end%>
+    </div>
+  </div>
+</main>

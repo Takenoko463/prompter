@@ -13,7 +13,7 @@
   </div>
   <div class="prompt-footer">
     <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
-    <%= link_to prompt.category.name,"#"%>
+    <%= link_to prompt.category.name,category_path(prompt.category.id)%>
     <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
     <button class="content-copy-button">COPY!</button>
     <%if(your_prompt?(prompt))%>
