@@ -5,21 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-themes = [
-  { name: "文学と創作" },
-  { name: "技術とプログラミング" },
-  { name: "ビジネスと経済" },
-  { name: "アートとデザイン" },
-  { name: "エンターテインメント" },
-  { name: "健康とフィットネス" },
-  { name: "科学と自然"},
-  { name: "インタビュー質問"},
-  {name: "その他"}
-]
-writing,programming,business,art,entertainment,fitness,science,interview=Category.create(themes)
 
-writing_children=[{name: "小説"},{name: "詩"},{name: "キャラクター開発"}]
-writing.children.create(writing_children)
+#CSVファイルの読み込みを有効化
+require "csv"
 
-programming_children=[{name: "Web開発"},{name: "モバイル開発"},{name: "データサイエンス"},{name: "DX"},{name: "プログラミン学習"}]
-programming.children.create(programming_children)
+##CSVファイルをforeachでインポート
+CSV.foreach('db/category.csv') do |row|
+  Category.create(:id => row[0], :name => row[1], :ancestry => row[2])
+end 
