@@ -68,6 +68,6 @@ class PromptsController < ApplicationController
   end
 
   def set_categories
-    @categories = Category.roots
+    @categories = Category.roots.order(id: 'DESC')
   end
 end
