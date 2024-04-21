@@ -40,7 +40,7 @@ class PromptsController < ApplicationController
   end
 
   def prompt_params
-    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id).merge(ip_md5_head8: set_ip)
+    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer).merge(ip_md5_head8: set_ip)
   end
 
   def set_prompt
