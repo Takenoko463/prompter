@@ -1,6 +1,9 @@
 class CategoriesController < ApplicationController
-  def new
-    @categories = Category.new
-    @main_categories = Category.all.order('id ASC').limit(13)
+  def children
+    @category = Category.find(params[:id])
+    @children = @category.children
+    respond_to do |format|
+      format.json { render json: @children }
+    end
   end
 end
