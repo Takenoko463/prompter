@@ -1,7 +1,7 @@
 class PromptsController < ApplicationController
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
-  before_action :set_categories, only: [:index]
+  before_action :set_categories, only: [:index, :new, :create, :edit, :update]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
     @prompts = Prompt.all.order(id: 'DESC')
@@ -41,7 +41,7 @@ class PromptsController < ApplicationController
   end
 
   def prompt_params
-    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer).merge(ip_md5_head8: set_ip)
+    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer, :category_id).merge(ip_md5_head8: set_ip)
   end
 
   def set_prompt
