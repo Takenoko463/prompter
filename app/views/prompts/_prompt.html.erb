@@ -17,7 +17,7 @@
     <button class="content-copy-button">COPY!</button>
     <%if(your_prompt?(prompt))%>
       <%=link_to "編集", edit_prompt_path(prompt.id)%>
-      <%= link_to "削除", prompt_path(prompt.id),data: {turbo_method: :delete}%>
+      <%= link_to "削除", prompt_path(prompt.id),data: { confirm: "本当に削除しますか？" }, method: :delete%>
     <%end%>
   </div>
 </div>
