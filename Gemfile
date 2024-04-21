@@ -85,3 +85,4 @@ gem "sassc-rails"
 gem 'pry-rails'
 gem 'devise'
 gem 'ancestry'
+gem 'seed-fu'
