@@ -34,7 +34,7 @@
     /* 角丸にする */
     padding: 15px;
     /* 内側の余白を追加して内容を調整する */
-    margin: 10px;
+    margin: 20px;
     /* プロンプト間の間隔を追加する */
     margin-right: auto;
     margin-left: auto;
@@ -45,11 +45,14 @@
 
 /* プロンプトのタイトルのスタイル */
 
+.prompt-header {
+    margin-bottom: 5px;
+    /* タイトルと内容の間に余白を追加する */
+}
+
 .prompt-title {
     font-weight: bold;
     /* タイトルを太字にする */
-    margin-bottom: 5px;
-    /* タイトルと内容の間に余白を追加する */
 }
 
 
@@ -80,6 +83,13 @@
 .prompt-footer a:hover {
     text-decoration: underline;
     /* ホバー時に下線を表示する */
+}
+
+
+/*プロンプト内容のスタイル*/
+
+.prompt-main {
+    margin: 10px;
 }
 
 
