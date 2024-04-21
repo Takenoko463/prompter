@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   resources :prompts do
     resources :comments ,only:[:index,:new,:create,:edit,:update,:destroy]
   end
+  
+  resources :categories, only:[:show] do
+    get 'children', on: :member
+  end
 end

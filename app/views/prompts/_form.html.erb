@@ -20,5 +20,14 @@
     <span>プロンプトを適用したAI</span>
     <%=form.collection_select(:ai_id, ais, :id, :name, {})%>
   </div>
+  <div class="prompt-category-form">
+    <span>親カテゴリ</span>
+    <%= form.collection_select(:parent_category_id, Category.roots, :id, :name, prompt: true, id: 'parent_category_id') %>
+  </div>
+  <div class="prompt-subcategory-form">
+    <span>子カテゴリ</span>
+    <%= form.select(:child_category_id, options_for_select([]), prompt: '選択してください', id: 'child_category_id') %>
+  </div>
+  <%= form.hidden_field :category_id, id: 'category_id' %>
   <%= form.submit action_name, class: "submit-btn" %>
 <%end%>
