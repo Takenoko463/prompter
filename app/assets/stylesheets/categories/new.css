@@ -1,0 +1,10 @@
+.categories {
+    height: 100%;
+    width: 15vw;
+    padding: 10px;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+}

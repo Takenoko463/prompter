@@ -1,3 +1,9 @@
+main.prompts-main-index {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 /*詳細情報を隠す*/
 
 .toggle {
