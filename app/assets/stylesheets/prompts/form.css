@@ -53,7 +53,7 @@ form * {
     /* 幅を100%に設定して親要素にフィットさせる */
 }
 
-.prompt-content-form input[type="text"] {
+.prompt-content-form textarea {
     padding: 10px;
     /* 内側の余白を追加して見た目を整える */
     margin-bottom: 15px;
