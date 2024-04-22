@@ -70,12 +70,9 @@ class PromptsController < ApplicationController
   end
 
   def set_category
-    category_id = if params[:category_id].present?
-                    params[:category_id]
-                  else
-                    0
-                  end
-    @category = Category.find(category_id)
+    selected_category_id = params[:category_id].present? ? params[:category_id] : 0
+
+    @category = Category.find(selected_category_id)
   end
 
   def set_categories
