@@ -1,10 +1,12 @@
 class PromptsController < ApplicationController
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
-  before_action :set_categories, only: [:index, :new, :create, :edit, :update]
+  before_action :set_category, only: [:index]
+  before_action :set_categories, only: [:index]
+  before_action :set_root_categories, only: [:new, :create, :edit, :update]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
-    @prompts = Prompt.all.order(id: 'DESC')
+    @prompts = @category.prompts
   end
 
   def new
@@ -67,7 +69,20 @@ class PromptsController < ApplicationController
     redirect_to root_path
   end
 
+  def set_category
+    category_id = if params[:category_id].present?
+                    params[:category_id]
+                  else
+                    0
+                  end
+    @category = Category.find(category_id)
+  end
+
   def set_categories
+    @categories = @category.children
+  end
+
+  def set_root_categories
     @categories = Category.roots.order(id: 'DESC')
   end
 end

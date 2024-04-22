@@ -2,6 +2,6 @@ class Category < ApplicationRecord
   has_ancestry
   has_many :prompts
   def roots
-    all.limit(9)
+    find(0).children
   end
 end
