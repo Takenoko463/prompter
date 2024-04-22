@@ -5,7 +5,8 @@ class PromptsController < ApplicationController
   before_action :set_root_categories, only: [:new, :create, :edit, :update]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
-    @prompts = @category.prompts
+    ## categoryと、その子孫に繋がる全てのpromptを取り出す
+    @prompts = Prompt.where(category_id: @category.subtree.pluck(:id))
   end
 
   def new
