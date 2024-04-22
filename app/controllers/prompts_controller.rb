@@ -2,7 +2,8 @@ class PromptsController < ApplicationController
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
   before_action :set_category_index, only: [:index]
-  before_action :set_root_categories, only: [:new, :create, :edit, :update]
+  before_action :set_root_category, only: [:new, :create, :edit, :update]
+  before_action :set_main_categories, only: [:new, :create, :edit, :update]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
     ## categoryと、その子孫に繋がる全てのpromptを取り出す
@@ -72,7 +73,7 @@ class PromptsController < ApplicationController
   def set_category_index
     set_category
     set_category_parent
-    set_category_children
+    @categories = @category.children
   end
 
   def set_category
@@ -85,11 +86,11 @@ class PromptsController < ApplicationController
     @parent_category = @category.parent if @category.has_parent?
   end
 
-  def set_category_children
-    @categories = @category.children
+  def set_main_categories
+    @categories = [@category] + @category.children
   end
 
-  def set_root_categories
-    @categories = Category.roots.order(id: 'DESC')
+  def set_root_category
+    @category = Category.roots[0]
   end
 end

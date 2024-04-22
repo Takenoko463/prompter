@@ -6,7 +6,7 @@ $(document).on('change', '#prompt_parent_category_id', function() {
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                var options = '<option value="">選択してください</option>';
+                var options = '<option value="">必要があれば選択してください</option>';
                 data.forEach(function(category) {
                     options += '<option value="' + category.id + '">' + category.name + '</option>';
                 });
