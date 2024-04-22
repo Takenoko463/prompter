@@ -1,8 +1,7 @@
 class PromptsController < ApplicationController
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
-  before_action :set_category, only: [:index]
-  before_action :set_categories, only: [:index]
+  before_action :set_category_index, only: [:index]
   before_action :set_root_categories, only: [:new, :create, :edit, :update]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
@@ -69,13 +68,23 @@ class PromptsController < ApplicationController
     redirect_to root_path
   end
 
+  def set_category_index
+    set_category
+    set_category_parent
+    set_category_children
+  end
+
   def set_category
     selected_category_id = params[:category_id].present? ? params[:category_id] : 0
 
     @category = Category.find(selected_category_id)
   end
 
-  def set_categories
+  def set_category_parent
+    @parent_category = @category.parent if @category.has_parent?
+  end
+
+  def set_category_children
     @categories = @category.children
   end
 
