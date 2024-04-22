@@ -1,10 +1,13 @@
 class PromptsController < ApplicationController
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
-  before_action :set_categories, only: [:index, :new, :create, :edit, :update]
+  before_action :set_category_index, only: [:index]
+  before_action :set_root_category, only: [:new, :create, :edit, :update]
+  before_action :set_main_categories, only: [:new, :create, :edit, :update]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
-    @prompts = Prompt.all.order(id: 'DESC')
+    ## categoryと、その子孫に繋がる全てのpromptを取り出す
+    @prompts = Prompt.where(category_id: @category.subtree.pluck(:id))
   end
 
   def new
@@ -67,7 +70,27 @@ class PromptsController < ApplicationController
     redirect_to root_path
   end
 
-  def set_categories
-    @categories = Category.roots.order(id: 'DESC')
+  def set_category_index
+    set_category
+    set_category_parent
+    @categories = @category.children
+  end
+
+  def set_category
+    selected_category_id = params[:category_id].present? ? params[:category_id] : 0
+
+    @category = Category.find(selected_category_id)
+  end
+
+  def set_category_parent
+    @parent_category = @category.parent if @category.has_parent?
+  end
+
+  def set_main_categories
+    @categories = [@category] + @category.children
+  end
+
+  def set_root_category
+    @category = Category.roots[0]
   end
 end

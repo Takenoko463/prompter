@@ -1,5 +1,14 @@
 <main class="prompts-main-index">
   <div class="categories">
+    <h1>カテゴリ一覧</h1>
+    <%if defined? @parent_category%>
+      <h2>
+        <%=render partial: "categories/index",locals: {category: @parent_category}%>
+      </h2>
+    <%end%>
+    <h2>
+      <%=render partial: "categories/index",locals: {category: @category}%>
+    </h2>
     <%=render partial: "categories/index",collection: @categories, as: :category%>
   </div>
   <div class="prompts-index">
