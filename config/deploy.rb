@@ -32,3 +32,13 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 end
+
+# マイグレーション後にseed_fuでデータを更新
+after 'deploy:migrating', 'deploy:apply_seed_fu'
+namespace :deploy do
+  task :apply_seed_fu do
+    on primary :db do
+      invoke 'seed_fu:apply'
+    end
+  end
+end
