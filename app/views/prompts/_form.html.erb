@@ -21,12 +21,14 @@
     <%=form.collection_select(:ai_id, ais, :id, :name, {})%>
   </div>
   <div class="prompt-category-form">
-    <span>親カテゴリ</span>
-    <%= form.collection_select(:parent_category_id, categories, :id, :name, prompt: true, id: 'prompt_parent_category_id',selected: 0) %>
-  </div>
-  <div class="prompt-child-category-form">
-    <span>子カテゴリ</span>
-    <%= form.collection_select(:child_category_id, category.children, :id, :name, prompt: "必要があれば選択してください", id: 'prompt_child_category_id') %>
+    <div class="prompt-parent-category-form">
+      <span>親カテゴリ</span>
+      <%= form.collection_select(:parent_category_id, categories, :id, :name, prompt: true, id: 'prompt_parent_category_id',selected: 0) %>
+    </div>
+    <div class="prompt-child-category-form">
+      <span>子カテゴリ</span>
+      <%= form.collection_select(:child_category_id, category.children, :id, :name, prompt: "必要があれば選択してください", id: 'prompt_child_category_id') %>
+    </div>
   </div>
   <%= form.hidden_field :category_id, id: 'category_id' %>
   <%= form.submit action_name, class: "submit-btn" %>

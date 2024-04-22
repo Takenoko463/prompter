@@ -12,7 +12,7 @@ main.new-prompt h1 {
 }
 
 form {
-    max-height: calc(100% - 60px);
+    max-height: calc(100% - 90px);
     max-width: calc( 100% - 40px);
     /* 最大幅を設定して、コンテンツが大きすぎないようにする */
     background-color: #f9f9f9;
@@ -32,8 +32,8 @@ form * {
 }
 
 .prompt-title-form {
+    margin-top: 5%;
     width: 60%;
-    /* 幅を100%に設定して親要素にフィットさせる */
     padding: 10px;
 }
 
@@ -41,7 +41,6 @@ form * {
 /* タイトル入力フィールドのスタイル */
 
 .prompt-title-form input[type="text"] {
-    /* 内側の余白を追加して見た目を整える */
     margin-bottom: 15px;
     /* 下部に余白を追加して見た目を整える */
 }
@@ -51,7 +50,6 @@ form * {
 
 .prompt-content-form {
     width: 80%;
-    /* 幅を100%に設定して親要素にフィットさせる */
 }
 
 .prompt-content-form textarea {
@@ -94,6 +92,23 @@ form * {
 }
 
 
+/*カテゴリ選択のスタイル*/
+
+.prompt-category-form {
+    width: calc(50% - 5px);
+    padding: 10px;
+    /* 内側の余白を追加して見た目を整える */
+    margin-bottom: 15px;
+    /* 下部に余白を追加して見た目を整える */
+}
+
+.prompt-category-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 /* 投稿ボタンのスタイル */
 
 .submit-btn {
@@ -112,6 +127,7 @@ form * {
     /* カーソルをポインターにする */
     font-size: 16px;
     /* フォントサイズを設定する */
+    margin-bottom: 5%;
 }
 
 .submit-btn:hover {
