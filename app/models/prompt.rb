@@ -4,6 +4,7 @@ class Prompt < ApplicationRecord
   validates :answer, length: { maximum: 3000 }
   belongs_to_active_hash :ai
   belongs_to :category
+  has_many :likes
   with_options presence: true do
     validates :title, length: { maximum: 31 }
     validates :nick_name, length: { maximum: 31 }
