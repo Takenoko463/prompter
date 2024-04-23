@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_21_150639) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_23_000753) do
   create_table "categories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "ancestry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", charset: "utf8", force: :cascade do |t|
+    t.string "ip_md5_head8", null: false
+    t.bigint "prompt_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prompt_id"], name: "index_likes_on_prompt_id"
   end
 
   create_table "prompts", charset: "utf8", force: :cascade do |t|
@@ -31,5 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_21_150639) do
     t.index ["category_id"], name: "index_prompts_on_category_id"
   end
 
+  add_foreign_key "likes", "prompts"
   add_foreign_key "prompts", "categories"
 end
