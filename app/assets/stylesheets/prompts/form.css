@@ -11,7 +11,7 @@ main.new-prompt h1 {
     margin: 10px;
 }
 
-form {
+main.new-prompt form {
     max-height: calc(100% - 90px);
     max-width: calc( 100% - 40px);
     /* 最大幅を設定して、コンテンツが大きすぎないようにする */
@@ -27,7 +27,7 @@ form {
     overflow: scroll;
 }
 
-form * {
+main.new-prompt form * {
     width: 100%;
 }
 
