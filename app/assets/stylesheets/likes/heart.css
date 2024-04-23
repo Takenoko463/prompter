@@ -1,7 +1,7 @@
-#like-button {
+#prompt_likes {
     color: inherit;
 }
 
-#like-button.liked {
+#prompt_likes.liked {
     color: red;
 }

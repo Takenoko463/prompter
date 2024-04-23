@@ -22,6 +22,6 @@ class Prompt < ApplicationRecord
   end
 
   def liked_by?(ip_md5_head8)
-    likes.where(:ip_md5_head8).exists?
+    likes.where(ip_md5_head8:).exists?
   end
 end
