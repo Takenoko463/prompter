@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  include LikesHelper
   before_action :set_prompt
   def create
     like = Like.new(like_params)
