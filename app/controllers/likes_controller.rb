@@ -10,6 +10,14 @@ class LikesController < ApplicationController
     end
   end
 
+  def destroy
+    like = Like.find_by(like_params)
+    like.destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def set_prompt
