@@ -1,7 +1,6 @@
 module LikesHelper
-  include IpsHelper
-  def liked?(prompt)
+  def liked?(id)
     likes = cookies[:likes] ? JSON.parse(cookies[:likes]) : []
-    likes.include?(prompt.id)
+    likes.include?(id)
   end
 end
