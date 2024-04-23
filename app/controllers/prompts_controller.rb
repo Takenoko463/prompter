@@ -1,4 +1,5 @@
 class PromptsController < ApplicationController
+  include PromptsHelper
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
   before_action :set_category_index, only: [:index]
@@ -51,21 +52,8 @@ class PromptsController < ApplicationController
     @prompt = Prompt.find(params[:id])
   end
 
-  def ip_to_md5_head8(ip)
-    Digest::MD5.hexdigest(ip)[0, 8]
-  end
-
-  def set_ip
-    ip_plain = request.remote_ip
-    ip_to_md5_head8(ip_plain)
-  end
-
-  def your_prompt?
-    set_ip == @prompt.ip_md5_head8
-  end
-
   def authenticate_ip!
-    return if your_prompt?
+    return if your_prompt?(@prompt)
 
     redirect_to root_path
   end
