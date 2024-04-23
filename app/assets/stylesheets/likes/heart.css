@@ -1,0 +1,7 @@
+#like-button {
+    color: inherit;
+}
+
+#like-button.liked {
+    color: red;
+}

@@ -1,0 +1,3 @@
+<%= button_to prompt_likes_path(prompt), method: :post, remote: true, id: 'like-button', class: "#{liked?(prompt) ? 'liked' : ''}" do %>
+  <i class="fa-solid fa-heart"></i>
+<% end %>

@@ -15,6 +15,7 @@
     <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
     <%= link_to prompt.category.name,category_prompts_path(prompt.category.id)%>
     <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
+    <%=render partial: "likes/like_button",locals: {prompt: prompt}%>
     <button class="content-copy-button">COPY!</button>
     <%if(your_prompt?(prompt))%>
       <%=link_to "編集", edit_prompt_path(prompt.id)%>
