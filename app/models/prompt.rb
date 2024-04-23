@@ -12,7 +12,6 @@ class Prompt < ApplicationRecord
     validates :ai_id, numericality: { other_than: 0 }
     validates :ip_md5_head8
   end
-  belongs_to :ai
 
   def first_line
     content.split("\n").first
@@ -20,5 +19,9 @@ class Prompt < ApplicationRecord
 
   def remaining_content
     content.split("\n")[1..].join("\n")
+  end
+
+  def liked_by?(ip_md5_head8)
+    likes.where(:ip_md5_head8).exists?
   end
 end
