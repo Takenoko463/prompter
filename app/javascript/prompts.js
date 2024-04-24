@@ -30,7 +30,8 @@ const copyPrompt = () => {
 
             return str;
         };
-        const contentMain = $(this).parent().parent();
+        const promptId = $(this).data('prompt-id');
+        const contentMain = $("#prompt-content-" + promptId);
         var text = contentMain.find("p.content-first-line").text();
         const remainingContent = contentMain.find("p.toggle").text();
         if (remainingContent) {
