@@ -4,7 +4,10 @@
       <%=link_to prompt.title,prompt_path(prompt.id),class:"prompt-title"%>
     </div>
     <div class="prompt-actions">
-      <button class="content-copy-button" data-prompt-id=<%=prompt.id%>>COPY!</button>
+      <button class="content-copy-button" data-prompt-id=<%=prompt.id%>>
+        <div class="copy-image"><i class="fa-regular fa-copy"></i></div>
+        <div class="copy-content"></div>
+      </button>
       <%if(your_prompt?(prompt))%>
         <%=link_to "編集", edit_prompt_path(prompt.id)%>
         <%= link_to "削除", prompt_path(prompt.id),data: { confirm: "本当に削除しますか？" }, method: :delete%>

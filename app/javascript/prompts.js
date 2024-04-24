@@ -42,8 +42,12 @@ const copyPrompt = () => {
         } else {
             navigator.clipboard.writeText(text);
         }
+        const copyContent = $(this).find('.copy-content');
+        //const copyImage = $(this).find('copy-image');
+        copyContent.text('Copied!');
+        setTimeout(() => {
+            copyContent.text('');
 
-        $(this).text('OK!');
-        setTimeout(() => { $(this).text('COPY!') }, 1000);
+        }, 1000);
     })
 };
