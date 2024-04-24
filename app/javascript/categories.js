@@ -47,3 +47,6 @@ $(document).on('click', '.submit-btn', function(e) {
         $('.prompt-form').prepend($subcategoryForm);
     });
 });
+$(document).on('click', '#sidebarCollapse', function(e) {
+    $('#sidebar').toggleClass('active');
+})

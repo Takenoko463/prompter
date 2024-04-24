@@ -1,24 +1,40 @@
-<main class="prompts-main-index">
-  <div class="categories">
-    <h1>カテゴリ一覧</h1>
-    <%if defined? @parent_category%>
-      <h2>
-        <%=render partial: "categories/category",locals: {category: @parent_category}%>
-      </h2>
-    <%end%>
-    <h2 class="current-category">
-      <%=render partial: "categories/category",locals: {category: @category}%>
-    </h2>
-    <%=render partial: "categories/category",collection: @categories, as: :category%>
-  </div>
-  <div class="prompts-index">
-    <h1>prompt一覧</h1>
-    <div class="prompts">
-      <%if @prompts.any?%>
-        <%=render partial: "prompt",collection: @prompts%>
-      <%else%>
-        <p>条件に該当するpromptは存在しません。</p>
-      <%end%>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <h1 class="navbar-brand">カテゴリ一覧</h1>
+    <button type="button" id="sidebarCollapse" class="btn btn-info">
+      <i class="fas fa-align-left"></i>
+      <span>Toggle Sidebar</span>
+    </button>
+    <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <%if defined? @parent_category%>
+            <li class="nav-item">
+              <%=render partial: "categories/category",locals: {category: @parent_category}%>
+            </li>
+          <%end%>
+          <li class="nav-item">
+            <%=render partial: "categories/category",locals: {category: @category}%>
+          </li>
+          <li class="nav-item">
+            <%=render partial: "categories/category",collection: @categories, as: :category%>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</main>
+  </nav>
+  <!-- Main content area -->
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="prompts-index">
+      <h1>prompt一覧</h1>
+      <div class="prompts">
+        <%if @prompts.any?%>
+          <%=render partial: "prompt",collection: @prompts%>
+        <%else%>
+          <p>条件に該当するpromptは存在しません。</p>
+        <%end%>
+      </div>
+    </div>
+  </main>
+</div>
