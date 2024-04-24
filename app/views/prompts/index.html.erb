@@ -6,7 +6,7 @@
         <%=render partial: "categories/category",locals: {category: @parent_category}%>
       </h2>
     <%end%>
-    <h2>
+    <h2 class="current-category">
       <%=render partial: "categories/category",locals: {category: @category}%>
     </h2>
     <%=render partial: "categories/category",collection: @categories, as: :category%>
