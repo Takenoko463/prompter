@@ -44,21 +44,32 @@ main.prompts-main-index {
     /* プロンプト間の間隔を追加する */
     margin-right: auto;
     margin-left: auto;
-    overflow: auto;
-    /* プロンプトがmainの高さを超えたらスクロールバーを表示 */
 }
 
 
 /* プロンプトのタイトルのスタイル */
 
 .prompt-header {
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 5px;
     /* タイトルと内容の間に余白を追加する */
 }
 
 .prompt-title {
+    width: 70%;
+    text-align: center;
+}
+
+.prompt-title a {
     font-weight: bold;
     /* タイトルを太字にする */
+}
+
+.prompt-actions {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -66,7 +77,10 @@ main.prompts-main-index {
 
 .prompt-footer {
     margin: 10px, 0, 5px;
+    padding-right: 15%;
     /* フッターと内容の間に余白を追加する */
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -126,14 +140,15 @@ main.prompts-main-index {
 /* プロンプト内容のサイズ設定 */
 
 .prompt-main {
-    max-height: 80%;
+    max-height: 100px;
 }
 
 .prompt-content {
-    max-height: 80%;
+    max-height: 80px;
+    overflow-y: auto;
 }
 
-.prompt-content p {
+.prompt-content {
     background-color: #f6f6f6;
 }
 
