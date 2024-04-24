@@ -27,7 +27,7 @@ main.prompts-main-index {
 .prompts {
     width: calc(100% - 40px);
     max-height: calc(100% - 60px);
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 
@@ -56,8 +56,12 @@ main.prompts-main-index {
     /* タイトルと内容の間に余白を追加する */
 }
 
-.prompt-title {
+.prompt-main-inf {
+    height: 20%;
     width: 70%;
+}
+
+.prompt-title {
     text-align: center;
 }
 
@@ -66,8 +70,12 @@ main.prompts-main-index {
     /* タイトルを太字にする */
 }
 
+.prompt-nick-name {
+    text-align: center;
+}
+
 .prompt-actions {
-    width: 30%;
+    width: 20%;
     display: flex;
     justify-content: space-around;
 }
@@ -149,7 +157,7 @@ main.prompts-main-index {
 }
 
 .prompt-content {
-    background-color: #f6f6f6;
+    background-color: white;
 }
 
 .read-more {
@@ -170,4 +178,8 @@ main.prompts-main-index {
     width: 20%;
     display: flex;
     justify-content: space-around;
+}
+
+.prompt-category {
+    background-color: #f2f2f2;
 }

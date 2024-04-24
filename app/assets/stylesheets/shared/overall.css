@@ -21,7 +21,8 @@ header a:hover {
 
 main {
     height: calc( 100vh - 100px);
-    background-color: #ecf0f1;
+    background-color: #f9f9f9;
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
 }
 
 footer {
