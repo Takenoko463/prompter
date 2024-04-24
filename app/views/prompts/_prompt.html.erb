@@ -4,33 +4,35 @@
       <%=link_to prompt.title,prompt_path(prompt.id),class:"prompt-title"%>
     </div>
     <div class="prompt-actions">
-      <button class="content-copy-button" data-prompt-id=<%=prompt.id%>>
-        <div class="copy-image"><i class="fa-regular fa-copy"></i></div>
-        <div class="copy-content"></div>
-      </button>
       <%if(your_prompt?(prompt))%>
         <%=link_to "編集", edit_prompt_path(prompt.id)%>
         <%= link_to "削除", prompt_path(prompt.id),data: { confirm: "本当に削除しますか？" }, method: :delete%>
       <%end%>
     </div>
-      </div>
-      <div class="prompt-main">
-        <div class="prompt-content" id="prompt-content-<%=prompt.id%>">
-          <p class="content-first-line"> <%= prompt.first_line %></p>
-          <%if prompt.remaining_content.present?%>
-            <%=simple_format(h(prompt.remaining_content),class:"toggle")%>
-            <p><span class="read-more">続きを読む</span></p>
-          <%end%>
-        </div>
-      </div>
-      <div class="prompt-footer">
-        <div class="prompt-nav">
-          <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
-          <%= link_to prompt.category.name,category_prompts_path(prompt.category.id)%>
-          <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
-        </div>
-        <div id="like-btn<%= prompt.id %>" class="like-btn-box">
-          <%=render partial: "likes/like",locals: {prompt: prompt}%>
-        </div>
-      </div>
+  </div>
+  <div class="prompt-main">
+    <div class="prompt-content" id="prompt-content-<%=prompt.id%>">
+      <p class="content-first-line"> <%= prompt.first_line %></p>
+      <%if prompt.remaining_content.present?%>
+        <%=simple_format(h(prompt.remaining_content),class:"toggle")%>
+        <p><span class="read-more">続きを読む</span></p>
+      <%end%>
     </div>
+  </div>
+  <div class="prompt-footer">
+    <div class="prompt-nav">
+      <a class="prompt-nick-name"> <%=prompt.nick_name%> </a>
+      <%= link_to prompt.category.name,category_prompts_path(prompt.category.id)%>
+      <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
+    </div>
+    <div class="prompt-tool">
+      <div id="like-btn<%= prompt.id %>" class="like-btn-box">
+        <%=render partial: "likes/like",locals: {prompt: prompt}%>
+      </div>
+      <button class="content-copy-button" data-prompt-id=<%=prompt.id%>>
+        <div class="copy-image"><i class="fa-regular fa-copy"></i></div>
+        <div class="copy-content"></div>
+      </button>
+    </div>
+  </div>
+</div>
