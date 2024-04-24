@@ -30,7 +30,7 @@
   </div>
   <div class="prompt-footer">
     <div class="prompt-nav">
-      <%= link_to prompt.category.name,category_prompts_path(prompt.category.id), class:"prompt-category"%>
+      <%=render partial: "categories/category",locals:{category: prompt.category}%>
       <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
     </div>
     <div class="prompt-tool">

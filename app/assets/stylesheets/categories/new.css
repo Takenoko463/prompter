@@ -8,3 +8,17 @@
     display: flex;
     flex-direction: column;
 }
+
+.prompt-category {
+    margin-right: 10px;
+    /* ユーザー名とAI名の間に余白を追加する */
+    text-decoration: none;
+    /* 下線を削除する */
+    color: black;
+    /* リンクの色を黒にする */
+}
+
+.prompt-category:hover {
+    text-decoration: underline;
+    /* ホバー時に下線を表示する */
+}
