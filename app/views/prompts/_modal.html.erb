@@ -1,0 +1,20 @@
+<%# # 確認用のモーダル %>
+<div class="modal fade" id="promptModal<%= prompt.id %>" tabindex="-1" role="dialog" aria-labelledby="promptModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <%# # モーダルのタイトル部分 %>
+        <h5 class="modal-title" id="promptModalLabel">PROMPT削除確認</h5>
+        <button type="button" class="btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%# # モーダルのbody部分、確認メッセージなど入れます %>
+      <div class="modal-body">削除しますか？</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">やめる</button>
+        <%= button_to "削除" ,prompt_path(prompt.id),  method: :delete,data: { turbo: false},  class:"btn btn-danger"%>
+      </div>
+    </div>
+  </div>
+</div>
