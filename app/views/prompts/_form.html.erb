@@ -1,35 +1,39 @@
-<%=form_with model:prompt, local: true do |form|%>
-  <%if form.object.errors.any?&&!form.object.valid?%>
-    <%=render 'shared/error_messages', model: form.object %>
-  <%end%>
-  <div class="prompt-title-form">
-    <span>プロンプトタイトル</span>
-    <%=form.text_field :title%>
+<%= form_with model: prompt, local: true do |form| %>
+  <% if form.object.errors.any? && !form.object.valid? %>
+    <%= render 'shared/error_messages', model: form.object %>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :title, "プロンプトタイトル" %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
-  <div class="prompt-content-form">
-    <span>プロンプト内容</span>
-    <%=form.text_area :content, size: "30x12"%>
-    <span>プロンプト回答</span>
-    <%=form.text_area :answer, size: "30x12",placeholder:"回答は必須ではありません"%>
+  <div class="form-group">
+    <%= form.label :content, "プロンプト内容" %>
+    <%= form.text_area :content, size: "30x12", class: "form-control" %>
   </div>
-  <div class="prompt-nick-name-form">
-    <span>投稿者名</span>
-    <%=form.text_field :nick_name, value: last_prompt_nick_name(form.object) %>
+  <div class="form-group">
+    <%= form.label :answer, "プロンプト回答" %>
+    <%= form.text_area :answer, size: "30x12", placeholder: "回答は必須ではありません", class: "form-control" %>
   </div>
-  <div class="prompt-ai-name-form">
-    <span>プロンプトを適用したAI</span>
-    <%=form.collection_select(:ai_id, ais, :id, :name, {})%>
+  <div class="form-group">
+    <%= form.label :nick_name, "投稿者名" %>
+    <%= form.text_field :nick_name, value: last_prompt_nick_name(form.object), class: "form-control" %>
   </div>
-  <div class="prompt-category-form">
-    <div class="prompt-parent-category-form">
-      <span>親カテゴリ</span>
-      <%= form.collection_select(:parent_category_id, categories, :id, :name, prompt: true, id: 'prompt_parent_category_id',selected: 0) %>
-    </div>
-    <div class="prompt-child-category-form">
-      <span>子カテゴリ</span>
-      <%= form.collection_select(:child_category_id, category.children, :id, :name, prompt: "必要があれば選択してください", id: 'prompt_child_category_id') %>
+  <div class="form-group">
+    <%= form.label :ai_id, "プロンプトを適用したAI" %>
+    <%= form.collection_select(:ai_id, ais, :id, :name, {}, class: "form-control") %>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6">
+        <%= form.label :parent_category_id, "親カテゴリ" %>
+        <%= form.collection_select(:parent_category_id, categories, :id, :name, { prompt: true, selected: 0 }, { class: "form-control", id: 'prompt_parent_category_id' }) %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :child_category_id, "子カテゴリ" %>
+        <%= form.collection_select(:child_category_id, category.children, :id, :name, { prompt: "必要があれば選択してください" }, { class: "form-control", id: 'prompt_child_category_id' }) %>
+      </div>
     </div>
   </div>
   <%= form.hidden_field :category_id, id: 'category_id' %>
-  <%= form.submit action_name, class: "submit-btn" %>
-<%end%>
+  <%= form.submit action_name, class: "btn btn-primary" %>
+<% end %>

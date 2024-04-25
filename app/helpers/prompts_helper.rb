@@ -1,4 +1,5 @@
 module PromptsHelper
+  include CategoriesHelper
   include LikesHelper
   include IpsHelper
   def your_prompt?(prompt)
