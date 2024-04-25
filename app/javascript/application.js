@@ -2,7 +2,7 @@
 import "jquery"
 import "jquery_ujs"
 import "bootstrap"
-import "@popperjs/core"
+import "popper"
 import "@hotwired/turbo-rails"
 import "controllers"
 import "prompts"
