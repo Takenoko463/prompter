@@ -1,4 +1,5 @@
 class PromptsController < ApplicationController
+  include PromptsHelper
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
   before_action :set_category_index, only: [:index]
@@ -7,7 +8,7 @@ class PromptsController < ApplicationController
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
     ## categoryと、その子孫に繋がる全てのpromptを取り出す
-    @prompts = Prompt.where(category_id: @category.subtree.pluck(:id))
+    @prompts = Prompt.where(category_id: @category.subtree.pluck(:id)).order(id: 'DESC')
   end
 
   def new
@@ -51,21 +52,8 @@ class PromptsController < ApplicationController
     @prompt = Prompt.find(params[:id])
   end
 
-  def ip_to_md5_head8(ip)
-    Digest::MD5.hexdigest(ip)[0, 8]
-  end
-
-  def set_ip
-    ip_plain = request.remote_ip
-    ip_to_md5_head8(ip_plain)
-  end
-
-  def your_prompt?
-    set_ip == @prompt.ip_md5_head8
-  end
-
   def authenticate_ip!
-    return if your_prompt?
+    return if your_prompt?(@prompt)
 
     redirect_to root_path
   end
@@ -87,10 +75,10 @@ class PromptsController < ApplicationController
   end
 
   def set_main_categories
-    @categories = [@category] + @category.children
+    @categories = main_categories
   end
 
   def set_root_category
-    @category = Category.roots[0]
+    @category = root_category
   end
 end

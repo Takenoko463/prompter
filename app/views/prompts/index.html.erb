@@ -1,23 +1,12 @@
-<main class="prompts-main-index">
-  <div class="categories">
-    <h1>カテゴリ一覧</h1>
-    <%if defined? @parent_category%>
-      <h2>
-        <%=render partial: "categories/index",locals: {category: @parent_category}%>
-      </h2>
-    <%end%>
-    <h2>
-      <%=render partial: "categories/index",locals: {category: @category}%>
-    </h2>
-    <%=render partial: "categories/index",collection: @categories, as: :category%>
-  </div>
-  <div class="prompts-index">
-    <h1>prompt一覧</h1>
-    <div class="prompts">
-      <%if @prompts.any?%>
-        <%=render partial: "prompt",collection: @prompts%>
+<main class="mt-3 py-2">
+  <div class="container-sm  w-50">
+    <div class="col gx-8">
+      <h1 class="text-center  mt-2">プロンプト一覧</h1>
+      <h2  class="text-center mb-2"><%=@category.name%></h2>
+      <%if @prompts.present?%>
+        <%=render partial:"prompts/prompt", collection:@prompts%>
       <%else%>
-        <p>条件に該当するpromptは存在しません。</p>
+        <p class="text-center">対象プロントは存在しません</p>
       <%end%>
     </div>
   </div>

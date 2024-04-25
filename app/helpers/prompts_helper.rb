@@ -1,6 +1,9 @@
 module PromptsHelper
+  include CategoriesHelper
+  include LikesHelper
+  include IpsHelper
   def your_prompt?(prompt)
-    current_ip_md5_head8 == prompt.ip_md5_head8
+    your_ip?(prompt.ip_md5_head8)
   end
 
   def last_prompt_nick_name(model)

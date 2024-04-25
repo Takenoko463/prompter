@@ -1,0 +1,9 @@
+<%if prompt.liked_by?(current_ip_md5_head8)%>
+  <%= button_to prompt_likes_path(prompt), method: :delete, remote: true, class: "prompt_likes liked" do %>
+    <i class="fa-solid fa-heart"></i>
+  <% end %>
+<%else%>
+  <%= button_to prompt_likes_path(prompt), method: :post, remote: true, class: "prompt_likes" do %>
+    <i class="fa-regular fa-heart"></i>
+  <% end %>
+<%end%>

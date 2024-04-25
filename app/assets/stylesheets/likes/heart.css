@@ -1,0 +1,15 @@
+.like-btn-box {
+    display: inline;
+}
+
+.like-btn-box form.button_to {
+    width: 100%;
+}
+
+.prompt_likes {
+    color: inherit;
+}
+
+.prompt_likes.liked {
+    color: red;
+}

@@ -8,3 +8,32 @@
     display: flex;
     flex-direction: column;
 }
+
+.prompt-category {
+    margin-right: 10px;
+    /* ユーザー名とAI名の間に余白を追加する */
+    text-decoration: none;
+    /* 下線を削除する */
+    color: black;
+    /* リンクの色を黒にする */
+}
+
+.prompt-category:hover {
+    text-decoration: underline;
+    /* ホバー時に下線を表示する */
+}
+
+.current-category {
+    color: #0000cc;
+    /* Text color for the current category */
+    background-color: #99ccff;
+    /* Background color for the current category */
+    padding: 5px 10px;
+    /* Padding to provide some spacing around the text */
+    border-radius: 5px;
+    /* Rounded corners for a softer look */
+}
+
+.navbar-toggler-icon {
+    height: 10px;
+}

@@ -1,1 +1,11 @@
-<%=link_to category.name,category_prompts_path(category.id)%>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">カテゴリ一覧</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav">
+      <%=render partial:"categories/category",collection:main_categories ,as: :category%>
+    </ul>
+  </div>
+</div>
