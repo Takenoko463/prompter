@@ -1,4 +1,8 @@
 $(window).on('turbo:load', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
     copyPrompt();
 });
 
@@ -26,7 +30,7 @@ const copyPrompt = () => {
             const promptId = $(this).data('prompt-id');
             const contentMain = $("#promptContent" + promptId);
             var text = contentMain.find("p.content-first-line").text();
-            const remainingContent = contentMain.find("p.toggle").text();
+            const remainingContent = contentMain.find("p.remaining-content").text();
             if (remainingContent) {
                 text += remainingContent;
             }
@@ -35,7 +39,11 @@ const copyPrompt = () => {
             } else {
                 navigator.clipboard.writeText(text);
             }
-            const message = $(this).data('title');
-            alert(message);
-        });
+            // "copied"というTooltipを表示する
+            $(this).tooltip('show');
+            setTimeout(function() {
+                $("#copyPrompt" + promptId).tooltip('hide');
+            }, 700);
+        })
+
 };
