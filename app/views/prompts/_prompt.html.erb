@@ -13,7 +13,7 @@
           <%end%>
         </li>
         <li class="nav-item">
-          <%= link_to prompt_path(prompt.id),data: { confirm: "本当に削除しますか？" }, method: :delete, class:"nav-link text-reset" do%>
+          <%= button_to prompt_path(prompt.id),method: :delete,form: {data: { turbo_confirm: "本当に削除してもよろしいですか？"}},  class:"nav-link text-reset" do%>
             <i class="fa-solid fa-trash"></i>
           <%end%>
         </li>
