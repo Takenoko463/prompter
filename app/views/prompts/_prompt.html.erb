@@ -23,7 +23,7 @@
       <div id="like-btn<%= prompt.id %>" class="like-btn-box">
         <%=render partial: "likes/like",locals: {prompt: prompt}%>
       </div>
-      <button class="content-copy-button btn btn-secondary" id="copyPrompt<%=prompt.id%>" data-toggle="tooltip" data-placement="bottom" data-title="copied!" data-prompt-id=<%=prompt.id%> >
+      <button class="content-copy-button btn btn-secondary" id="copyPrompt<%=prompt.id%>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copied!" data-prompt-id=<%=prompt.id%> data-bs-trigger="manual">
         <i class="fa-solid fa-copy"></i>
       </button>
     </div>
@@ -40,7 +40,7 @@
         <%= prompt.first_line %>
       </p>
       <%if prompt.remaining_content.present?%>
-        <%=simple_format(h(prompt.remaining_content),class:"collapse card-text" ,id:"remainingContent#{prompt.id}")%>
+        <%=simple_format(h(prompt.remaining_content),class:"collapse card-text remaining-content" ,id:"remainingContent#{prompt.id}")%>
         <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#remainingContent<%=prompt.id%>" aria-expanded="false" aria-controls="remainingContent<%=prompt.id%>">
           表示切り替え
         </button>
