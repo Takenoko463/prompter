@@ -1,46 +1,57 @@
-<div class="prompt">
-  <div class="prompt-header">
-    <div class="prompt-main-inf">
-      <div class="prompt-title">
-        <%=link_to prompt.title,prompt_path(prompt.id),class:"prompt-title"%>
-      </div>
-      <div class="user">
-        <h3 class="prompt-nick-name"> <%=prompt.nick_name%> </h3>
-      </div>
-    </div>
-    <div class="prompt-actions">
+<div class="prompt card mb-3 container-sm ">
+  <div class="card-header prompt-header row">
+    <ul class="nav nav-tabs card-header-tabs col-7">
+      <li class="nav-item">
+        <%=link_to prompt_path(prompt), class:"text-reset text-decoration-none nav-link" do%>
+          <i class="fas fa-external-link-alt"></i>
+        <%end%>
+      </li>
       <%if(your_prompt?(prompt))%>
-        <%=link_to edit_prompt_path(prompt.id) do%>
-          <i class="fa-solid fa-pen-to-square"></i>
-        <%end%>
-        <%= link_to prompt_path(prompt.id),data: { confirm: "本当に削除しますか？" }, method: :delete do%>
-          <i class="fa-solid fa-trash"></i>
-        <%end%>
+        <li class="nav-item">
+          <%=link_to edit_prompt_path(prompt.id), class:"nav-link text-reset" do%>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <%end%>
+        </li>
+        <li class="nav-item">
+          <%= link_to prompt_path(prompt.id),data: { confirm: "本当に削除しますか？" }, method: :delete, class:"nav-link text-reset" do%>
+            <i class="fa-solid fa-trash"></i>
+          <%end%>
+        </li>
       <%end%>
-    </div>
-  </div>
-  <div class="prompt-main">
-    <div class="prompt-content" id="prompt-content-<%=prompt.id%>">
-      <p class="content-first-line"> <%= prompt.first_line %></p>
-      <%if prompt.remaining_content.present?%>
-        <%=simple_format(h(prompt.remaining_content),class:"toggle")%>
-        <p><span class="read-more">続きを読む</span></p>
-      <%end%>
-    </div>
-  </div>
-  <div class="prompt-footer">
-    <div class="prompt-nav">
-      <%=render partial: "categories/category",locals:{category: prompt.category}%>
-      <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link",target: :_blank, rel: "noopener noreferrer"%>
-    </div>
-    <div class="prompt-tool">
+    </ul>
+    <div class="col-5 d-flex justify-content-around align-items-center">
       <div id="like-btn<%= prompt.id %>" class="like-btn-box">
         <%=render partial: "likes/like",locals: {prompt: prompt}%>
       </div>
-      <button class="content-copy-button" data-prompt-id=<%=prompt.id%>>
-        <div class="copy-image"><i class="fa-regular fa-copy"></i></div>
-        <div class="copy-content"></div>
+      <button class="content-copy-button btn btn-secondary" id="copyPrompt<%=prompt.id%>" data-toggle="tooltip" data-placement="bottom" data-title="copied!" data-prompt-id=<%=prompt.id%> >
+        <i class="fa-solid fa-copy"></i>
       </button>
     </div>
   </div>
+  <div class="card-body prompt-main">
+    <h5 class="card-title">
+      <%=link_to prompt.title, prompt_path(prompt), class:"text-reset text-decoration-none"%>
+    </h5>
+    <h6 class="card-subtitle">
+      <%=link_to prompt.category.name,category_prompts_path(prompt.category), class:"text-reset text-decoration-none"%>
+    </h6>
+    <div class="prompt-content" id="promptContent<%=prompt.id%>">
+      <p class="card-text content-first-line">
+        <%= prompt.first_line %>
+      </p>
+      <%if prompt.remaining_content.present?%>
+        <%=simple_format(h(prompt.remaining_content),class:"collapse card-text" ,id:"remainingContent#{prompt.id}")%>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#remainingContent<%=prompt.id%>" aria-expanded="false" aria-controls="remainingContent<%=prompt.id%>">
+          表示切り替え
+        </button>
+      <%end%>
+    </div>
+  </div>
+  <div class="card-footer prompt-footer row">
+    <p class="small mb-0 col-5">
+      <i class="fas fa-user"></i> <%=prompt.nick_name%>
+    </p>
+    <%=link_to prompt.ai.name,prompt.ai.url,class:"ai-link ms-3 col-3",target: :_blank, rel: "noopener noreferrer"%>
+  </div>
+</div>
 </div>
