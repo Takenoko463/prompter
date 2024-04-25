@@ -84,7 +84,6 @@ gem "jquery-rails"
 gem "sassc-rails"
 gem 'pry-rails'
 gem 'devise'
-gem 'ipaddress'
 gem 'ancestry'
 gem 'seed-fu'
 gem 'bootstrap'
