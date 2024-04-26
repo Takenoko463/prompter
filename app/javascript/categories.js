@@ -1,4 +1,7 @@
-$(document).on('change', '#prompt_parent_category_id', function() {
+$(document).on('change', '#category_parents', function() {
+    const $parentCategorySelect = $('#category_parents');
+    const $childCategorySelect = $('#category_children');
+    var categoryValue;
     var parentId = $(this).val();
     if (parentId !== '') {
         $.ajax({
@@ -10,40 +13,24 @@ $(document).on('change', '#prompt_parent_category_id', function() {
                 data.forEach(function(category) {
                     options += '<option value="' + category.id + '">' + category.name + '</option>';
                 });
-                $('#prompt_child_category_id').html(options);
+                $childCategorySelect.html(options);
             },
             error: function(xhr, status, error) {
                 console.error(error);
             }
         });
     } else {
-        $('#prompt_child_category_id').empty();
+        $childCategorySelect.empty();
     }
-});
-
-$(document).on('click', '.submit-btn', function(e) {
-    e.preventDefault();
-
-    var $parentCategorySelect = $('#prompt_parent_category_id');
-    var $childCategorySelect = $('#prompt_child_category_id');
-    var categoryValue;
-
+    categoryValue = $parentCategorySelect.val();
+    console.log(categoryValue);
+    //渡したい情報を含む
+    /*
     if ($childCategorySelect.val() === '') {
         categoryValue = $parentCategorySelect.val();
     } else {
         categoryValue = $childCategorySelect.val();
     }
-
-    $('#category_id').val(categoryValue);
-
-    var $categoryForm = $('.prompt-category-form').detach();
-    var $subcategoryForm = $('.prompt-subcategory-form').detach();
-
-    var $form = $(this).closest('form');
-    $form.submit();
-
-    $form.one('ajax:complete', function() {
-        $('.prompt-form').prepend($categoryForm);
-        $('.prompt-form').prepend($subcategoryForm);
-    });
+*/
+    $('#categoryId').val(categoryValue);
 });

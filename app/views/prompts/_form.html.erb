@@ -24,16 +24,16 @@
   </div>
   <div class="form-group">
     <div class="row">
-      <div class="col-md-6">
-        <%= form.label :parent_category_id, "親カテゴリ" %>
-        <%= form.collection_select(:parent_category_id, categories, :id, :name, { prompt: true, selected: 0 }, { class: "form-control", id: 'prompt_parent_category_id' }) %>
+      <div class="col-md-6 prompt-category-form">
+        <span>親カテゴリ</span>
+        <%=collection_select(:category, :parents, @categories, :id, :name, {selected: 0},{class:'form-control form-select'})%>
       </div>
-      <div class="col-md-6">
-        <%= form.label :child_category_id, "子カテゴリ" %>
-        <%= form.collection_select(:child_category_id, category.children, :id, :name, { prompt: "必要があれば選択してください" }, { class: "form-control", id: 'prompt_child_category_id' }) %>
+      <div class="col-md-6 prompt-category-form">
+        <span>子供カテゴリ</span>
+        <%=select( :category, :children, options_for_select([]),{prompt:"必要があれば選択してください"},{class:'form-control form-select'})%>
       </div>
+      <%= form.hidden_field :category_id, id: 'categoryId' %>
     </div>
   </div>
-  <%= form.hidden_field :category_id, id: 'category_id' %>
   <%= form.submit action_name, class: "btn btn-primary" %>
 <% end %>
