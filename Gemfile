@@ -88,3 +88,4 @@ gem 'ancestry'
 gem 'seed-fu'
 gem 'bootstrap'
 gem 'mini_racer'
+gem 'ipaddress' #本番環境から消去するのが容易ではない
