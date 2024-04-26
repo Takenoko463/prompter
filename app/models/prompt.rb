@@ -6,10 +6,10 @@ class Prompt < ApplicationRecord
   belongs_to :category
   has_many :likes, dependent: :destroy
   with_options presence: true do
-    validates :title, length: { maximum: 31 }
-    validates :nick_name, length: { maximum: 31 }
+    validates :title, length: { maximum: 30 }
+    validates :nick_name, length: { maximum: 30 }
     validates :content, length: { minimum: 5, maximum: 3000 }
-    validates :ai_id, numericality: { other_than: 0 }
+    validates :ai_id, numericality: { other_than: 0, message: 'must exist' }
     validates :ip_md5_head8
   end
 
