@@ -136,5 +136,5 @@ bundle install
 指定したカテゴリに属すプロンプトのみを表示します。
 [![Image from Gyazo](https://i.gyazo.com/508f0533af292307121cecb141b646c0.gif)](https://gyazo.com/508f0533af292307121cecb141b646c0)
 ### いいねを押す
-気に入った、プロンプトにはいいねをつけておけます。
+気に入ったプロンプトにはいいねをつけておけます。
 [![Image from Gyazo](https://i.gyazo.com/06da6055649d496b83deb894ba1306dd.gif)](https://gyazo.com/06da6055649d496b83deb894ba1306dd)
