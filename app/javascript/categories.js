@@ -1,7 +1,6 @@
 $(document).on('change', '#category_parents', function() {
-    const $parentCategorySelect = $('#category_parents');
-    const $childCategorySelect = $('#category_children');
-    var categoryValue;
+    var $parentCategorySelect = $('#category_parents');
+    var $childCategorySelect = $('#category_children');
     var parentId = $(this).val();
     if (parentId !== '') {
         $.ajax({
@@ -22,15 +21,11 @@ $(document).on('change', '#category_parents', function() {
     } else {
         $childCategorySelect.empty();
     }
-    categoryValue = $parentCategorySelect.val();
-    console.log(categoryValue);
-    //渡したい情報を含む
-    /*
-    if ($childCategorySelect.val() === '') {
-        categoryValue = $parentCategorySelect.val();
-    } else {
-        categoryValue = $childCategorySelect.val();
-    }
-*/
+    var categoryValue = $parentCategorySelect.val();
+    $('#categoryId').val(categoryValue);
+});
+$(document).on('change', '#category_children', function() {
+    var $childCategorySelect = $('#category_children');
+    var categoryValue = $childCategorySelect.val();
     $('#categoryId').val(categoryValue);
 });
