@@ -1,9 +1,6 @@
 $(window).on('turbo:load', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
     copyPrompt();
+    contentHide();
 });
 
 const copyPrompt = () => {
@@ -46,4 +43,16 @@ const copyPrompt = () => {
             }, 700);
         })
 
+};
+
+const contentHide = () => {
+    $('.remaining-content')
+        .on({
+            'shown.bs.collapse': function() {
+                $(this).parent().find("button.content-toggle-button").text("一部を表示");
+            },
+            'hidden.bs.collapse': function() {
+                $(this).parent().find("button.content-toggle-button").text("続きを読む");
+            }
+        })
 };

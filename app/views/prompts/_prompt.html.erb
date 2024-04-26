@@ -37,13 +37,11 @@
       <%= link_to prompt.category.name, category_prompts_path(prompt.category), class: "text-reset text-decoration-none" %>
     </h6>
     <div class="prompt-content" id="promptContent<%= prompt.id %>">
-      <p class="card-text content-first-line">
-        <%= prompt.first_line %>
-      </p>
+      <%= simple_format(h(prompt.first_line),class:"card-text content-first-line") %>
       <% if prompt.remaining_content.present? %>
-        <%= simple_format(h(prompt.remaining_content), class: "collapse card-text remaining-content", id: "remainingContent#{prompt.id}") %>
-        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#remainingContent<%= prompt.id %>" aria-expanded="false" aria-controls="remainingContent<%= prompt.id %>">
-          表示切り替え
+        <%= simple_format(h(prompt.remaining_content), class: "collapse card-text remaining-content", id: "remainingContent#{prompt.id}")%>
+        <button class="btn btn-secondary content-toggle-button" type="button" data-bs-toggle="collapse" data-bs-target="#remainingContent<%= prompt.id %>" aria-expanded="false" aria-controls="remainingContent<%= prompt.id %>">
+          続きを読む
         </button>
       <% end %>
     </div>
