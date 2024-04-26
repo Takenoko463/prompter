@@ -91,7 +91,7 @@ has_many:tags,throw prompt_tag_relations
 ![Prompterにおけるデータ関係図](data_base_setting.drawio.png)
 
 ## 開発環境
-- フロントエンド:Ruby,JavaScript
+- フロントエンド:Ruby,JavaScript,bootstrap
 - バックエンド:Ruby
 - インフラ:AWS
 - テキストエディター:VScode
