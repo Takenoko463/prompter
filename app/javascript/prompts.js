@@ -1,5 +1,6 @@
 $(window).on('turbo:load', function() {
     copyPrompt();
+    contentHide();
 });
 
 const copyPrompt = () => {
@@ -42,4 +43,16 @@ const copyPrompt = () => {
             }, 700);
         })
 
+};
+
+const contentHide = () => {
+    $('.remaining-content')
+        .on({
+            'shown.bs.collapse': function() {
+                $(this).parent().find("button.content-toggle-button").text("一部を表示");
+            },
+            'hidden.bs.collapse': function() {
+                $(this).parent().find("button.content-toggle-button").text("続きを読む");
+            }
+        })
 };
