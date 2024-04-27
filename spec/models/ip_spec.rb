@@ -21,6 +21,12 @@ RSpec.describe Ip, type: :model do
         @ip.valid?
         expect(@ip.errors.full_messages).to include 'Ip md5 head8 is the wrong length (should be 8 characters)'
       end
+      it 'ipを重複登録できない' do
+        @ip.save
+        another_ip = FactoryBot.build(:ip, ip_md5_head8: @ip.ip_md5_head8)
+        another_ip.valid?
+        expect(another_ip.errors.full_messages).to include 'Ip md5 head8 has already been taken'
+      end
     end
   end
 end
