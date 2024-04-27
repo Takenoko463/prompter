@@ -41,9 +41,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_27_053452) do
     t.integer "ai_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ip"
     t.text "answer"
     t.bigint "category_id", default: 0
-    t.string "ip"
     t.bigint "ip_id"
     t.index ["category_id"], name: "index_prompts_on_category_id"
     t.index ["ip_id"], name: "index_prompts_on_ip_id"
