@@ -31,10 +31,10 @@ RSpec.describe Prompt, type: :model do
         @prompt.valid?
         expect(@prompt.errors.full_messages).to include 'Ai must exist'
       end
-      it 'idを特定できていないと投稿できない' do
-        @prompt.ip_md5_head8 = ''
+      it 'ipを特定できていないと投稿できない' do
+        @prompt.ip = nil
         @prompt.valid?
-        expect(@prompt.errors.full_messages).to include "Ip md5 head8 can't be blank"
+        expect(@prompt.errors.full_messages).to include 'Ip must exist'
       end
       it 'categoryを指定しないと投稿できない' do
         @prompt.category = nil
