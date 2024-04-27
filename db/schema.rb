@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_27_053452) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_27_102408) do
   create_table "categories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "ancestry"
@@ -25,7 +25,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_27_053452) do
   end
 
   create_table "likes", charset: "utf8", force: :cascade do |t|
-    t.string "ip_md5_head8", null: false
     t.bigint "prompt_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,7 +40,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_27_053452) do
     t.integer "ai_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "ip"
     t.text "answer"
     t.bigint "category_id", default: 0
     t.bigint "ip_id"
