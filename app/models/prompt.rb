@@ -21,7 +21,7 @@ class Prompt < ApplicationRecord
     content.split("\n")[1..].join("\n")
   end
 
-  def liked_by?(ip_md5_head8)
-    likes.where(ip_md5_head8:).exists?
+  def liked_by?(ip_id)
+    likes.where(ip_id:).exists?
   end
 end
