@@ -2,9 +2,7 @@ class PromptsController < ApplicationController
   include PromptsHelper
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
-  before_action :set_category_index, only: [:index]
-  before_action :set_root_category, only: [:new, :create, :edit, :update]
-  before_action :set_main_categories, only: [:new, :create, :edit, :update]
+  before_action :set_category, only: [:index]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   def index
     ## categoryと、その子孫に繋がる全てのpromptを取り出す
@@ -58,27 +56,9 @@ class PromptsController < ApplicationController
     redirect_to root_path
   end
 
-  def set_category_index
-    set_category
-    set_category_parent
-    @categories = @category.children
-  end
-
   def set_category
     selected_category_id = params[:category_id].present? ? params[:category_id] : 0
-
-    @category = Category.find(selected_category_id)
-  end
-
-  def set_category_parent
-    @parent_category = @category.parent if @category.has_parent?
-  end
-
-  def set_main_categories
-    @categories = main_categories
-  end
-
-  def set_root_category
-    @category = root_category
+    @category = Category.current_category(selected_category_id)
+    session[:current_category_id] = selected_category_id
   end
 end
