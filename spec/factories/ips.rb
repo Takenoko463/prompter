@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :ip do
-    ip_md5_head8 { Faker::Alphanumeric.alphanumeric(number: 8) }
+    ip_md5_head8 { Digest::MD5.hexdigest('127.0.0.1')[0, 8] }
   end
 end
