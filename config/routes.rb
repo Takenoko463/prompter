@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "ips#create"
-  resources :prompts,except:[:index] do
+  resources :prompts do
     resource :likes ,only:[:create,:destroy]
     resources :comments ,only:[:index,:new,:create,:edit,:update,:destroy]
   end
