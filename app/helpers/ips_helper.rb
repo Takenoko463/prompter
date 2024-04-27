@@ -1,6 +1,6 @@
 module IpsHelper
   def ip_to_md5_head8(ip)
-    Digest::MD5.hexdigest(ip)[0, 7]
+    Digest::MD5.hexdigest(ip)[0, 8]
   end
 
   def set_ip
