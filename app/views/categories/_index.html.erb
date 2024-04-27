@@ -5,8 +5,14 @@
   </div>
   <div class="offcanvas-body">
     <ul class="navbar-nav">
-      <%if main_categories.present?%>
-        <%=render partial:"categories/category",collection:main_categories ,as: :category%>
+      <%current_category=Category.current_category(session[:current_category_id])%>
+      <%if current_category.has_parent?%>
+        <%parent_category=current_category.parent%>
+        <li class="nav-item"><%=link_to parent_category.name,category_prompts_path(parent_category), class:"nav-link"%></li>
+      <%end%>
+      <li class="nav-item"><%=link_to current_category.name,category_prompts_path(current_category), class:"nav-link active"%></li>
+      <%if current_category.has_children?%>
+        <%=render partial:"categories/category",collection:current_category.children ,as: :category%>
       <%end%>
     </ul>
   </div>
