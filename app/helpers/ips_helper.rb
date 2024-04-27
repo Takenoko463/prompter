@@ -23,7 +23,7 @@ module IpsHelper
 
   # 以下sessionでのip管理
   def ip_registered?
-    session.respond_to? :ip_id
+    session[:ip_id].present?
   end
 
   # sessionをいじってからのデータ操作を防ぐ
