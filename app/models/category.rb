@@ -5,14 +5,18 @@ class Category < ApplicationRecord
     find(0).children
   end
 
-  def root_category
+  def self.root_category
     roots[0]
   end
 
-  def categories_index
-    category_index = [self]
-    category_index.unshift(parent) if has_parent?
-    category_index + children if has_children?
+  def self.current_categories(current_category_id = nil)
+    current_category_id ||= 0
+    target_category = current_category(current_category_id)
+    if target_category.has_siblings? && !target_category.is_root?
+      [target_category.parent] + target_category.sibling
+    else
+      [root_category] + root_category.children
+    end
   end
 
   def self.current_category(current_category_id = nil)
