@@ -30,4 +30,8 @@ module IpsHelper
   def legitimate_ip?
     your_ip?(Ip.find(session[:ip_id]).ip_md5_head8)
   end
+
+  def authenticate_ip!
+    redirect_to root_path if ip_registered?
+  end
 end

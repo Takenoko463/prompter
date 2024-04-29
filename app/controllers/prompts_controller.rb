@@ -1,5 +1,6 @@
 class PromptsController < ApplicationController
   include PromptsHelper
+  before_action :authenticate_ip!
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
   before_action :others_prompt!, only: [:edit, :update, :destroy]
