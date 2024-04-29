@@ -19,7 +19,7 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new(prompt_params)
     if @prompt.save
       cookies[:last_nick_name] = prompt_params[:nick_name]
-      redirect_to root_path
+      redirect_to action: 'index'
     else
       render action: :new, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class PromptsController < ApplicationController
 
   def update
     if @prompt.update(prompt_params)
-      redirect_to root_path
+      redirect_to action: 'index'
     else
       render action: :edit, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class PromptsController < ApplicationController
 
   def destroy
     @prompt.destroy
-    redirect_to root_path
+    redirect_to action: 'index'
   end
 
   private

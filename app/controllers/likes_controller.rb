@@ -25,6 +25,6 @@ class LikesController < ApplicationController
   end
 
   def like_params
-    { prompt_id: params[:prompt_id], ip_md5_head8: current_ip_md5_head8 }
+    { prompt_id: params[:prompt_id], ip_id: session[:ip_id] }
   end
 end
