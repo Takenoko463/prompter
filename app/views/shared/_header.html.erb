@@ -5,10 +5,12 @@
   <div class="d-flex p-2 me-2">
     <%=link_to "プロンプト一覧",category_prompts_path(0),html_options = {class:"nav-link p-2 me-2"}%>
     <%=link_to "プロンプト投稿",new_prompt_path,html_options = {class:"nav-link p-2"}%>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
+    <%if @current_category.present?%>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
             aria-controls="offcanvas">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <%=render partial:"categories/index",locals: {current_category:@current_category,current_categories:@current_categories}%>
+    <%end%>
   </div>
 </div>
-<%=render partial:"categories/index"%>

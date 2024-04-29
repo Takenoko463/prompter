@@ -2,11 +2,13 @@ class PromptsController < ApplicationController
   include PromptsHelper
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
-  before_action :set_category, only: [:index]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
+  before_action :set_current_category_at_session, only: :index
+  before_action :set_current_category, only: [:index, :new, :edit]
+  before_action :set_current_categories, only: [:index, :new, :edit]
   def index
     ## categoryと、その子孫に繋がる全てのpromptを取り出す
-    @prompts = Prompt.where(category_id: @category.subtree.pluck(:id)).order(id: 'DESC')
+    @prompts = Prompt.where(category_id: @current_category.subtree.pluck(:id)).order(id: 'DESC')
   end
 
   def new
@@ -54,11 +56,5 @@ class PromptsController < ApplicationController
     return if your_prompt?(@prompt)
 
     redirect_to root_path
-  end
-
-  def set_category
-    selected_category_id = params[:category_id].present? ? params[:category_id] : 0
-    @category = Category.current_category(selected_category_id)
-    session[:current_category_id] = selected_category_id
   end
 end

@@ -13,7 +13,7 @@ class Category < ApplicationRecord
     current_category_id ||= 0
     target_category = current_category(current_category_id)
     if target_category.has_siblings? && !target_category.is_root?
-      [target_category.parent] + target_category.sibling
+      [target_category.parent] + target_category.siblings
     else
       [root_category] + root_category.children
     end
