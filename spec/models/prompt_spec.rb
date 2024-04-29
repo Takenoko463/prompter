@@ -6,7 +6,7 @@ RSpec.describe Prompt, type: :model do
   end
   describe 'Prompt投稿' do
     context '新規投稿できるとき' do
-      it 'title,nick_name,content,ai_id,ip_md5_head8,category_idを持っている' do
+      it 'title,nick_name,content,ai_id,ip,category_idを持っている' do
         expect(@prompt).to be_valid
       end
     end
