@@ -11,19 +11,38 @@ RSpec.describe 'Prompts', type: :request do
     @prompt = FactoryBot.create(:prompt, category: @category_root, ip: @ip)
   end
   describe 'GET /prompts' do
-    it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do
-      get prompts_path
-      expect(response.status).to eq 200
-    end
-    it 'indexアクションにリクエストするとレスポンスに投稿済みのpromptのテキストが存在する' do
-      get prompts_path
-      expect(response.body).to include(@prompt.content)
+    context 'indexアクションに成功する' do
+      it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do
+        get prompts_path
+        expect(response).to have_http_status(:success)
+      end
+      it 'indexアクションにリクエストするとレスポンスに投稿済みのpromptのテキストが存在する' do
+        get prompts_path
+        expect(response.body).to include(@prompt.content)
+      end
     end
   end
-  describe 'NEW /prompts' do
+  describe 'GET /prompts/new' do
     it 'newアクションにリクエストすると正常にレスポンスが返ってくる' do
       get new_prompt_path
-      expect(response.status).to eq 200
+      expect(response).to have_http_status(:success)
+    end
+  end
+  describe 'POST /prompts' do
+    context 'createアクションに成功する' do
+      before 'IP IDをセッションから取り出せるようにする' do
+        mock_session = ActionController::TestSession.new(ip_id: @ip.id)
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_session)
+      end
+      it 'createアクションにリクエストすると正常にレスポンスが返ってくる' do
+        prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
+        post prompts_path, params: { prompt: prompt_params }
+        expect(response).to redirect_to action: 'index'
+      end
+      it 'createアクションにリクエストすると@ip由来のpromptデータが追加される' do
+        prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
+        expect { post prompts_path, params: { prompt: prompt_params } }.to change(@ip.prompts, :count).by(1)
+      end
     end
   end
 end
