@@ -2,7 +2,7 @@ class PromptsController < ApplicationController
   include PromptsHelper
   before_action :retribute_active_hash, only: [:index, :new, :create, :edit, :update, :show]
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
-  before_action :authenticate_ip!, only: [:edit, :update, :destroy]
+  before_action :others_prompt!, only: [:edit, :update, :destroy]
   before_action :set_current_category_at_session, only: :index
   before_action :set_current_category, except: :destroy
   before_action :set_current_categories, except: :destroy
@@ -52,7 +52,7 @@ class PromptsController < ApplicationController
     @prompt = Prompt.find(params[:id])
   end
 
-  def authenticate_ip!
+  def others_prompt!
     return if your_prompt?(@prompt)
 
     redirect_to root_path
