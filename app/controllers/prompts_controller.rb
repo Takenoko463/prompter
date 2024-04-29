@@ -4,8 +4,8 @@ class PromptsController < ApplicationController
   before_action :set_prompt, only: [:edit, :update, :destroy, :show]
   before_action :authenticate_ip!, only: [:edit, :update, :destroy]
   before_action :set_current_category_at_session, only: :index
-  before_action :set_current_category, only: [:index, :new, :edit]
-  before_action :set_current_categories, only: [:index, :new, :edit]
+  before_action :set_current_category, except: :destroy
+  before_action :set_current_categories, except: :destroy
   def index
     ## categoryと、その子孫に繋がる全てのpromptを取り出す
     @prompts = Prompt.where(category_id: @current_category.subtree.pluck(:id)).order(id: 'DESC')
@@ -45,7 +45,7 @@ class PromptsController < ApplicationController
   end
 
   def prompt_params
-    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer, :category_id).merge(ip_md5_head8: set_ip)
+    params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer, :category_id).merge(ip_id: session[:ip_id])
   end
 
   def set_prompt
