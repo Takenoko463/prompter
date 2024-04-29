@@ -32,6 +32,6 @@ module IpsHelper
   end
 
   def authenticate_ip!
-    redirect_to root_path if ip_registered?
+    redirect_to root_path unless ip_registered?
   end
 end
