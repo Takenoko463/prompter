@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: "prompts#index"
-  resources :prompts,except:[:index] do
+  root to: "ips#create"
+  resources :prompts do
     resource :likes ,only:[:create,:destroy]
     resources :comments ,only:[:index,:new,:create,:edit,:update,:destroy]
   end
@@ -8,4 +8,5 @@ Rails.application.routes.draw do
     get 'children', on: :member
     resources :prompts , only:[:index]
   end
+  resources :ips,only:[:create]
 end

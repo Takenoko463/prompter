@@ -1,1 +1,1 @@
-document.getElementById('like-btn<%= @prompt.id %>').innerHTML = "<%= j(render partial: 'likes/like', locals: {prompt: @prompt}) %>"
+$("#like-btn<%= @prompt.id %>").html("<%= j(render partial: 'likes/like', locals: {prompt: @prompt}) %>")

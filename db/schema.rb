@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_23_000753) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_27_102408) do
   create_table "categories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "ancestry"
@@ -18,11 +18,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_23_000753) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "likes", charset: "utf8", force: :cascade do |t|
+  create_table "ips", charset: "utf8", force: :cascade do |t|
     t.string "ip_md5_head8", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", charset: "utf8", force: :cascade do |t|
     t.bigint "prompt_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ip_id"
+    t.index ["ip_id"], name: "index_likes_on_ip_id"
     t.index ["prompt_id"], name: "index_likes_on_prompt_id"
   end
 
@@ -33,12 +40,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_23_000753) do
     t.integer "ai_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "ip_md5_head8", null: false
     t.text "answer"
     t.bigint "category_id", default: 0
+    t.bigint "ip_id"
     t.index ["category_id"], name: "index_prompts_on_category_id"
+    t.index ["ip_id"], name: "index_prompts_on_ip_id"
   end
 
+  add_foreign_key "likes", "ips"
   add_foreign_key "likes", "prompts"
   add_foreign_key "prompts", "categories"
+  add_foreign_key "prompts", "ips"
 end

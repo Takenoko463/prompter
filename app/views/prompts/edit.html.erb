@@ -1,4 +1,8 @@
-<main class="new-prompt">
-  <h1>プロンプト編集ページ</h1>
-  <%=render partial: 'form' , locals: {prompt:@prompt,ais:@ais,category:@category,categories:@categories,action_name:"編集する"}%>
+<main class="mt-3 py-2">
+  <div class="container-lg">
+    <div class="col">
+      <h1>プロンプト編集ページ</h1>
+      <%=render partial: 'form' , locals: {prompt:@prompt,ais:@ais,current_categories:@current_categories,action_name:"編集する"}%>
+    </div>
+  </div>
 </main>

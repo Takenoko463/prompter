@@ -2,7 +2,7 @@
   <div class="container-lg">
     <div class="col">
       <h1>プロンプト投稿ページ</h1>
-      <%=render partial: 'form' , locals: {prompt:@prompt,ais:@ais,category:@category,categories:@categories,action_name:"投稿する"}%>
+      <%=render partial: 'form' , locals: {prompt:@prompt,ais:@ais,current_categories:@current_categories,action_name:"投稿する"}%>
     </div>
   </div>
 </main>
