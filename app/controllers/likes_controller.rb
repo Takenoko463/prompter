@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   include LikesHelper
+  before_action :authenticate_ip!
   before_action :set_prompt
   def create
     like = current_ip.likes.new(prompt: @prompt)
@@ -13,8 +14,11 @@ class LikesController < ApplicationController
 
   def destroy
     like = Like.find_by(prompt_id: @prompt.id, ip_id: current_ip.id)
-    like.destroy
-    respond_to(&:js)
+    if like.presence && like.destroy
+      respond_to(&:js)
+    else
+      redirect_to prompts_path, flash: { error: 'いいねを取り消せません' }
+    end
   end
 
   private
