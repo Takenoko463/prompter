@@ -10,5 +10,16 @@ RSpec.describe 'Ips', type: :system do
       expect(page).to have_content('プロンプト投稿')
       expect(page).to_not have_button '.navbar-toggle'
     end
+    it 'sessionにip_idが保存されていてもトップページに遷移できる' do
+      using_session('ip_id') do
+        visit root_path
+      end
+      visit root_path
+      expect(page).to have_content('Prompterへようこそ')
+      expect(page).to have_content('Prompter')
+      expect(page).to have_content('プロンプト一覧')
+      expect(page).to have_content('プロンプト投稿')
+      expect(page).to_not have_button '.navbar-toggle'
+    end
   end
 end
