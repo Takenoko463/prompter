@@ -2,29 +2,21 @@ class LikesController < ApplicationController
   include LikesHelper
   before_action :set_prompt
   def create
-    like = Like.new(like_params)
+    like = current_ip.likes.new(prompt: @prompt)
     like.valid?
     like.save
-    respond_to do |format|
-      format.js
-    end
+    respond_to(&:js)
   end
 
   def destroy
-    like = Like.find_by(like_params)
+    like = Like.find_by(prompt_id: @prompt.id, ip_id: current_ip.id)
     like.destroy
-    respond_to do |format|
-      format.js
-    end
+    respond_to(&:js)
   end
 
   private
 
   def set_prompt
     @prompt = Prompt.find(params[:prompt_id])
-  end
-
-  def like_params
-    { prompt_id: params[:prompt_id], ip_id: session[:ip_id] }
   end
 end
