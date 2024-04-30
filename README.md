@@ -42,8 +42,8 @@ ChatGPTなどの対話型AI利用は2つの段階に分けられます。初回�
 | content | text | null: false |
 | nick_name | string | null: false<br>default: 'prompter'|
 | ai_id | integer | null: false<br>default:'1'|
-| ip_md5_head8| string | null: false | 
-| tags | references | null: false<br>foreign_key:true|
+| ip| references | null: false<br>foreign_key:true | 
+| category | references | null: false<br>foreign_key:true|
 <!--tagを実装するならば-->
 ---
 ### Comments
@@ -52,40 +52,46 @@ ChatGPTなどの対話型AI利用は2つの段階に分けられます。初回�
 | nick_name | string |null: false<br>default:'commenter'|
 | content | text | null: false |
 | prompt | references | null: false<br>foreign_key:true|
-| ip_md5_head8 | string | null: false | 
+| ip | string | null: false<br>foreign_key:true | 
 
 ### Likes
 <!--cookie上に保存?-->
 <!--後から拡張しやすいようにcountは入れない-->
 | Column | Type | Options |
 | --- | --- | --- |
-| prompt| references |null: false<br>foreign_key:true|
-### Tags
-| Column | Type | Options |
-| --- | --- | --- |
-| prompt | references | null: false|
+| prompt| references |null: false<br>foreign_key:true|s
 
 ### PromptTagRelations
 | Column | Type | Options |
 | --- | --- | --- |
 | prompt | references | null: false |
 | tag | references | null: false |
----
 
+### Ip
+| Column | Type | Options |
+| --- | --- | --- |
+| ip_md5_head8 | string | null: false|
+
+### Category
+| Column | Type | Options |
+| --- | --- | --- |
+| name | string | null: false |
+| ancestor | string| null: true |
+---
 ## Association
 ### Prompts
+belongs_to :ip
 <!--When generate comments_controller-->
 has_many:comments
 <!--When generate likes_controller-->
 has_many:likes
 <!--When generate tags_controller-->
-has_many:tags,throw prompt_tag_relations 
+belongs_to: category
 ### Comments
-
+belongs_to :ip
 ### Likes
-<!--When generate user_controller-->
-### Tags
-
+belongs_to :ip
+belongs_to :prompt
 ---
 # ER図
 ![Prompterにおけるデータ関係図](data_base_setting.drawio.png)
