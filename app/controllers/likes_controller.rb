@@ -4,8 +4,11 @@ class LikesController < ApplicationController
   def create
     like = current_ip.likes.new(prompt: @prompt)
     like.valid?
-    like.save
-    respond_to(&:js)
+    if like.save
+      respond_to(&:js)
+    else
+      redirect_to prompts_path, flash: { error: like.errors.full_messages }
+    end
   end
 
   def destroy
