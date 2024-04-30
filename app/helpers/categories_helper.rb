@@ -15,4 +15,8 @@ module CategoriesHelper
   def set_current_categories
     @current_categories = Category.current_categories(current_category_id)
   end
+
+  def main_categories
+    @main_categories ||= Category.current_categories
+  end
 end
