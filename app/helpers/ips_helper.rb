@@ -35,6 +35,6 @@ module IpsHelper
   end
 
   def current_ip
-    Ip.find(session[:ip_id])
+    @current_ip ||= Ip.find_by(id: session[:ip_id])
   end
 end
