@@ -1,0 +1,1 @@
+$("#prompt<%=@prompt.id%>").html("<%= j(render partial: 'prompts/form' , locals: {prompt:@prompt,ais:@ais,action_name:"編集する"}) %>")

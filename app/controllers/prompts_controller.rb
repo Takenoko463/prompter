@@ -26,6 +26,10 @@ class PromptsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to(&:js)
+  end
+
   def update
     if @prompt.update(prompt_params)
       redirect_to action: 'index'
