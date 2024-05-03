@@ -1,4 +1,4 @@
-<%= form_with model: prompt, local: true do |form| %>
+<%= form_with model: prompt, local: local_flag do |form| %>
   <% if form.object.errors.any? && !form.object.valid? %>
     <%= render 'shared/error_messages', model: form.object %>
   <% end %>
@@ -32,8 +32,11 @@
         <span>子供カテゴリ</span>
         <%=select( :category, :children, options_for_select([]),{prompt:"必要があれば選択してください"},{class:'form-control form-select category-select'})%>
       </div>
-      <%= form.hidden_field :category_id, value:0,id: 'categoryId' %>
+      <%= form.hidden_field :category_id%>
     </div>
   </div>
-  <%= form.submit action_name, class: "btn btn-primary" %>
+  <%= form.submit action_name, class: "btn btn-primary mr-2" %>
+  <% if !local_flag%>
+    <%=link_to "キャンセル", prompt_path(form.object.id) ,class:"btn btn-outline-secondary ml-2",remote:!local_flag%>
+  <%end%>
 <% end %>

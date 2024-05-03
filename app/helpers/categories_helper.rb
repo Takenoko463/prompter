@@ -5,7 +5,7 @@ module CategoriesHelper
   end
 
   def current_category_id
-    session[:current_category_id]
+    @current_category_id ||= session[:current_category_id]
   end
 
   def set_current_category
