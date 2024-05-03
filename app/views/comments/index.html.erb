@@ -1,0 +1,7 @@
+<%= render partial: "prompts/prompt",locals: {prompt: @prompt}%>
+<h1 class="text-center  mt-2">コメント一覧</h1>
+<%if @comments.present?%>
+  <%=render partial:"comment", collection:@comments%>
+<%else%>
+  <p class="text-center">対象プロンプトへのコメントは存在しません</p>
+<%end%>
