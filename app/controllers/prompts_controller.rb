@@ -14,6 +14,7 @@ class PromptsController < ApplicationController
 
   def new
     @prompt = Prompt.new
+    respond_to(&:html)
   end
 
   def create

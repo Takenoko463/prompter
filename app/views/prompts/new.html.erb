@@ -1,8 +1,1 @@
-<main class="mt-3 py-2">
-  <div class="container-lg">
-    <div class="col">
-      <h1>プロンプト投稿ページ</h1>
-      <%=render partial: 'form' , locals: {prompt:@prompt,ais:@ais,action_name:"投稿する",local_flag:true}%>
-    </div>
-  </div>
-</main>
+<%=render partial: 'form' , locals: {prompt:@prompt,ais:@ais,action_name:"投稿する",local_flag:true}%>
