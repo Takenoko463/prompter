@@ -1,0 +1,3 @@
+$("#comment<%=@comment.id%>").html("<%= j(render partial: 'comments/comment' , locals: {comment:@comment}) %>");
+$("textarea").val('');
+$(".error-alert").remove();

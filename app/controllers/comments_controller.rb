@@ -25,6 +25,15 @@ class CommentsController < ApplicationController
     respond_to(&:js)
   end
 
+  def update
+    if @comment.update(comment_params)
+      cookies[:last_nick_name] = comment_params[:nick_name]
+      respond_to(&:js)
+    else
+      render action: :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_prompt
