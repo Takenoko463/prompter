@@ -12,3 +12,4 @@ pin "categories", to:"categories.js"
 pin "@fortawesome/fontawesome-free", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-free@6.5.2/js/all.js"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "popper", to: "popper.js", preload: true
+pin "prompt_form", to:"prompt_form.js"

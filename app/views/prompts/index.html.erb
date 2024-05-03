@@ -2,16 +2,16 @@
   <div class="container-lg">
     <div class="col">
       <h1 class="text-center  mt-2">プロンプト一覧</h1>
-      <h2  class="text-center mb-2"><%=@current_category.name%></h2>
-      <%if @prompts.present?%>
-        <%@prompts.each do |prompt|%>
-          <div class="mb-3 px-2 container-sm", id="prompt<%=prompt.id%>">
-            <%=render partial:"prompts/prompt", locals: {prompt:prompt}%>
+      <h2  class="text-center mb-2"><%= @current_category.name %></h2>
+      <% if @prompts.present? %>
+        <% @prompts.each do |prompt| %>
+          <div class="mb-3 px-2 container-sm", id="prompt<%= prompt.id %>">
+            <%= render partial: "prompts/prompt", locals: { prompt: prompt } %>
           </div>
-        <%end%>
-      <%else%>
+        <% end %>
+      <% else %>
         <p class="text-center">対象プロンプトは存在しません</p>
-      <%end%>
+      <% end %>
     </div>
   </div>
 </main>

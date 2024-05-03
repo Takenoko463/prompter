@@ -4,7 +4,6 @@
   </div>
   <div class="d-flex p-2 me-2">
     <%=link_to "プロンプト一覧",category_prompts_path(0),html_options = {class:"nav-link p-2 me-2"}%>
-    <%=link_to "プロンプト投稿",new_prompt_path,html_options = {class:"nav-link p-2"}%>
     <%if @current_category.present?%>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
             aria-controls="offcanvas">
