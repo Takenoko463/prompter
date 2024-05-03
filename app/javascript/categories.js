@@ -22,10 +22,10 @@ $(document).on('change', '#category_parents', function() {
         $childCategorySelect.empty();
     }
     var categoryValue = $parentCategorySelect.val();
-    $('#categoryId').val(categoryValue);
+    $('#prompt_category_id').val(categoryValue);
 });
 $(document).on('change', '#category_children', function() {
     var $childCategorySelect = $('#category_children');
     var categoryValue = $childCategorySelect.val();
-    $('#categoryId').val(categoryValue);
+    $('#prompt_category_id').val(categoryValue);
 });
