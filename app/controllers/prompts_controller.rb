@@ -26,6 +26,10 @@ class PromptsController < ApplicationController
     end
   end
 
+  def show
+    respond_to(&:js)
+  end
+
   def edit
     respond_to(&:js)
   end
