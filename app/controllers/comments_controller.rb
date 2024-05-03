@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       cookies[:last_nick_name] = comment_params[:nick_name]
       respond_to(&:js)
     else
-      render action: :index, status: :unprocessable_entity
+      render action: :new, status: :unprocessable_entity
     end
   end
 
