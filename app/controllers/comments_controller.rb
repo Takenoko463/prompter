@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_prompt, only: [:index, :new, :create, :update]
   before_action :set_comment, only: [:edit, :destroy, :update, :show]
-  before_action :set_comment_prompt, only: [:edit, :destroy, :show]
+  before_action :set_comment_prompt, only: [:edit, :destroy, :show, :destroy]
   def index
     @comments = @prompt.comments.order(id: 'DESC')
   end
@@ -36,6 +36,11 @@ class CommentsController < ApplicationController
 
   def show
     respond_to(&:js)
+  end
+
+  def destroy
+    @comment.destroy
+    redirect_to action: :index, prompt_id: @prompt.id
   end
 
   private
