@@ -32,9 +32,9 @@ class PromptsController < ApplicationController
 
   def update
     if @prompt.update(prompt_params)
-      redirect_to action: 'index'
+      respond_to(&:js)
     else
-      render action: :edit, status: :unprocessable_entity
+      render action: :index, status: :unprocessable_entity
     end
   end
 
