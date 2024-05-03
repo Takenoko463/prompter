@@ -37,6 +37,6 @@
   </div>
   <%= form.submit action_name, class: "btn btn-primary mr-2" %>
   <% if !local_flag%>
-    <%=link_to "キャンセル", prompt_path(form.object.id) ,class:"btn btn-outline-secondary ml-2",remote:!local_flag%>
+    <%=link_to "キャンセル", prompt_path(form.object) ,class:"btn btn-outline-secondary ml-2",remote:!local_flag%>
   <%end%>
 <% end %>
