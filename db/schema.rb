@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_27_102408) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_03_062016) do
   create_table "categories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "ancestry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", charset: "utf8", force: :cascade do |t|
+    t.string "nick_name", default: "commenter", null: false
+    t.text "content", null: false
+    t.bigint "prompt_id"
+    t.bigint "ip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip_id"], name: "index_comments_on_ip_id"
+    t.index ["prompt_id"], name: "index_comments_on_prompt_id"
   end
 
   create_table "ips", charset: "utf8", force: :cascade do |t|
@@ -47,6 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_27_102408) do
     t.index ["ip_id"], name: "index_prompts_on_ip_id"
   end
 
+  add_foreign_key "comments", "ips"
+  add_foreign_key "comments", "prompts"
   add_foreign_key "likes", "ips"
   add_foreign_key "likes", "prompts"
   add_foreign_key "prompts", "categories"
