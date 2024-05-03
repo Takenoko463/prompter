@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :comments ,only:[:index,:new,:create,:update]
   end
   resources :comments,only:[:edit,:show,:destroy]
+  resources :categories, only: :index
   resources :categories, only:[:show] do
     get 'children', on: :member
     resources :prompts , only:[:index]
