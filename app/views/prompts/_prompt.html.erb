@@ -72,7 +72,9 @@
             </button>
           </div>
           <div  class="col small">
-            <%= link_to "コメント一覧", prompt_comments_path(prompt.id)%>
+            <%= link_to prompt_comments_path(prompt.id), class:"text-reset" do%>
+              <i class="fa-regular fa-comment"></i>
+            <%end%>
           </div>
         </div>
         <div class="col-3 row">
