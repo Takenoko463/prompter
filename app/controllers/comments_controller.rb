@@ -34,6 +34,10 @@ class CommentsController < ApplicationController
     end
   end
 
+  def show
+    respond_to(&:js)
+  end
+
   private
 
   def set_prompt

@@ -11,5 +11,10 @@
     <%= form.text_area :content, size: "30x12", class: "form-control" %>
   </div>
   <%= form.hidden_field :prompt_id%>
-  <%= form.submit action_name, class: "btn btn-primary mr-2" %>
+  <div class="form-group">
+    <%= form.submit action_name, class: "btn btn-primary mr-2" %>
+    <%unless form.object.id.nil?%>
+      <%=link_to "キャンセル", comment_path(form.object) ,class:"btn btn-outline-secondary ml-2",remote: true %>
+    <%end%>
+  </div>
 <%end%>
