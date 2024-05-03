@@ -3,4 +3,5 @@ class Ip < ApplicationRecord
 
   has_many :prompts
   has_many :likes
+  has_many :comments
 end
