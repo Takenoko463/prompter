@@ -1,31 +1,33 @@
-<div class="mb-3 px-0 container-sm" id="prompt<%=prompt.id%>">
-  <div class="prompt card">
-    <div class="prompt-header card-header row">
-      <ul class="nav nav-tabs card-header-tabs col-9" id="promptTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="contentButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptContent<%= prompt.id %>" type="button" role="tab" aria-controls="promptContent<%= prompt.id %>" aria-selected="true">内容</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="infButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptInf<%= prompt.id %>" type="button" role="tab" aria-controls="promptInf<%= prompt.id %>" aria-selected="false">詳細情報</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="answerButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptAnswer<%= prompt.id %>" type="button" role="tab" aria-controls="promptAnswer<%= prompt.id %>" aria-selected="false">回答</button>
-        </li>
-      </ul>
-      <div class="col-3 row">
-        <% if (your_prompt?(prompt)) %>
-          <div class="col-6">
-            <button type="button" class="nav-link text-reset" data-bs-toggle="modal" data-bs-target="#promptModal<%= prompt.id %>">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
-          <div class="col-6">
-            <%= link_to edit_prompt_path(prompt.id), remote: true,class: "nav-link text-reset" do %>
-              <i class="fa-solid fa-pen-to-square"></i>
-            <% end %>
-          </div>
-          <%=render partial:"prompts/modal", locals:{prompt:prompt}%>
-        <% end %>
+<div class="mb-3 px-2 container-sm">
+  <div class="prompt card" id="prompt<%=prompt.id%>">
+    <div class="prompt-header card-header">
+      <div class="row px-3">
+        <ul class="nav nav-tabs card-header-tabs col-9" id="promptTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="contentButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptContent<%= prompt.id %>" type="button" role="tab" aria-controls="promptContent<%= prompt.id %>" aria-selected="true">内容</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="infButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptInf<%= prompt.id %>" type="button" role="tab" aria-controls="promptInf<%= prompt.id %>" aria-selected="false">詳細</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="answerButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptAnswer<%= prompt.id %>" type="button" role="tab" aria-controls="promptAnswer<%= prompt.id %>" aria-selected="false">回答</button>
+          </li>
+        </ul>
+        <div class="col-3 row">
+          <% if (your_prompt?(prompt)) %>
+            <div class="col-6">
+              <button type="button" class="nav-link text-reset" data-bs-toggle="modal" data-bs-target="#promptModal<%= prompt.id %>">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+            <div class="col-6">
+              <%= link_to edit_prompt_path(prompt.id), remote: true,class: "nav-link text-reset" do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+              <% end %>
+            </div>
+            <%=render partial:"prompts/modal", locals:{prompt:prompt}%>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="tab-content card-body" id="promptTabContent">
@@ -95,3 +97,4 @@
       </div>
     </div>
   </div>
+</div>
