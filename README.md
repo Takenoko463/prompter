@@ -91,7 +91,9 @@ belongs_to: category
 belongs_to :ip
 ### Likes
 belongs_to :ip
+
 belongs_to :prompt
+
 ---
 # ER図
 ![Prompterにおけるデータ関係図](data_base_setting.drawio.png)
