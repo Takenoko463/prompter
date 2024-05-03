@@ -38,7 +38,7 @@ class PromptsController < ApplicationController
     if @prompt.update(prompt_params)
       respond_to(&:js)
     else
-      render action: :index, status: :unprocessable_entity
+      render 'prompts/edit', status: :unprocessable_entity
     end
   end
 
