@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :set_prompt
+  before_action :set_prompt, only: [:index, :new, :create, :update]
+  before_action :set_comment, only: [:edit, :destroy, :update, :show]
+  before_action :set_comment_prompt, only: [:edit, :destroy, :show]
   def index
     @comments = @prompt.comments.order(id: 'DESC')
   end
@@ -19,6 +21,10 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to(&:js)
+  end
+
   private
 
   def set_prompt
@@ -27,5 +33,13 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content, :nick_name, :prompt_id).merge(ip_id: session[:ip_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def set_comment_prompt
+    @prompt = @comment.prompt
   end
 end

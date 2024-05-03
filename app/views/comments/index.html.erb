@@ -8,7 +8,11 @@
         <h1 class="text-center">コメント一覧</h1>
         <div class="comments">
           <%if @comments.present?%>
-            <%=render partial:"comment", collection:@comments%>
+            <%@comments.each do |comment|%>
+              <div class="mb-3 px-0 container-sm" id="comment<%=comment.id%>">
+                <%=render partial:"comment", locals:{comment: comment}%>
+              </div>
+            <%end%>
           <%end%>
         </div>
       </div>

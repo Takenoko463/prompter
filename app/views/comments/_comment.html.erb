@@ -1,12 +1,15 @@
-<div class="mb-3 px-0 container-sm" id="comment<%=comment.id%>">
-  <div class="comment card ">
-    <div class="card-body">
-      <h5 class="card-title">
-        <%=comment.nick_name%>
-      </h5>
-      <div class="card-text">
-        <%=comment.content%>
-      </div>
+<div class="comment card ">
+  <div class="card-header">
+    <%= link_to edit_comment_path(comment), remote: true,class: "text-reset" do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      <%=comment.nick_name%>
+    </h5>
+    <div class="card-text">
+      <%=comment.content%>
     </div>
   </div>
 </div>
