@@ -1,0 +1,1 @@
+$("#comment<%=@comment.id%>").html("<%= j(render partial: 'comments/form' , locals: {prompt:@prompt,comment:@comment,action_name:"編集する"}) %>");

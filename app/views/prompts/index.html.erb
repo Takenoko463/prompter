@@ -4,7 +4,11 @@
       <h1 class="text-center  mt-2">プロンプト一覧</h1>
       <h2  class="text-center mb-2"><%=@current_category.name%></h2>
       <%if @prompts.present?%>
-        <%=render partial:"prompts/prompt", collection:@prompts%>
+        <%@prompts.each do |prompt|%>
+          <div class="mb-3 px-2 container-sm", id="prompt<%=prompt.id%>">
+            <%=render partial:"prompts/prompt", locals: {prompt:prompt}%>
+          </div>
+        <%end%>
       <%else%>
         <p class="text-center">対象プロンプトは存在しません</p>
       <%end%>

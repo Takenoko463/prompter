@@ -6,6 +6,7 @@ class Prompt < ApplicationRecord
   belongs_to :category
   belongs_to :ip
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   with_options presence: true do
     validates :title, length: { maximum: 30 }
     validates :nick_name, length: { maximum: 30 }

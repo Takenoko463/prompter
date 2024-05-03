@@ -1,0 +1,28 @@
+<main class="mt-3 py-2">
+  <div class="container-lg">
+    <div class="mb-3 px-2", id="prompt<%=@prompt.id%>">
+      <%= render partial: "prompts/prompt",locals: {prompt: @prompt}%>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-9">
+        <h1 class="text-center">コメント一覧</h1>
+        <div class="comments">
+          <%if @comments.present?%>
+            <%@comments.each do |comment|%>
+              <div class="mb-3 px-0 container-sm" id="comment<%=comment.id%>">
+                <%=render partial:"comment", locals:{comment: comment}%>
+              </div>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <div id="comment_form" class="col-md-3 my-4">
+        <div class="text-center mt-4">
+          <%= link_to new_prompt_comment_path(@prompt.id), remote: true,class: "text-reset" do %>
+            コメント投稿 <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

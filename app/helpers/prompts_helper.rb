@@ -7,6 +7,6 @@ module PromptsHelper
   end
 
   def last_prompt_nick_name(model)
-    cookies[:last_nick_name].presence || model.nick_name
+    model.nick_name || cookies[:last_nick_name].presence
   end
 end
