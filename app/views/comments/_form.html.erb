@@ -1,0 +1,15 @@
+<%= form_with model: [prompt, comment], local: false do |form| %>
+  <% if form.object.errors.any? && !form.object.valid? %>
+    <%= render 'shared/error_messages', model: form.object %>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :nick_name, "投稿者名" %>
+    <%= form.text_field :nick_name, value: last_prompt_nick_name(form.object), class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :content, "コメント内容" %>
+    <%= form.text_area :content, size: "30x12", class: "form-control" %>
+  </div>
+  <%= form.hidden_field :prompt_id%>
+  <%= form.submit action_name, class: "btn btn-primary mr-2" %>
+<%end%>

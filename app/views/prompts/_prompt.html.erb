@@ -63,13 +63,16 @@
     <div class="prompt-footer card-footer">
       <div class="row mx-md-3">
         <div class="col-9 row">
-          <div class="like-btn-box small col-5" id="like-btn<%= prompt.id %>">
+          <div class="like-btn-box small col" id="like-btn<%= prompt.id %>">
             <%= render partial: "likes/like", locals: { prompt: prompt } %>
           </div>
-          <div class="col-5">
+          <div class="col">
             <button class="content-copy-button small" id="copyPrompt<%= prompt.id %>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copied!" data-prompt-id=<%= prompt.id %> data-bs-trigger="manual">
               <i class="fa-solid fa-copy"></i>
             </button>
+          </div>
+          <div  class="col small">
+            <%= link_to "コメント一覧", prompt_comments_path(prompt.id)%>
           </div>
         </div>
         <div class="col-3 row">

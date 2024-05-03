@@ -1,7 +1,22 @@
-<%= render partial: "prompts/prompt",locals: {prompt: @prompt}%>
-<h1 class="text-center  mt-2">コメント一覧</h1>
-<%if @comments.present?%>
-  <%=render partial:"comment", collection:@comments%>
-<%else%>
-  <p class="text-center">対象プロンプトへのコメントは存在しません</p>
-<%end%>
+<main class="mt-3 py-2">
+  <div class="container-lg">
+    <%= render partial: "prompts/prompt",locals: {prompt: @prompt}%>
+    <div class="row mt-2">
+      <div class="col-md-9">
+        <h1 class="text-center">コメント一覧</h1>
+        <div class="comments">
+          <%if @comments.present?%>
+            <%=render partial:"comment", collection:@comments%>
+          <%end%>
+        </div>
+      </div>
+      <div id="comment_form" class="col-md-3 my-4">
+        <div class="text-center mt-4">
+          <%= link_to new_prompt_comment_path(@prompt.id), remote: true,class: "text-reset" do %>
+            コメント投稿 <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
