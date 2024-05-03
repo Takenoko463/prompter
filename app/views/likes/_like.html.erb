@@ -1,9 +1,9 @@
 <%if prompt.liked_by?(session[:ip_id])%>
-  <%= button_to prompt_likes_path(prompt), method: :delete, remote: true, class: "prompt_likes liked" do %>
-    <i class="fa-solid fa-heart"></i>
+  <%= button_to prompt_likes_path(prompt), method: :delete, remote: true, class: "prompt_likes liked row btn btn-sm",form: { class: 'like-btn-box col row', id: "like-btn#{prompt.id}"} do %>
+    <i class="fa-solid fa-heart col-md-offset-5"></i>
   <% end %>
 <%else%>
-  <%= button_to prompt_likes_path(prompt), method: :post, remote: true, class: "prompt_likes" do %>
-    <i class="fa-regular fa-heart"></i>
+  <%= button_to prompt_likes_path(prompt), method: :post, remote: true, class: "prompt_likes row btn btn-sm",form: { class: 'like-btn-box  col row', id: "like-btn#{prompt.id}" } do %>
+    <i class="fa-regular fa-heart col-md-offset-5"></i>
   <% end %>
 <%end%>

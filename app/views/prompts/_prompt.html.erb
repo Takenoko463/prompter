@@ -1,7 +1,7 @@
 <div class="mb-3 px-0 container-sm" id="prompt<%=prompt.id%>">
-  <div class="prompt card ">
-    <div class="prompt-header card-header">
-      <ul class="nav nav-tabs card-header-tabs" id="promptTab" role="tablist">
+  <div class="prompt card">
+    <div class="prompt-header card-header row">
+      <ul class="nav nav-tabs card-header-tabs col-9" id="promptTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="contentButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptContent<%= prompt.id %>" type="button" role="tab" aria-controls="promptContent<%= prompt.id %>" aria-selected="true">内容</button>
         </li>
@@ -12,6 +12,21 @@
           <button class="nav-link" id="answerButton<%= prompt.id %>" data-bs-toggle="tab" data-bs-target="#promptAnswer<%= prompt.id %>" type="button" role="tab" aria-controls="promptAnswer<%= prompt.id %>" aria-selected="false">回答</button>
         </li>
       </ul>
+      <div class="col-3 row">
+        <% if (your_prompt?(prompt)) %>
+          <div class="col-6">
+            <button type="button" class="nav-link text-reset" data-bs-toggle="modal" data-bs-target="#promptModal<%= prompt.id %>">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="col-6">
+            <%= link_to edit_prompt_path(prompt.id), remote: true,class: "nav-link text-reset" do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+          </div>
+          <%=render partial:"prompts/modal", locals:{prompt:prompt}%>
+        <% end %>
+      </div>
     </div>
     <div class="tab-content card-body" id="promptTabContent">
       <div class="prompt-content tab-pane fade show active" id="promptContent<%= prompt.id %>" role="tabpanel" aria-labelledby="contentButton<%= prompt.id %>" tabindex="0">
@@ -61,38 +76,22 @@
       </div>
     </div>
     <div class="prompt-footer card-footer">
-      <div class="row mx-md-3">
-        <div class="col-9 row">
-          <div class="like-btn-box small col" id="like-btn<%= prompt.id %>">
-            <%= render partial: "likes/like", locals: { prompt: prompt } %>
-          </div>
-          <div class="col">
-            <button class="content-copy-button small" id="copyPrompt<%= prompt.id %>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copied!" data-prompt-id=<%= prompt.id %> data-bs-trigger="manual">
+      <div class="row">
+        <div class="col row">
+          <div class="btn btn-sm row">
+            <a class="content-copy-button col-md-offset-5 row text-reset" , style="display: table-cell; vertical-align: middle;" id="copyPrompt<%= prompt.id %>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copied!" data-prompt-id=<%= prompt.id %> data-bs-trigger="manual">
               <i class="fa-solid fa-copy"></i>
-            </button>
+            </a>
           </div>
-          <div  class="col small">
-            <%= link_to prompt_comments_path(prompt.id), class:"text-reset" do%>
-              <i class="fa-regular fa-comment"></i>
+        </div>
+        <div  class="col row">
+          <div class="btn btn-sm row">
+            <%= link_to prompt_comments_path(prompt.id), class:"text-reset col-md-offset-5 row", style:"display: table-cell; vertical-align: middle;" do%>
+              <i class="fa-regular fa-comment col-md-offset-5"></i>
             <%end%>
           </div>
         </div>
-        <div class="col-3 row">
-          <% if (your_prompt?(prompt)) %>
-            <div class="col-6">
-              <%= link_to edit_prompt_path(prompt.id), remote: true,class: "nav-link text-reset" do %>
-                <i class="fa-solid fa-pen-to-square"></i>
-              <% end %>
-            </div>
-            <div class="col-6">
-              <button type="button" class="nav-link text-reset" data-bs-toggle="modal" data-bs-target="#promptModal<%= prompt.id %>">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-            <%=render partial:"prompts/modal", locals:{prompt:prompt}%>
-          <% end %>
-        </div>
+        <%= render partial: "likes/like", locals: { prompt: prompt } %>
       </div>
     </div>
   </div>
-</div>
