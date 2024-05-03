@@ -3,13 +3,9 @@
     <%#=render partial:"prompts/search"%>
     <h2 class="mb-5">Prompterへようこそ</h2>
     <div class="container-md row pt-5">
-      <div class="col-md-6 p-2">
+      <div class="col p-2">
         <%=link_to "プロンプト一覧",category_prompts_path(0),html_options = {class:"p-2 mb-2"}%>
         <p class="mt-2">投稿されたプロンプトの一覧を閲覧するページです。コピーボタンを押したのちにAIへの質問に利用できます。</p>
-      </div>
-      <div class="col-md-6 p-2">
-        <%=link_to "プロンプト投稿",new_prompt_path,html_options = {class:"p-2 mb-2"}%>
-        <p class="mt-2">プロンプトを投稿するページです。プロンプトタイトル、プロンプト内容は必ず記入してください。</p>
       </div>
     </div>
   </div>
