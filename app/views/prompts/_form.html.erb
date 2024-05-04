@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-md-6 prompt-category-form">
         <span>親カテゴリ</span>
-        <%=collection_select(:category, :parents, main_categories, :id, :name, {selected:0},{class:'form-control form-select category-select'})%>
+        <%=collection_select(:category, :parents, Category.main_categories, :id, :name, {selected:0},{class:'form-control form-select category-select'})%>
       </div>
       <div class="col-md-6 prompt-category-form">
         <span>子供カテゴリ</span>
