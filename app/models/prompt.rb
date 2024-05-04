@@ -7,6 +7,7 @@ class Prompt < ApplicationRecord
   belongs_to :ip
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes_ips, through: :likes, source: :ip
   with_options presence: true do
     validates :title, length: { maximum: 30 }
     validates :nick_name, length: { maximum: 30 }
@@ -22,7 +23,7 @@ class Prompt < ApplicationRecord
     content.split("\n")[1..].join("\n")
   end
 
-  def liked_by?(ip_id)
-    likes.where(ip_id:).exists?
+  def liked_by?(ip)
+    likes_ips.exists?(id: ip.id)
   end
 end
