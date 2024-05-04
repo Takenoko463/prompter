@@ -27,7 +27,7 @@ class PromptsController < ApplicationController
       cookies[:last_nick_name] = prompt_params[:nick_name]
       redirect_to action: 'index'
     else
-      render action: :new, status: :unprocessable_entity
+      redirect_back fallback_location: '/', allow_other_host: false
     end
   end
 
