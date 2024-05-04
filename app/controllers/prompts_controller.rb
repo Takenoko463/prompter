@@ -27,7 +27,10 @@ class PromptsController < ApplicationController
       cookies[:last_nick_name] = prompt_params[:nick_name]
       respond_to(&:js)
     else
-      render action: :new, status: :unprocessable_entity
+      @errors = @prompt.errors.full_messages
+      respond_to do |format|
+        format.js { render 'error', status: :unprocessable_entity }
+      end
     end
   end
 
