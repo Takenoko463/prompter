@@ -29,3 +29,37 @@ $(document).on('change', '#category_children', function() {
     var categoryValue = $childCategorySelect.val();
     $('#prompt_category_id').val(categoryValue);
 });
+$(window).on('turbo:load', function() {
+    categoryIndex();
+});
+const categoryIndex = () => {
+    $('#categoryIndex')
+        .on({
+            'show.bs.offcanvas': function() {
+                $.ajax({
+                        url: $("#categoryIndexButton").data('url'),
+                        type: 'GET',
+                        dataType: 'json'
+                    })
+                    // Ajax通信が成功したら発動
+                    .done((data) => {
+                        var categories = '<ul class="navbar-nav">';
+                        console.log(data);
+                        data.forEach(function(category) {
+                            let category_prompts_path = '/categories/' + category.id + '/prompts';
+                            categories += '<li class="nav-item"><a class="nav-link text-reset" href=' + category_prompts_path + '>' + category.name + '</a></li>';
+                        });
+                        categories += '</ul>'
+                        $(this).find('.offcanvas-body').html(categories);
+                    })
+                    // Ajax通信が失敗したら発動
+                    .fail((jqXHR, textStatus, errorThrown) => {
+                        alert('Ajax通信に失敗しました。');
+                        console.log("jqXHR          : " + jqXHR.status); // HTTPステータスを表示
+                        console.log("textStatus     : " + textStatus); // タイムアウト、パースエラーなどのエラー情報を表示
+                        console.log("errorThrown    : " + errorThrown); // 例外情報を表示
+                    });
+
+            }
+        })
+};

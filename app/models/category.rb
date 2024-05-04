@@ -1,22 +1,28 @@
 class Category < ApplicationRecord
   has_ancestry
   has_many :prompts
-  ROOT = roots[0]
-  ROOTS = ROOT.children
-  def self.roots
-    ROOTS
+
+  def self.root_children
+    root_category.children
   end
 
   def self.root_category
-    ROOT
+    roots[0]
+  end
+
+  def self.main_categories
+    [root_category] + root_children
   end
 
   def self.current_categories(current_category_id = nil)
-    return [root_category] + roots if current_category_id.nil? || current_category_id == '0'
-
     target_category = current_category(current_category_id)
-    target_category.has_siblings? && !target_category.is_root?
-    [target_category.parent] + target_category.siblings
+    if target_category.is_root?
+      main_categories
+    elsif !target_category.has_children?
+      [target_category.parent] + target_category.siblings
+    else
+      [target_category.parent, target_category] + target_category.children
+    end
   end
 
   def self.current_category(current_category_id = nil)

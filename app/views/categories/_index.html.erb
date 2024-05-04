@@ -1,18 +1,8 @@
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="categoryIndex" aria-labelledby="categoryIndex">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title">カテゴリ一覧</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <ul class="navbar-nav">
-      <%if current_category.has_parent?%>
-        <%parent_category=current_category.parent%>
-        <li class="nav-item"><%=link_to parent_category.name,category_prompts_path(parent_category), class:"nav-link"%></li>
-      <%end%>
-      <li class="nav-item"><%=link_to current_category.name,category_prompts_path(current_category), class:"nav-link active"%></li>
-      <%if current_category.has_children?%>
-        <%=render partial:"categories/category",collection:current_category.children ,as: :category%>
-      <%end%>
-    </ul>
   </div>
 </div>
