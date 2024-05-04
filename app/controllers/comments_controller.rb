@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
+  include CommentsHelper
+  before_action :authenticate_ip!
   before_action :set_prompt, only: [:index, :new, :create, :update]
   before_action :set_comment, only: [:edit, :destroy, :update, :show]
   before_action :set_comment_prompt, only: [:edit, :destroy, :show, :destroy]
+  before_action :others_comment!, only: [:edit, :update, :show, :destroy]
   def index
     @comments = @prompt.comments.order(id: 'DESC')
   end
@@ -59,5 +62,15 @@ class CommentsController < ApplicationController
 
   def set_comment_prompt
     @prompt = @comment.prompt
+  end
+
+  def your_comment?
+    @comment.ip == current_ip
+  end
+
+  def others_comment!
+    return if your_comment?
+
+    redirect_to root_path
   end
 end
