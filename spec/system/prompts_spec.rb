@@ -53,6 +53,7 @@ RSpec.describe 'Prompts', type: :system do
     context '投稿ページ表示に成功する' do
       it '投稿ページを初めて表示する' do
         visit root_path
+        visit prompts_path
         find_by_id('promptFormButton').click
         sleep 1
         expect(page).to have_selector 'h5', text: 'Prompt投稿'
@@ -69,7 +70,7 @@ RSpec.describe 'Prompts', type: :system do
     end
     context 'prompt投稿に成功する' do
       it 'root_categoryページから遷移してprompt投稿に成功する' do
-        visit category_prompts_path(0)
+        visit prompts_path
         find_by_id('promptFormButton').click
         sleep 1
         expect(page).to have_selector 'h5', text: 'Prompt投稿'
@@ -88,7 +89,7 @@ RSpec.describe 'Prompts', type: :system do
       end
       it '子供カテゴリページから遷移してprompt投稿に成功する' do
         # 2回目
-        visit category_prompts_path(2)
+        visit prompts_path
         find_by_id('promptFormButton').click
         sleep 1
         expect(page).to have_selector 'h5', text: 'Prompt投稿'
@@ -109,7 +110,7 @@ RSpec.describe 'Prompts', type: :system do
     end
     context '投稿できない' do
       it '不備のある内容を投稿する' do
-        visit category_prompts_path(0)
+        visit prompts_path
         find_by_id('promptFormButton').click
         sleep 1
         expect(page).to have_selector 'h5', text: 'Prompt投稿'
