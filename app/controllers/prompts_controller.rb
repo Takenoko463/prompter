@@ -25,9 +25,9 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new(prompt_params)
     if @prompt.save
       cookies[:last_nick_name] = prompt_params[:nick_name]
-      redirect_to action: 'index'
+      respond_to(&:js)
     else
-      redirect_back fallback_location: '/', allow_other_host: false
+      render action: :new, status: :unprocessable_entity
     end
   end
 
