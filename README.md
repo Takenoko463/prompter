@@ -127,16 +127,16 @@ bundle install
 [![Image from Gyazo](https://i.gyazo.com/0c8e0bf4e3c2c26117cacf87be42e699.gif)](https://gyazo.com/0c8e0bf4e3c2c26117cacf87be42e699)
 ### プロンプト投稿
 自分の利用したプロンプトを公開します。
-#### 投稿ページへの遷移
-[![Image from Gyazo](https://i.gyazo.com/1f02838cd36dec7375481408557a3c70.gif)](https://gyazo.com/1f02838cd36dec7375481408557a3c70)
+#### 投稿フォームを開く
+[![Image from Gyazo](https://i.gyazo.com/c8e9d83b497355f31f3892ec83497f2f.gif)](https://gyazo.com/c8e9d83b497355f31f3892ec83497f2f)
 #### プロンプト投稿
-[![Image from Gyazo](https://i.gyazo.com/6b2127ebef28bfd2b6f4098987d67c36.gif)](https://gyazo.com/6b2127ebef28bfd2b6f4098987d67c36)
+[![Image from Gyazo](https://i.gyazo.com/84e38f3f75400ccc012ea63d4c53f6de.gif)](https://gyazo.com/84e38f3f75400ccc012ea63d4c53f6de)
 ### プロンプト編集
 公開済みのプロンプトを編集します。ただし、編集権限は公開した方と同一IPの方にしかありません。
-#### プロンプト編集ページへの遷移
-[![Image from Gyazo](https://i.gyazo.com/e48d3973356baa4fc720572dc5d67039.gif)](https://gyazo.com/e48d3973356baa4fc720572dc5d67039)
+#### プロンプト編集フォームへの切り替え
+[![Image from Gyazo](https://i.gyazo.com/fa360477f555bcd5372cb8d15810e850.gif)](https://gyazo.com/fa360477f555bcd5372cb8d15810e850)
 #### プロンプト編集実行
-[![Image from Gyazo](https://i.gyazo.com/96f08c6ae7c5a4c39feeb7df4153d21e.gif)](https://gyazo.com/96f08c6ae7c5a4c39feeb7df4153d21e)
+[![Image from Gyazo](https://i.gyazo.com/96cd3d0612aaf51a6a570e43bccffc82.gif)](https://gyazo.com/96cd3d0612aaf51a6a570e43bccffc82)
 ### プロンプト削除
 公開済みのプロンプトを削除します。ただし、削除権限は公開した方と同一IPの方にしかありません。
 [![Image from Gyazo](https://i.gyazo.com/66eef5d28165f045dd10a1f969195c1b.gif)](https://gyazo.com/66eef5d28165f045dd10a1f969195c1b)
