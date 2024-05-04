@@ -39,7 +39,7 @@ RSpec.describe 'Prompts', type: :request do
   describe 'GET /prompts/new' do
     context 'newアクションに成功する' do
       it 'newアクションにリクエストすると正常にレスポンスが返ってくる' do
-        get new_prompt_path
+        get new_prompt_path, xhr: true, as: :html
         expect(response).to have_http_status(:success)
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe 'Prompts', type: :request do
       it 'ipを登録していない' do
         mock_blank_session = ActionController::TestSession.new(ip_id: nil)
         allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-        get new_prompt_path
+        get new_prompt_path, xhr: true, as: :html
         expect(response.status).to eq 302
       end
     end
@@ -56,17 +56,17 @@ RSpec.describe 'Prompts', type: :request do
     context 'createアクションに成功する' do
       it 'createアクションにリクエストすると正常にレスポンスが返ってくる' do
         prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        post prompts_path, params: { prompt: prompt_params }
+        post prompts_path, params: { prompt: prompt_params }, xhr: true
         expect(response).to redirect_to action: 'index'
       end
       it 'createアクションにリクエストすると@ip由来のpromptデータが追加される' do
         prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        expect { post prompts_path, params: { prompt: prompt_params } }.to change(@ip.prompts, :count).by(1)
+        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true }.to change(@ip.prompts, :count).by(1)
       end
       it 'answerが空でもpromptデータが追加される' do
         prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
         prompt_params[:answer] = ''
-        expect { post prompts_path, params: { prompt: prompt_params } }.to change(@ip.prompts, :count).by(1)
+        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true }.to change(@ip.prompts, :count).by(1)
       end
     end
     context 'createアクションに失敗する' do
@@ -74,7 +74,7 @@ RSpec.describe 'Prompts', type: :request do
         mock_blank_session = ActionController::TestSession.new(ip_id: nil)
         allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
         prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        post prompts_path, params: { prompt: prompt_params }
+        post prompts_path, params: { prompt: prompt_params }, xhr: true
         expect(response.status).to eq 302
       end
     end
@@ -82,15 +82,15 @@ RSpec.describe 'Prompts', type: :request do
   describe 'GET /prompts/edit/id' do
     context 'editアクションに成功する' do
       it 'editアクションにリクエストすると正常にレスポンスが返ってくる' do
-        get edit_prompt_path(@prompt.id)
+        get edit_prompt_path(@prompt.id), xhr: true, as: :js
         expect(response).to have_http_status(:success)
       end
       it 'editアクションにリクエストするとformに記入済みのpromptのテキストが存在する' do
-        get edit_prompt_path(@prompt.id)
+        get edit_prompt_path(@prompt.id), xhr: true, as: :js
         expect(response.body).to include(@prompt.content)
       end
       it 'category_idを登録せずにeditアクションにリクエストするとformにroot_categoryの名前が存在する' do
-        get edit_prompt_path(@prompt.id)
+        get edit_prompt_path(@prompt.id), xhr: true, as: :js
         expect(response.body).to include(@category_root.name)
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe 'Prompts', type: :request do
       it 'ipを登録していない' do
         mock_blank_session = ActionController::TestSession.new(ip_id: nil)
         allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-        get edit_prompt_path(@prompt.id)
+        get edit_prompt_path(@prompt.id), xhr: true, as: :js
         expect(response.status).to eq 302
       end
     end
@@ -106,14 +106,14 @@ RSpec.describe 'Prompts', type: :request do
       context 'updateアクションに成功する' do
         it 'updateアクションにリクエストすると正常にレスポンスが返ってくる' do
           prompt_params = @prompt.attributes
-          put prompt_path(@prompt.id), params: { prompt: prompt_params }
-          expect(response).to redirect_to action: 'index'
+          put prompt_path(@prompt.id), params: { prompt: prompt_params }, xhr: true, as: :js
+          expect(response).to have_http_status(:success)
         end
         it 'updateアクションでtitleを編集すると更新されている' do
           prompt_params = @prompt.attributes
           prompt_params[:title] = "#{@prompt.title}_edited"
           old_title = @prompt.title
-          put prompt_path(@prompt.id), params: { prompt: prompt_params }
+          put prompt_path(@prompt.id), params: { prompt: prompt_params }, xhr: true, as: :js
           expect(@prompt.reload.title).not_to eq(old_title)
         end
       end
@@ -122,7 +122,7 @@ RSpec.describe 'Prompts', type: :request do
           mock_blank_session = ActionController::TestSession.new(ip_id: nil)
           allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
           prompt_params = @prompt.attributes
-          put prompt_path(@prompt.id), params: { prompt: prompt_params }
+          put prompt_path(@prompt.id), params: { prompt: prompt_params }, xhr: true, as: :js
           expect(response.status).to eq 302
         end
       end

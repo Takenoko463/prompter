@@ -3,7 +3,7 @@ module PromptsHelper
   include LikesHelper
   include IpsHelper
   def your_prompt?(prompt)
-    your_ip?(prompt.ip.ip_md5_head8)
+    current_ip == prompt.ip
   end
 
   def last_prompt_nick_name(model)
