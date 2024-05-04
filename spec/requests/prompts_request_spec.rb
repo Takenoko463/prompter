@@ -56,17 +56,17 @@ RSpec.describe 'Prompts', type: :request do
     context 'createアクションに成功する' do
       it 'createアクションにリクエストすると正常にレスポンスが返ってくる' do
         prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        post prompts_path, params: { prompt: prompt_params }, xhr: true
-        expect(response).to redirect_to action: 'index'
+        post prompts_path, params: { prompt: prompt_params }, xhr: true, as: :js
+        expect(response).to have_http_status(:success)
       end
       it 'createアクションにリクエストすると@ip由来のpromptデータが追加される' do
         prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true }.to change(@ip.prompts, :count).by(1)
+        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true, as: :js }.to change(@ip.prompts, :count).by(1)
       end
       it 'answerが空でもpromptデータが追加される' do
         prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
         prompt_params[:answer] = ''
-        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true }.to change(@ip.prompts, :count).by(1)
+        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true, as: :js }.to change(@ip.prompts, :count).by(1)
       end
     end
     context 'createアクションに失敗する' do
