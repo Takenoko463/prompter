@@ -39,7 +39,7 @@ RSpec.describe 'Prompts', type: :request do
   describe 'GET /prompts/new' do
     context 'newアクションに成功する' do
       it 'newアクションにリクエストすると正常にレスポンスが返ってくる' do
-        get new_prompt_path, xhr: true, as: :html
+        get new_prompt_path, xhr: true, as: :js
         expect(response).to have_http_status(:success)
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe 'Prompts', type: :request do
       it 'ipを登録していない' do
         mock_blank_session = ActionController::TestSession.new(ip_id: nil)
         allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-        get new_prompt_path, xhr: true, as: :html
+        get new_prompt_path, xhr: true, as: :js
         expect(response.status).to eq 302
       end
     end
