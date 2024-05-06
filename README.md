@@ -52,20 +52,14 @@ ChatGPTなどの対話型AI利用は2つの段階に分けられます。初回�
 | nick_name | string |null: false<br>default:'commenter'|
 | content | text | null: false |
 | prompt | references | null: false<br>foreign_key:true|
-| ip | string | null: false<br>foreign_key:true | 
+| ip | references | null: false<br>foreign_key:true | 
 
 ### Likes
 <!--cookie上に保存?-->
 <!--後から拡張しやすいようにcountは入れない-->
 | Column | Type | Options |
 | --- | --- | --- |
-| prompt| references |null: false<br>foreign_key:true|s
-
-### PromptTagRelations
-| Column | Type | Options |
-| --- | --- | --- |
-| prompt | references | null: false |
-| tag | references | null: false |
+| prompt| references |null: false<br>foreign_key:true|
 
 ### Ip
 | Column | Type | Options |
