@@ -7,11 +7,11 @@ module CategoriesHelper
     session[:current_category_id] || 0
   end
 
-  def set_current_category
-    @current_category = Category.current_category(current_category_id)
+  def current_category
+    @current_category ||= Category.current_category(current_category_id)
   end
 
-  def set_current_categories
-    @current_categories = Category.current_categories(current_category_id)
+  def current_categories
+    @current_categories ||= Category.current_categories(current_category_id)
   end
 end

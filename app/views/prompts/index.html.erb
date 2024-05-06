@@ -2,7 +2,7 @@
   <div class="container-lg">
     <div class="col">
       <h1 class="text-center  mt-2">プロンプト一覧</h1>
-      <h2  class="text-center mb-2"><%= @current_category.name %></h2>
+      <h2  class="text-center mb-2"><%= current_category.name %></h2>
       <div class="prompts">
       <% if @prompts.present? %>
         <% @prompts.each do |prompt| %>

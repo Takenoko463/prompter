@@ -9,9 +9,8 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    set_current_categories
     respond_to do |format|
-      format.json { render json: @current_categories }
+      format.json { render json: current_categories }
     end
   end
 end
