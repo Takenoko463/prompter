@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   before_action :set_comment_prompt, only: [:edit, :destroy, :show, :destroy]
   before_action :others_comment!, only: [:edit, :update, :show, :destroy]
   def index
-    @comments = @prompt.comments.order(id: 'DESC')
+    @comments = @prompt.comments.includes(:ip).order(id: 'DESC')
   end
 
   def new

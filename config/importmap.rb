@@ -13,3 +13,4 @@ pin "@fortawesome/fontawesome-free", to: "https://ga.jspm.io/npm:@fortawesome/fo
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "popper", to: "popper.js", preload: true
 pin "prompt_form", to:"prompt_form.js"
+pin "modal", to:"modal.js"

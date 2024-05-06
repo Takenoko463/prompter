@@ -9,8 +9,9 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%= render "shared/header"%>
+    <%= render "shared/header" %>
     <%= yield %>
-    <%= render "shared/footer"%>
+    <%= render "shared/footer" %>
   </body>
+  <%= render partial: "shared/modal" %>
 </html>

@@ -15,16 +15,15 @@
       <div class="col-3 row">
         <% if (your_prompt?(prompt)) %>
           <div class="col-6">
-            <button type="button" class="nav-link text-reset" data-bs-toggle="modal" data-bs-target="#promptModal<%= prompt.id %>">
+            <button type="button" class="delete-confirm-button nav-link text-reset" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal" data-url=<%= prompt_path(prompt.id)%> data-name="プロンプト">
               <i class="fa-solid fa-trash"></i>
             </button>
           </div>
           <div class="col-6">
-            <%= link_to edit_prompt_path(prompt), remote: true,class: "nav-link text-reset" do %>
+            <%= link_to edit_prompt_path(prompt), remote: true, class: "nav-link text-reset" do %>
               <i class="fa-solid fa-pen-to-square"></i>
             <% end %>
           </div>
-          <%=render partial:"prompts/modal", locals:{prompt:prompt}%>
         <% end %>
       </div>
     </div>
@@ -34,9 +33,9 @@
       <h5 class="card-title">
         プロンプト内容
       </h5>
-      <%= simple_format(h(prompt.first_line),class:"card-text content-first-line") %>
+      <%= simple_format(h(prompt.first_line), class: "card-text content-first-line") %>
       <% if prompt.remaining_content.present? %>
-        <%= simple_format(h(prompt.remaining_content), class: "collapse card-text remaining-content", id: "remainingContent#{prompt.id}")%>
+        <%= simple_format(h(prompt.remaining_content), class: "collapse card-text remaining-content", id: "remainingContent#{prompt.id}") %>
         <button class="btn btn-link content-toggle-button" type="button" data-bs-toggle="collapse" data-bs-target="#remainingContent<%= prompt.id %>" aria-expanded="false" aria-controls="remainingContent<%= prompt.id %>">
           続きを読む
         </button>
@@ -69,11 +68,11 @@
       <h6 class="card-title">
         <%= link_to prompt.ai.name, prompt.ai.url, class: "ai-link ms-3 col text-center", target: :_blank, rel: "noopener noreferrer" %>からの回答
       </h6>
-      <%if prompt.answer.present?%>
-        <%=simple_format(h(prompt.answer),class:"content-answer card-text")%>
-      <%else%>
+      <% if prompt.answer.present? %>
+        <%= simple_format(h(prompt.answer), class: "content-answer card-text") %>
+      <% else %>
         <p class="prompt-no-answer card-text text-center">no answer</p>
-      <%end%>
+      <% end %>
     </div>
   </div>
   <div class="prompt-footer card-footer">
@@ -87,9 +86,9 @@
       </div>
       <div  class="col row">
         <div class="btn btn-sm row">
-          <%= link_to prompt_comments_path(prompt.id), class:"text-reset col-md-offset-5 row", style:"display: table-cell; vertical-align: middle;" do%>
+          <%= link_to prompt_comments_path(prompt.id), class: "text-reset col-md-offset-5 row", style: "display: table-cell; vertical-align: middle;" do %>
             <i class="fa-regular fa-comment col-md-offset-5"></i>
-          <%end%>
+          <% end %>
         </div>
       </div>
       <%= render partial: "likes/like", locals: { prompt: prompt } %>

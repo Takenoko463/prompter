@@ -3,9 +3,9 @@
     <ul class="nav">
       <%if current_ip==comment.ip%>
         <li class="nav-item">
-          <%= link_to comment_path(comment), data: {turbo_method: :delete} , class:"text-reset nav-link" do%>
+          <button type="button" class="delete-confirm-button nav-link text-reset" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal" data-url=<%= comment_path(comment)%> data-name="コメント">
             <i class="fa-solid fa-trash"></i>
-          <%end%>
+          </button>
         </li>
         <li class="nav-item">
           <%= link_to edit_comment_path(comment), remote: true,class: "text-reset nav-item nav-link" do %>
