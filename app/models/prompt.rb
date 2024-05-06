@@ -24,6 +24,6 @@ class Prompt < ApplicationRecord
   end
 
   def liked_by?(ip)
-    likes_ips.exists?(id: ip.id)
+    likes_ips.pluck(:id).include?(ip.id)
   end
 end

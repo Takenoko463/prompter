@@ -9,7 +9,10 @@ class PromptsController < ApplicationController
   before_action :set_current_categories, except: :destroy
   def index
     ## categoryと、その子孫に繋がる全てのpromptを取り出す
-    @prompts = Prompt.where(category_id: @current_category.subtree.pluck(:id)).includes([:likes, :ip]).order(id: 'DESC')
+    category_ids = @current_category.subtree.pluck(:id)
+    @prompts = Prompt.where(category_id: category_ids).all.order(id: 'DESC').includes([:ip,
+                                                                                       :likes_ips,
+                                                                                       :category])
   end
 
   def new
