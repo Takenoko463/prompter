@@ -15,11 +15,7 @@ class PromptsController < ApplicationController
 
   def new
     @prompt = Prompt.new
-    respond_to do |format|
-      format.html do
-        render partial: 'prompts/new'
-      end
-    end
+    respond_to(&:js)
   end
 
   def create
@@ -28,10 +24,7 @@ class PromptsController < ApplicationController
       cookies[:last_nick_name] = prompt_params[:nick_name]
       respond_to(&:js)
     else
-      @errors = @prompt.errors.full_messages
-      respond_to do |format|
-        format.js { render 'error', status: :unprocessable_entity }
-      end
+      render action: :new, status: :unprocessable_entity
     end
   end
 
