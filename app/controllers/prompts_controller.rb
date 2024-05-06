@@ -15,11 +15,7 @@ class PromptsController < ApplicationController
 
   def new
     @prompt = Prompt.new
-    respond_to do |format|
-      format.html do
-        render partial: 'prompts/new'
-      end
-    end
+    respond_to(&:js)
   end
 
   def create

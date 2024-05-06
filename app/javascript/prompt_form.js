@@ -10,12 +10,10 @@ const postForm = () => {
                 $.ajax({
                         url: $("#promptFormButton").data('url'),
                         type: 'GET',
-                        dataType: 'html'
+                        dataType: 'script'
                     })
                     // Ajax通信が成功したら発動
-                    .done((data) => {
-                        $(this).find('.offcanvas-body').html(data);
-                    })
+                    .done(() => {})
                     // Ajax通信が失敗したら発動
                     .fail((jqXHR, textStatus, errorThrown) => {
                         alert('Ajax通信に失敗しました。');
