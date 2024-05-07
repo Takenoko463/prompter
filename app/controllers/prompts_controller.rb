@@ -11,6 +11,10 @@ class PromptsController < ApplicationController
                  @q.result(distinct: true).includes([:ip,
                                                      :likes_ips,
                                                      :category]).order(id: 'DESC')
+               elsif params[:category_id].present?
+                 Prompt.subtree_category(params[:category_id]).includes([:ip,
+                                                                         :likes_ips,
+                                                                         :category]).order(id: 'DESC')
                else
                  Prompt.includes([:ip,
                                   :likes_ips,
@@ -52,6 +56,14 @@ class PromptsController < ApplicationController
   def destroy
     @prompt.destroy
     redirect_to action: 'index'
+  end
+
+  def search
+    @q = Prompt.ransack
+    @url = prompts_path
+    respond_to do |format|
+      format.html { render partial: 'prompts/search' }
+    end
   end
 
   private

@@ -1,5 +1,6 @@
 $(window).on('turbo:load', function() {
     postForm();
+    searchForm();
 });
 const postForm = () => {
     $('#offcanvasPromptForm')
@@ -14,6 +15,31 @@ const postForm = () => {
                     })
                     // Ajax通信が成功したら発動
                     .done(() => {})
+                    // Ajax通信が失敗したら発動
+                    .fail((jqXHR, textStatus, errorThrown) => {
+                        alert('Ajax通信に失敗しました。');
+                        console.log("jqXHR          : " + jqXHR.status); // HTTPステータスを表示
+                        console.log("textStatus     : " + textStatus); // タイムアウト、パースエラーなどのエラー情報を表示
+                        console.log("errorThrown    : " + errorThrown); // 例外情報を表示
+                    });
+
+            }
+        })
+};
+const searchForm = () => {
+    $('#collapseSearch')
+        .on({
+            'show.bs.collapse': function() {
+                console.log($("#promptSearchButton").data('url'));
+                $.ajax({
+                        url: $("#promptSearchButton").data('url'),
+                        type: 'GET',
+                        dataType: 'html'
+                    })
+                    // Ajax通信が成功したら発動
+                    .done((data) => {
+                        $(this).find('.collapse-body').html(data);
+                    })
                     // Ajax通信が失敗したら発動
                     .fail((jqXHR, textStatus, errorThrown) => {
                         alert('Ajax通信に失敗しました。');

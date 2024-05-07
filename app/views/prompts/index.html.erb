@@ -3,12 +3,9 @@
     <div class="col">
       <h1 class="text-center  mt-2">プロンプト一覧</h1>
       <h2  class="text-center mb-2"><%= current_category.name %></h2>
-      <% unless @q.nil?%>
-        <div class="row m-2 px-2 container-sm">
-          <h3 class="navbar-text">プロンプト検索</h3>
-          <%= render "search", q: @q, url: prompts_path%>
-        </div>
-      <%end%>
+      <div class="row m-2 px-2 container-sm">
+        <%= render "search_collapse"%>
+      </div>
       <div class="prompts">
         <% if @prompts.present? %>
           <% @prompts.each do |prompt| %>
