@@ -11,7 +11,7 @@ class Category < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[name]
+    %w[id name ancestry]
   end
 
   def self.ransackable_associations(_auth_object = nil)

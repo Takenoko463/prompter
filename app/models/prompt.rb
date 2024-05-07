@@ -14,13 +14,26 @@ class Prompt < ApplicationRecord
     validates :content, length: { minimum: 5, maximum: 3000 }
     validates :ai_id, numericality: { other_than: 0, message: 'must exist' }
   end
-
+  scope :subtree_category, lambda { |category_id|
+                             category = Category.find(category_id)
+                             subtree_ids = category.subtree.pluck(:id)
+                             Prompt.where(category_id: subtree_ids)
+                           }
   def self.ransackable_attributes(_auth_object = nil)
     %w[content]
   end
 
   def self.ransackable_associations(_auth_object = nil)
     %w[likes comments category]
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[subtree_category]
+  end
+
+  # この設定を加えたscopeでは 1→true とかの変換をしなくなる
+  def self.ransackable_scopes_skip_sanitize_args
+    %i[subtree_category]
   end
 
   def first_line
