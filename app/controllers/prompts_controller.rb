@@ -10,15 +10,15 @@ class PromptsController < ApplicationController
     @prompts = if params[:q].present?
                  @q.result(distinct: true).includes([:ip,
                                                      :likes_ips,
-                                                     :category]).order(id: 'DESC')
+                                                     :category]).order_by_likes
                elsif params[:category_id].present?
                  Prompt.subtree_category(params[:category_id]).includes([:ip,
                                                                          :likes_ips,
-                                                                         :category]).order(id: 'DESC')
+                                                                         :category]).order_by_likes
                else
                  Prompt.includes([:ip,
                                   :likes_ips,
-                                  :category]).order(id: 'DESC')
+                                  :category]).order_by_likes
                end
   end
 

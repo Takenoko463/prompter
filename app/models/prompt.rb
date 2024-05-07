@@ -17,8 +17,11 @@ class Prompt < ApplicationRecord
   scope :subtree_category, lambda { |category_id|
                              category = Category.find(category_id)
                              subtree_ids = category.subtree.pluck(:id)
-                             Prompt.where(category_id: subtree_ids)
+                             where(category_id: subtree_ids)
                            }
+  scope :order_by_likes, lambda {
+    select('prompts.*', 'count(likes.id) AS likes_count').left_outer_joins(:likes).group('prompts.id').order('likes_count desc')
+  }
   def self.ransackable_attributes(_auth_object = nil)
     %w[content]
   end
@@ -33,7 +36,7 @@ class Prompt < ApplicationRecord
 
   # この設定を加えたscopeでは 1→true とかの変換をしなくなる
   def self.ransackable_scopes_skip_sanitize_args
-    %i[subtree_category]
+    %w[subtree_category]
   end
 
   def first_line
