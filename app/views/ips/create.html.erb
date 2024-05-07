@@ -2,7 +2,12 @@
   <div class="container-md text-center">
     <%#=render partial:"prompts/search"%>
     <h2 class="mb-5">Prompterへようこそ</h2>
-    <div class="container-md row pt-5">
+    <div class="container-md row mb-5 pt-5">
+      <div class="col-sm-4">
+        <div class="m-4 px-2 container-sm">
+          <%= render partial:"prompts/search_collapse"%>
+        </div>
+      </div>
       <div class="col p-2">
         <%=link_to "プロンプト一覧",prompts_path,html_options = {class:"p-2 mb-2"}%>
         <p class="mt-2">投稿されたプロンプトの一覧を閲覧するページです。コピーボタンを押したのちにAIへの質問に利用できます。</p>
