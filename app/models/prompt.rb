@@ -15,6 +15,14 @@ class Prompt < ApplicationRecord
     validates :ai_id, numericality: { other_than: 0, message: 'must exist' }
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[content]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[likes comments category]
+  end
+
   def first_line
     content.split("\n").first
   end

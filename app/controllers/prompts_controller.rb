@@ -6,11 +6,16 @@ class PromptsController < ApplicationController
   before_action :others_prompt!, only: [:edit, :update, :destroy]
   before_action :set_current_category_at_session, only: :index
   def index
-    ## categoryと、その子孫に繋がる全てのpromptを取り出す
-    category_ids = current_category.subtree.pluck(:id)
-    @prompts = Prompt.where(category_id: category_ids).all.order(id: 'DESC').includes([:ip,
-                                                                                       :likes_ips,
-                                                                                       :category])
+    @q = Prompt.ransack(params[:q])
+    @prompts = if params[:q].present?
+                 @q.result(distinct: true).includes([:ip,
+                                                     :likes_ips,
+                                                     :category]).order(id: 'DESC')
+               else
+                 Prompt.includes([:ip,
+                                  :likes_ips,
+                                  :category]).order(id: 'DESC')
+               end
   end
 
   def new
