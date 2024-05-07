@@ -2,20 +2,24 @@
   <div class="container-lg">
     <div class="col">
       <h1 class="text-center  mt-2">プロンプト一覧</h1>
-      <h2  class="text-center mb-2"><%= current_category.name %></h2>
-      <div class="row m-2 px-2 container-sm">
-        <%= render "search_collapse"%>
-      </div>
-      <div class="prompts">
-        <% if @prompts.present? %>
-          <% @prompts.each do |prompt| %>
-            <div class="mb-3 px-2 container-sm", id="prompt<%= prompt.id %>">
-              <%= render partial: "prompts/prompt", locals: { prompt: prompt } %>
-            </div>
+      <h2  class="text-center mb-4"><%= current_category.name %></h2>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="m-4 px-2 container-sm">
+            <%= render "search_collapse"%>
+          </div>
+        </div>
+        <div class="prompts col-sm-8">
+          <% if @prompts.present? %>
+            <% @prompts.each do |prompt| %>
+              <div class="mb-3 px-2 container-sm", id="prompt<%= prompt.id %>">
+                <%= render partial: "prompts/prompt", locals: { prompt: prompt } %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-center">対象プロンプトは存在しません</p>
           <% end %>
-        <% else %>
-          <p class="text-center">対象プロンプトは存在しません</p>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
