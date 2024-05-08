@@ -63,10 +63,10 @@ RSpec.describe 'Comments', type: :request do
           is_expected.to eq 200
           expect(response).to have_http_status(:success)
         end
-        it 'create prompt' do
+        it 'create comment' do
           expect { subject }.to change(@ip.comments, :count).by(1)
         end
-        it 'include prompt' do
+        it 'include content' do
           is_expected.to eq 200
           expect(response.body).to include(@comment.content)
         end
