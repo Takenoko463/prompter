@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "ips#create"
   resources :prompts do
+    get 'search', on: :collection
     resource :likes ,only:[:create,:destroy]
     resources :comments ,only:[:index,:new,:create,:update]
   end

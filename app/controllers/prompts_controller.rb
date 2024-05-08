@@ -6,11 +6,32 @@ class PromptsController < ApplicationController
   before_action :others_prompt!, only: [:edit, :update, :destroy]
   before_action :set_current_category_at_session, only: :index
   def index
-    ## categoryと、その子孫に繋がる全てのpromptを取り出す
-    category_ids = current_category.subtree.pluck(:id)
-    @prompts = Prompt.where(category_id: category_ids).all.order(id: 'DESC').includes([:ip,
-                                                                                       :likes_ips,
-                                                                                       :category])
+    @q = Prompt.ransack(params[:q])
+    # promptを絞り込み
+    @prompts = if params[:q].present?
+                 @q.result(distinct: true).includes([:ip,
+                                                     :likes_ips,
+                                                     :category, :comments])
+               elsif params[:category_id].present?
+                 Prompt.subtree_category(params[:category_id]).includes([:ip,
+                                                                         :likes_ips,
+                                                                         :category, :comments])
+               else
+                 Prompt.includes([:ip,
+                                  :likes_ips,
+                                  :category, :comments])
+               end
+    # promptをsort
+    @prompts = case order_params
+               when nil
+                 @prompts.order_by_likes
+               when 'likes'
+                 @prompts.order_by_likes
+               when 'created'
+                 @prompts.order(created_at: :desc)
+               when 'comments'
+                 @prompts.order_by_comments
+               end
   end
 
   def new
@@ -49,6 +70,14 @@ class PromptsController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def search
+    @q = Prompt.ransack
+    @url = prompts_path
+    respond_to do |format|
+      format.html { render partial: 'prompts/search' }
+    end
+  end
+
   private
 
   def retribute_active_hash
@@ -57,6 +86,10 @@ class PromptsController < ApplicationController
 
   def prompt_params
     params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer, :category_id).merge(ip_id: session[:ip_id])
+  end
+
+  def order_params
+    params[:sort].try(:[], :order)
   end
 
   def set_prompt

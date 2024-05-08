@@ -87,7 +87,9 @@
       <div  class="col row">
         <div class="btn btn-sm row">
           <%= link_to prompt_comments_path(prompt.id), class: "text-reset col-md-offset-5 row", style: "display: table-cell; vertical-align: middle;" do %>
-            <i class="fa-regular fa-comment col-md-offset-5"></i>
+            <span>
+              <i class="fa-regular fa-comment fa-fw col-md-offset-5"></i><%= prompt.comments.size %>
+            </span>
           <% end %>
         </div>
       </div>

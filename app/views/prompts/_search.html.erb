@@ -1,7 +1,25 @@
-<p class="navbar-text">プロンプト検索</p>
-<form class="navbar-form">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="キーワード">
+<%= search_form_for @q, url: @url do |f| %>
+  <div class="form-group py-2">
+    <%= f.label :content_cont, "プロンプト内容検索" %>
+    <%= f.search_field :content_cont, class: 'form-control', placeholder: '検索ワード' %>
   </div>
-  <button type="submit" class="btn btn-info">検索</button>
-</form>
+  <div class="form-group py-2">
+    <%= f.label :subtree_category, "カテゴリ検索" %>
+    <%= f.select :subtree_category, options_from_collection_for_select(Category.all, :id, :name , 0),class:"form-control form-select"%>
+  </div>
+  <div class="form-group py-2">
+    <div>
+      <%=radio_button 'sort', 'order', 'created'%>
+      <strong>新着順</strong>
+    </div>
+    <div>
+      <%=radio_button 'sort', 'order', 'likes', checked: true%>
+      <strong>いいね順</strong>
+    </div>
+    <div>
+      <%=radio_button 'sort', 'order', 'comments'%>
+      <strong>コメント数順</strong>
+    </div>
+  </div>
+  <%= f.submit '検索', class: 'btn btn-primary' %>
+<% end %>

@@ -14,6 +14,35 @@ class Prompt < ApplicationRecord
     validates :content, length: { minimum: 5, maximum: 3000 }
     validates :ai_id, numericality: { other_than: 0, message: 'must exist' }
   end
+  scope :subtree_category, lambda { |category_id|
+                             category = Category.find(category_id)
+                             subtree_ids = category.subtree.pluck(:id)
+                             where(category_id: subtree_ids)
+                           }
+  scope :order_by_likes, lambda {
+    select('prompts.*', 'count(likes.id) AS likes_count').left_outer_joins(:likes)
+                                                         .group('prompts.id').order('likes_count desc')
+  }
+  scope :order_by_comments, lambda {
+    select('prompts.*', 'count(comments.id) AS comments_count').left_outer_joins(:comments)
+                                                               .group('prompts.id').order('comments_count desc')
+  }
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[content]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[likes comments category]
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[subtree_category]
+  end
+
+  # この設定を加えたscopeでは 1→true とかの変換をしなくなる
+  def self.ransackable_scopes_skip_sanitize_args
+    %w[subtree_category]
+  end
 
   def first_line
     content.split("\n").first
