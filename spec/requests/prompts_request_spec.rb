@@ -18,37 +18,39 @@ RSpec.describe 'Prompts', type: :request do
   end
   describe 'GET /prompts' do
     context 'indexアクションに成功する' do
-      it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do
+      subject(:index) do
         get prompts_path
-        expect(response).to have_http_status(:success)
+        response
+      end
+      it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do
+        is_expected.to have_http_status(:success)
       end
       it 'indexアクションにリクエストするとレスポンスに投稿済みのpromptのテキストが存在する' do
-        get prompts_path
-        expect(response.body).to include(@prompt.content)
+        expect(index.body).to include(@prompt.content)
       end
     end
     context 'indexアクションに失敗する' do
-      it 'ipを登録していない' do
-        mock_blank_session = ActionController::TestSession.new(ip_id: nil)
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
+      subject(:index) do
         get prompts_path
-        expect(response.status).to eq 302
+        response
       end
+      include_examples 'not authenticate ip test'
     end
   end
   describe 'GET /prompts/new' do
+    subject(:new) do
+      get new_prompt_path, xhr: true, as: :js
+      response
+    end
     context 'newアクションに成功する' do
       it 'newアクションにリクエストすると正常にレスポンスが返ってくる' do
-        get new_prompt_path, xhr: true, as: :js
-        expect(response).to have_http_status(:success)
+        expect(new).to have_http_status(:success)
       end
     end
     context 'newアクションに失敗する' do
+      include_context 'not authenticate ip'
       it 'ipを登録していない' do
-        mock_blank_session = ActionController::TestSession.new(ip_id: nil)
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-        get new_prompt_path, xhr: true, as: :js
-        expect(response.status).to eq 302
+        expect(new.status).to eq 302
       end
     end
   end
@@ -143,6 +145,14 @@ RSpec.describe 'Prompts', type: :request do
           allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
           delete prompt_path(@prompt.id)
           expect(response.status).to eq 302
+        end
+      end
+    end
+    describe 'GET /prompts/search' do
+      context 'searchアクションに成功する' do
+        it 'searchアクションにリクエストすると正常にレスポンスが返ってくる' do
+          get search_prompts_path
+          expect(response).to have_http_status(:success)
         end
       end
     end
