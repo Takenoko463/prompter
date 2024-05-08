@@ -41,6 +41,33 @@ RSpec.describe 'Prompts', type: :system do
         expect(page).to have_selector 'h1', text: 'プロンプト一覧'
         expect(page).to have_content(@category_root.name)
       end
+      it 'いいね順' do
+        visit root_path
+        expect(page).to have_content('いいね順')
+        click_on('いいね順')
+        sleep 1
+        # prompt一覧ページ
+        expect(page).to have_selector 'h1', text: 'プロンプト一覧'
+        expect(page).to have_content(@category_root.name)
+      end
+      it 'コメント数順' do
+        visit root_path
+        expect(page).to have_content('コメント数順')
+        click_on('コメント数順')
+        sleep 1
+        # prompt一覧ページ
+        expect(page).to have_selector 'h1', text: 'プロンプト一覧'
+        expect(page).to have_content(@category_root.name)
+      end
+      it '新規投稿順' do
+        visit root_path
+        expect(page).to have_content('新規投稿順')
+        click_on('新規投稿順')
+        sleep 1
+        # prompt一覧ページ
+        expect(page).to have_selector 'h1', text: 'プロンプト一覧'
+        expect(page).to have_content(@category_root.name)
+      end
     end
     context '一覧ページを表示できない' do
       it '一覧ページにトップページを介さず初めて訪れる' do
