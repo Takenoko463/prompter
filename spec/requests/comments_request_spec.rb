@@ -99,7 +99,7 @@ RSpec.describe 'Comments', type: :request do
       it 'editアクションにリクエストすると正常にレスポンスが返ってくる' do
         is_expected.to eq 200
       end
-      it 'editアクションにリクエストするとformに記入済みのpromptのテキストが存在する' do
+      it 'editアクションにリクエストするとformに記入済みのcommentのテキストが存在する' do
         is_expected.to eq 200
         expect(response.body).to include(@comment.content)
       end
@@ -125,7 +125,7 @@ RSpec.describe 'Comments', type: :request do
         is_expected.to eq 200
         expect(response).to have_http_status(:success)
       end
-      it 'updateアクションでtitleを編集すると更新されている' do
+      it 'updateアクションでcontentを編集すると更新されている' do
         is_expected.to eq 200
         expect(@comment.content).not_to eq(@comment.reload.content)
       end
