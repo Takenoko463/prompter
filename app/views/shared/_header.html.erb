@@ -1,15 +1,29 @@
-<div class="navbar bg-light px-3">
+<div class="navbar navbar-expand-md bg-light px-3">
   <div class="col gx-8 text-center">
     <%=link_to "Prompter",root_path,html_options = {class:"navbar-brand me-2"}%>
   </div>
+  <div class="collapse navbar-collapse" tabindex="-1" id="promptIndex" aria-labelledby="promptIndex">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <%=link_to "いいね順",prompts_path(sort:{order: :likes}),html_options = {class:"nav-link p-2 me-2"}%>
+      </li>
+      <li class="nav-item">
+        <%=link_to "新着投稿順",prompts_path(sort:{order: :created}),html_options = {class:"nav-link p-2 me-2"}%>
+      </li>
+      <li class="nav-item">
+        <%=link_to "コメント数順",prompts_path(sort:{order: :comments}),html_options = {class:"nav-link p-2 me-2"}%>
+      </li>
+    </ul>
+  </div>
   <div class="d-flex p-2 me-2">
-    <%=link_to "いいね順",prompts_path(sort:{order: :likes}),html_options = {class:"nav-link p-2 me-2"}%>
-    <%=link_to "新着投稿順",prompts_path(sort:{order: :created}),html_options = {class:"nav-link p-2 me-2"}%>
-    <%=link_to "コメント数順",prompts_path(sort:{order: :comments}),html_options = {class:"nav-link p-2 me-2"}%>
-    <button class="navbar-toggler" id="categoryIndexButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryIndex"
+    <button class="navbar-toggler mx-2" id="promptIndexButton" type="button" data-bs-toggle="collapse" data-bs-target="#promptIndex"
+            aria-controls="promptIndex">
+      <i class="fa-solid fa-list"></i>
+    </button>
+    <button class="navbar-toggler mx-2" id="categoryIndexButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryIndex"
             aria-controls="categoryIndex" data-url=<%=categories_path%>>
       <span class="navbar-toggler-icon"></span>
     </button>
-    <%=render partial:"categories/index"%>
   </div>
-    </div>
+</div>
+<%=render partial:"categories/index"%>
