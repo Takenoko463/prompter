@@ -20,7 +20,12 @@ class Prompt < ApplicationRecord
                              where(category_id: subtree_ids)
                            }
   scope :order_by_likes, lambda {
-    select('prompts.*', 'count(likes.id) AS likes_count').left_outer_joins(:likes).group('prompts.id').order('likes_count desc')
+    select('prompts.*', 'count(likes.id) AS likes_count').left_outer_joins(:likes)
+                                                         .group('prompts.id').order('likes_count desc')
+  }
+  scope :order_by_comments, lambda {
+    select('prompts.*', 'count(comments.id) AS comments_count').left_outer_joins(:comments)
+                                                               .group('prompts.id').order('comments_count desc')
   }
   def self.ransackable_attributes(_auth_object = nil)
     %w[content]

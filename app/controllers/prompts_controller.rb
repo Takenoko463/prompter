@@ -21,10 +21,13 @@ class PromptsController < ApplicationController
                                   :category])
                end
 
-    @prompts = if sort_params[:order] == 'likes'
+    @prompts = case sort_params[:order]
+               when 'likes'
                  @prompts = @prompts.order_by_likes
-               elsif sort_params[:order] == 'created'
+               when 'created'
                  @prompts = @prompts.order(created_at: :desc)
+               when 'comments'
+                 @prompts = @prompts.order_by_comments
                end
   end
 

@@ -16,6 +16,10 @@
       <%=radio_button 'sort', 'order', 'likes', checked: true%>
       <strong>いいね順</strong>
     </div>
+    <div>
+      <%=radio_button 'sort', 'order', 'comments'%>
+      <strong>コメント数順</strong>
+    </div>
   </div>
   <%= f.submit '検索', class: 'btn btn-primary' %>
 <% end %>
