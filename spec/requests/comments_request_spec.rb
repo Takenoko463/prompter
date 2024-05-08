@@ -84,7 +84,7 @@ RSpec.describe 'Comments', type: :request do
         it 'returns http failed' do
           is_expected.to eq 422
         end
-        it 'create no prompt' do
+        it 'create no comment' do
           expect { subject }.to change(@ip.comments, :count).by(0)
         end
       end
