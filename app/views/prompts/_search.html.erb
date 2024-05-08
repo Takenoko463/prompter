@@ -7,5 +7,15 @@
     <%= f.label :subtree_category, "カテゴリ検索" %>
     <%= f.select :subtree_category, options_from_collection_for_select(Category.all, :id, :name , 0),class:"form-control form-select"%>
   </div>
+  <div class="form-group py-2">
+    <div>
+      <%=radio_button 'sort', 'order', 'created'%>
+      <strong>新着順</strong>
+    </div>
+    <div>
+      <%=radio_button 'sort', 'order', 'likes', checked: true%>
+      <strong>いいね順</strong>
+    </div>
+  </div>
   <%= f.submit '検索', class: 'btn btn-primary' %>
 <% end %>

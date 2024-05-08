@@ -20,9 +20,10 @@ class PromptsController < ApplicationController
                                   :likes_ips,
                                   :category])
                end
-    @prompts = if params[:order_by_likes].present?
+
+    @prompts = if sort_params[:order] == 'likes'
                  @prompts = @prompts.order_by_likes
-               elsif params[:order_by_created].present?
+               elsif sort_params[:order] == 'created'
                  @prompts = @prompts.order(created_at: :desc)
                end
   end
@@ -79,6 +80,10 @@ class PromptsController < ApplicationController
 
   def prompt_params
     params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer, :category_id).merge(ip_id: session[:ip_id])
+  end
+
+  def sort_params
+    params.require(:sort).permit(:order) || 'likes'
   end
 
   def set_prompt
