@@ -7,6 +7,7 @@ class PromptsController < ApplicationController
   before_action :set_current_category_at_session, only: :index
   def index
     @q = Prompt.ransack(params[:q])
+    # promptを絞り込み
     @prompts = if params[:q].present?
                  @q.result(distinct: true).includes([:ip,
                                                      :likes_ips,
@@ -20,7 +21,7 @@ class PromptsController < ApplicationController
                                   :likes_ips,
                                   :category])
                end
-
+    # promptをsort
     @prompts = case order_params
                when nil
                  @prompts.order_by_likes
