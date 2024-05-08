@@ -11,15 +11,15 @@ class PromptsController < ApplicationController
     @prompts = if params[:q].present?
                  @q.result(distinct: true).includes([:ip,
                                                      :likes_ips,
-                                                     :category])
+                                                     :category, :comments])
                elsif params[:category_id].present?
                  Prompt.subtree_category(params[:category_id]).includes([:ip,
                                                                          :likes_ips,
-                                                                         :category])
+                                                                         :category, :comments])
                else
                  Prompt.includes([:ip,
                                   :likes_ips,
-                                  :category])
+                                  :category, :comments])
                end
     # promptをsort
     @prompts = case order_params
