@@ -69,9 +69,13 @@ shared_context 'not authenticate ip' do
     allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
   end
 end
-shared_examples_for 'not authenticate ip test' do
+shared_examples 'not_authenticate_ip_test' do
   include_context 'not authenticate ip'
-  it 'ipを登録していない' do
-    expect(subject.status).to eq 302
+  it 'ip未登録' do
+    is_expected.to eq 302
+  end
+  it 'トップページへ飛ばす' do
+    is_expected.to eq 302
+    expect(response).to redirect_to root_path
   end
 end

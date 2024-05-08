@@ -14,146 +14,161 @@ RSpec.describe 'Prompts', type: :request do
     FactoryBot.create(:category, id: 2, name: 'カテゴリ2', ancestry: '0/1')
   end
   before 'テストを動かしているipで、promptを作成' do
-    @prompt = FactoryBot.create(:prompt, category: @category_root, ip: @ip)
+    @prompt = FactoryBot.build(:prompt, category: @category_root, ip: @ip)
   end
   describe 'GET /prompts' do
+    before 'promptを登録済' do
+      @prompt.save
+    end
+    subject do
+      get prompts_path
+    end
     context 'indexアクションに成功する' do
-      subject(:index) do
-        get prompts_path
-        response
-      end
       it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do
-        is_expected.to have_http_status(:success)
+        is_expected.to eq 200
       end
       it 'indexアクションにリクエストするとレスポンスに投稿済みのpromptのテキストが存在する' do
-        expect(index.body).to include(@prompt.content)
+        is_expected.to eq 200
+        expect(response.body).to include(@prompt.content)
       end
     end
     context 'indexアクションに失敗する' do
-      subject(:index) do
-        get prompts_path
-        response
+      context 'ip未登録でindexアクションを行う' do
+        include_examples 'not_authenticate_ip_test'
       end
-      include_examples 'not authenticate ip test'
     end
   end
   describe 'GET /prompts/new' do
-    subject(:new) do
+    subject do
       get new_prompt_path, xhr: true, as: :js
-      response
     end
     context 'newアクションに成功する' do
       it 'newアクションにリクエストすると正常にレスポンスが返ってくる' do
-        expect(new).to have_http_status(:success)
+        is_expected.to eq 200
       end
     end
     context 'newアクションに失敗する' do
-      include_context 'not authenticate ip'
-      it 'ipを登録していない' do
-        expect(new.status).to eq 302
+      context 'ip未登録でnewアクションを行う' do
+        include_examples 'not_authenticate_ip_test'
       end
     end
   end
   describe 'POST /prompts' do
+    let(:params) { @prompt.attributes }
+    subject { post prompts_path, params: { prompt: params }, xhr: true, as: :js }
     context 'createアクションに成功する' do
-      it 'createアクションにリクエストすると正常にレスポンスが返ってくる' do
-        prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        post prompts_path, params: { prompt: prompt_params }, xhr: true, as: :js
-        expect(response).to have_http_status(:success)
+      context 'valid_params' do
+        it 'returns http success' do
+          is_expected.to eq 200
+          expect(response).to have_http_status(:success)
+        end
+        it 'create prompt' do
+          expect { subject }.to change(@ip.prompts, :count).by(1)
+        end
+        it 'include prompt' do
+          is_expected.to eq 200
+          expect(response.body).to include(@prompt.content)
+        end
       end
-      it 'createアクションにリクエストすると@ip由来のpromptデータが追加される' do
-        prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true, as: :js }.to change(@ip.prompts, :count).by(1)
-      end
-      it 'answerが空でもpromptデータが追加される' do
-        prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        prompt_params[:answer] = ''
-        expect { post prompts_path, params: { prompt: prompt_params }, xhr: true, as: :js }.to change(@ip.prompts, :count).by(1)
+      context 'no answer' do
+        let(:params) do
+          @prompt[:answer] = ''
+          @prompt.attributes
+        end
+        it 'create prompt' do
+          expect { subject }.to change(@ip.prompts, :count).by(1)
+        end
       end
     end
     context 'createアクションに失敗する' do
-      it 'ipを登録していない' do
-        mock_blank_session = ActionController::TestSession.new(ip_id: nil)
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-        prompt_params = FactoryBot.attributes_for(:prompt).merge(category_id: @category_root.id)
-        post prompts_path, params: { prompt: prompt_params }, xhr: true
-        expect(response.status).to eq 302
+      context 'ipを登録せずにpost' do
+        include_examples 'not_authenticate_ip_test'
+      end
+      context 'invalid params' do
+        let(:params) do
+          @prompt[:content] = ''
+          @prompt.attributes
+        end
+        it 'returns http failed' do
+          is_expected.to eq 422
+        end
+        it 'create no prompt' do
+          expect { subject }.to change(@ip.prompts, :count).by(0)
+        end
       end
     end
   end
   describe 'GET /prompts/edit/id' do
+    before 'prompt登録' do
+      @prompt.save
+    end
+    subject { get edit_prompt_path(@prompt.id), xhr: true, as: :js }
     context 'editアクションに成功する' do
       it 'editアクションにリクエストすると正常にレスポンスが返ってくる' do
-        get edit_prompt_path(@prompt.id), xhr: true, as: :js
-        expect(response).to have_http_status(:success)
+        is_expected.to eq 200
       end
       it 'editアクションにリクエストするとformに記入済みのpromptのテキストが存在する' do
-        get edit_prompt_path(@prompt.id), xhr: true, as: :js
+        is_expected.to eq 200
         expect(response.body).to include(@prompt.content)
-      end
-      it 'category_idを登録せずにeditアクションにリクエストするとformにroot_categoryの名前が存在する' do
-        get edit_prompt_path(@prompt.id), xhr: true, as: :js
-        expect(response.body).to include(@category_root.name)
       end
     end
     context 'editアクションに失敗する' do
-      it 'ipを登録していない' do
-        mock_blank_session = ActionController::TestSession.new(ip_id: nil)
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-        get edit_prompt_path(@prompt.id), xhr: true, as: :js
-        expect(response.status).to eq 302
+      context 'ipを登録せずにedit' do
+        include_examples 'not_authenticate_ip_test'
       end
     end
-    describe 'PUT /prompts/:id' do
-      context 'updateアクションに成功する' do
-        it 'updateアクションにリクエストすると正常にレスポンスが返ってくる' do
-          prompt_params = @prompt.attributes
-          put prompt_path(@prompt.id), params: { prompt: prompt_params }, xhr: true, as: :js
-          expect(response).to have_http_status(:success)
-        end
-        it 'updateアクションでtitleを編集すると更新されている' do
-          prompt_params = @prompt.attributes
-          prompt_params[:title] = "#{@prompt.title}_edited"
-          old_title = @prompt.title
-          put prompt_path(@prompt.id), params: { prompt: prompt_params }, xhr: true, as: :js
-          expect(@prompt.reload.title).not_to eq(old_title)
-        end
+  end
+  describe 'PUT /prompts/:id' do
+    before 'prompt登録' do
+      @prompt.save
+    end
+    let(:params) do
+      prompt_params = @prompt.attributes
+      prompt_params[:title] = "#{@prompt.title}_edited"
+      prompt_params
+    end
+    subject { put prompt_path(@prompt.id), params: { prompt: params }, xhr: true, as: :js }
+    context 'updateアクションに成功する' do
+      it 'updateアクションにリクエストすると正常にレスポンスが返ってくる' do
+        is_expected.to eq 200
+        expect(response).to have_http_status(:success)
       end
-      context 'updateアクションに失敗する' do
-        it 'ipを登録していない' do
-          mock_blank_session = ActionController::TestSession.new(ip_id: nil)
-          allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-          prompt_params = @prompt.attributes
-          put prompt_path(@prompt.id), params: { prompt: prompt_params }, xhr: true, as: :js
-          expect(response.status).to eq 302
-        end
+      it 'updateアクションでtitleを編集すると更新されている' do
+        is_expected.to eq 200
+        expect(@prompt.title).not_to eq(@prompt.reload.title)
       end
     end
-    describe 'DELETE /prompts/:id' do
-      context 'destroyアクションに成功する' do
-        it 'destroyアクションにリクエストすると正常にレスポンスが返ってくる' do
-          delete prompt_path(@prompt.id)
-          expect(response).to redirect_to action: 'index'
-        end
-        it 'destroyアクションにリクエストすると、データが消去される' do
-          expect { delete prompt_path(@prompt.id) }.to change(@ip.prompts, :count).by(-1)
-        end
-      end
-      context 'destroyアクションに失敗する' do
-        it 'ipを登録していない' do
-          mock_blank_session = ActionController::TestSession.new(ip_id: nil)
-          allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(mock_blank_session)
-          delete prompt_path(@prompt.id)
-          expect(response.status).to eq 302
-        end
+    context 'updateアクションに失敗する' do
+      context 'ipを登録せずにupdate' do
+        include_examples 'not_authenticate_ip_test'
       end
     end
-    describe 'GET /prompts/search' do
-      context 'searchアクションに成功する' do
-        it 'searchアクションにリクエストすると正常にレスポンスが返ってくる' do
-          get search_prompts_path
-          expect(response).to have_http_status(:success)
-        end
+  end
+  describe 'DELETE /prompts/:id' do
+    before 'prompt登録' do
+      @prompt.save
+    end
+    subject { delete prompt_path(@prompt.id) }
+    context 'destroyアクションに成功する' do
+      it 'destroyアクションにリクエストすると正常にレスポンスが返ってくる' do
+        is_expected.to eq 302
+        expect(response).to redirect_to action: 'index'
+      end
+      it 'destroyアクションにリクエストすると、データが消去される' do
+        expect { subject }.to change(@ip.prompts, :count).by(-1)
+      end
+    end
+    context 'destroyアクションに失敗する' do
+      context 'ipを登録せずにdestroy' do
+        include_examples 'not_authenticate_ip_test'
+      end
+    end
+  end
+  describe 'GET /prompts/search' do
+    context 'searchアクションに成功する' do
+      it 'searchアクションにリクエストすると正常にレスポンスが返ってくる' do
+        get search_prompts_path
+        expect(response).to have_http_status(:success)
       end
     end
   end
