@@ -5,13 +5,13 @@
   <div class="collapse navbar-collapse" tabindex="-1" id="promptIndex" aria-labelledby="promptIndex">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
-        <%=link_to "いいね順",prompts_path(sort:{order: :likes}),html_options = {class:"nav-link p-2 me-2"}%>
+        <%=link_to "いいね順",prompts_path(prompt_form:{order: :likes}),html_options = {class:"nav-link p-2 me-2"}%>
       </li>
       <li class="nav-item">
-        <%=link_to "新規投稿順",prompts_path(sort:{order: :created}),html_options = {class:"nav-link p-2 me-2"}%>
+        <%=link_to "新規投稿順",prompts_path(prompt_form:{order: :created_at}),html_options = {class:"nav-link p-2 me-2"}%>
       </li>
       <li class="nav-item">
-        <%=link_to "コメント数順",prompts_path(sort:{order: :comments}),html_options = {class:"nav-link p-2 me-2"}%>
+        <%=link_to "コメント数順",prompts_path(prompt_form:{order: :comments}),html_options = {class:"nav-link p-2 me-2"}%>
       </li>
     </ul>
   </div>
