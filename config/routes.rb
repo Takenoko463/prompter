@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :categories, only: :index
   resources :categories, only:[:show] do
     get 'children', on: :member
-    resources :prompts , only:[:index]
   end
   resources :ips,only:[:create]
 end

@@ -46,7 +46,8 @@ const categoryIndex = () => {
                         var categories = '<ul class="navbar-nav">';
                         console.log(data);
                         data.forEach(function(category) {
-                            let category_prompts_path = '/categories/' + category.id + '/prompts';
+
+                            let category_prompts_path = 'prompts?prompt_form%5Bcategory_id%5D=' + category.id;
                             categories += '<li class="nav-item"><a class="nav-link text-reset" href=' + category_prompts_path + '>' + category.name + '</a></li>';
                         });
                         categories += '</ul>'
