@@ -1,6 +1,6 @@
 module CategoriesHelper
   def set_current_category_at_session
-    params_category_id = params[:category_id] || params[:q].try(:[], :subtree_category) || 0
+    params_category_id = params[:prompt_form].try(:[], :category_id) || 0
     session[:current_category_id] = params_category_id
   end
 
