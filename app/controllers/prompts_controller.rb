@@ -6,32 +6,9 @@ class PromptsController < ApplicationController
   before_action :others_prompt!, only: [:edit, :update, :destroy]
   before_action :set_current_category_at_session, only: :index
   def index
-    @q = Prompt.ransack(params[:q])
-    # promptを絞り込み
-    @prompts = if params[:q].present?
-                 @q.result(distinct: true).includes([:ip,
-                                                     :likes_ips,
-                                                     :category, :comments])
-               elsif params[:category_id].present?
-                 Prompt.subtree_category(params[:category_id]).includes([:ip,
-                                                                         :likes_ips,
-                                                                         :category, :comments])
-               else
-                 Prompt.includes([:ip,
-                                  :likes_ips,
-                                  :category, :comments])
-               end
-    # promptをsort
-    @prompts = case order_params
-               when nil
-                 @prompts.order_by_likes
-               when 'likes'
-                 @prompts.order_by_likes
-               when 'created'
-                 @prompts.order(created_at: :desc)
-               when 'comments'
-                 @prompts.order_by_comments
-               end
+    prompt_form = PromptForm.new(prompt_form_params)
+
+    @prompts = prompt_form.result
   end
 
   def new
@@ -71,7 +48,7 @@ class PromptsController < ApplicationController
   end
 
   def search
-    @q = Prompt.ransack
+    @prompt_form = PromptForm.new
     @url = prompts_path
     respond_to do |format|
       format.html { render partial: 'prompts/search' }
@@ -88,8 +65,10 @@ class PromptsController < ApplicationController
     params.require(:prompt).permit(:title, :content, :nick_name, :ai_id, :answer, :category_id).merge(ip_id: session[:ip_id])
   end
 
-  def order_params
-    params[:sort].try(:[], :order)
+  def prompt_form_params
+    return nil unless params[:prompt_form].present?
+
+    params.require(:prompt_form).permit(:category_id, :word, :order)
   end
 
   def set_prompt

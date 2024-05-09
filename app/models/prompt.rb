@@ -15,10 +15,14 @@ class Prompt < ApplicationRecord
     validates :ai_id, numericality: { other_than: 0, message: 'must exist' }
   end
   scope :subtree_category, lambda { |category_id|
+                             category_id ||= 0
                              category = Category.find(category_id)
                              subtree_ids = category.subtree.pluck(:id)
                              where(category_id: subtree_ids)
                            }
+  scope :content_cont, lambda { |word|
+                         where('prompts.content like ?', "%#{word}%")
+                       }
   scope :order_by_likes, lambda {
     select('prompts.*', 'count(likes.id) AS likes_count').left_outer_joins(:likes)
                                                          .group('prompts.id').order('likes_count desc')
@@ -27,21 +31,22 @@ class Prompt < ApplicationRecord
     select('prompts.*', 'count(comments.id) AS comments_count').left_outer_joins(:comments)
                                                                .group('prompts.id').order('comments_count desc')
   }
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[content]
+
+  def self.search(params)
+    subtree_category(params[:category_id]).content_cont(params[:word])
   end
 
-  def self.ransackable_associations(_auth_object = nil)
-    %w[likes comments category]
-  end
-
-  def self.ransackable_scopes(_auth_object = nil)
-    %i[subtree_category]
-  end
-
-  # この設定を加えたscopeでは 1→true とかの変換をしなくなる
-  def self.ransackable_scopes_skip_sanitize_args
-    %w[subtree_category]
+  def self.ranking(order)
+    case order
+    when 'likes'
+      order_by_likes
+    when 'created'
+      order(created_at: :desc)
+    when 'comments'
+      order_by_comments
+    else
+      order_by_likes
+    end
   end
 
   def first_line

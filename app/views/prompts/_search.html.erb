@@ -1,23 +1,23 @@
-<%= search_form_for @q, url: @url do |f| %>
+<%= form_with model:@prompt_form, url: @url , method: :get,local: true do |f| %>
   <div class="form-group py-2">
-    <%= f.label :content_cont, "プロンプト内容検索" %>
-    <%= f.search_field :content_cont, class: 'form-control', placeholder: '検索ワード' %>
+    <%= f.label :word, "プロンプト内容検索" %>
+    <%= f.text_field :word, class: 'form-control', placeholder: '検索ワード' %>
   </div>
   <div class="form-group py-2">
-    <%= f.label :subtree_category, "カテゴリ検索" %>
-    <%= f.select :subtree_category, options_from_collection_for_select(Category.all, :id, :name , 0),class:"form-control form-select"%>
+    <%= f.label :category_id, "カテゴリ検索" %>
+    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name , 0),class:"form-control form-select"%>
   </div>
   <div class="form-group py-2">
     <div>
-      <%=radio_button 'sort', 'order', 'created'%>
+      <%=f.radio_button 'order', 'created'%>
       <strong>新着順</strong>
     </div>
     <div>
-      <%=radio_button 'sort', 'order', 'likes', checked: true%>
+      <%=f.radio_button 'order', 'likes', checked: true%>
       <strong>いいね順</strong>
     </div>
     <div>
-      <%=radio_button 'sort', 'order', 'comments'%>
+      <%=f.radio_button 'order', 'comments'%>
       <strong>コメント数順</strong>
     </div>
   </div>
