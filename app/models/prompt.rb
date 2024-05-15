@@ -23,14 +23,15 @@ class Prompt < ApplicationRecord
   scope :content_cont, lambda { |word|
                          where('prompts.content like ?', "%#{word}%")
                        }
-  scope :order_by_likes, lambda {
-    select('prompts.*', 'count(likes.id) AS likes_count').left_outer_joins(:likes)
-                                                         .group('prompts.id').order('likes_count desc')
-  }
-  scope :order_by_comments, lambda {
-    select('prompts.*', 'count(comments.id) AS comments_count').left_outer_joins(:comments)
-                                                               .group('prompts.id').order('comments_count desc')
-  }
+  scope :order_by_count, lambda { |association_name, column_name|
+                           select("prompts.*, count(#{association_name}.id) AS #{column_name}_count")
+                             .left_outer_joins(association_name)
+                             .group('prompts.id')
+                             .order("#{column_name}_count desc")
+                         }
+
+  scope :order_by_likes, -> { order_by_count(:likes, :likes) }
+  scope :order_by_comments, -> { order_by_count(:comments, :comments) }
 
   def self.search(params)
     subtree_category(params[:category_id]).content_cont(params[:word])
