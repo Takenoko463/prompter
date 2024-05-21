@@ -1,4 +1,4 @@
-<h2 class="mb-5 text-center"id="greeting">Prompterへようこそ</h2>
+<h2 class="mb-5 pt-3 text-center"id="greeting">Prompterへようこそ</h2>
 <div class="container-md row mb-5 pt-5">
   <div class="col-sm-4">
     <div class="m-4 px-2 container-sm">
@@ -6,7 +6,20 @@
     </div>
   </div>
   <div class="col p-2 text-center">
-    <%=link_to "プロンプト一覧",prompts_path,html_options = {class:"p-2 mb-2 text-reset text-decoration-none noto-sans-jp-title"}%>
-    <p class="mt-2">投稿されたプロンプトの一覧を閲覧するページです。コピーボタンを押したのちにAIへの質問に利用できます。</p>
+    <div>
+      <h4>
+        <%=link_to "プロンプト一覧",prompts_path,html_options = {class:"p-2 mb-2 text-reset text-decoration-none noto-sans-jp-title"}%>
+      </h4>
+      <p class="mt-2">投稿されたプロンプトの一覧を閲覧するページです。コピーボタンを押したのちにAIへの質問に利用できます。</p>
+    </div>
+    <div>
+      <h5 class="noto-sans-jp-title">プロンプト検索</h5>
+      <p class="mt-2">プロンプト検索ボタンを押すと、検索フォームが出現します</p>
+    </div>
+    <div>
+      <h5 class="noto-sans-jp-title">プロンプト投稿ボタン</h5>
+      <p class="mt-2">プロンプト一覧ページにて、下記のボタンを押すと投稿フォームが出現します</p>
+      <i class="fa-solid fa-pen-to-square"></i>
+    </div>
   </div>
 </div>
